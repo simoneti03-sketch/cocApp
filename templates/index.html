@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="es" data-bs-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Clash Tracker</title>
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark glass-nav">
+        <div class="container">
+            <a class="navbar-brand fw-bold mb-0 h1 d-flex align-items-center gap-2" href="#">
+                <i class="bi bi-shield-shaded text-warning"></i>
+                Clash Tracker
+            </a>
+        </div>
+    </nav>
+
+    <div class="container mt-5">
+        <!-- Hero Section -->
+        <div class="text-center mb-5 hero-section py-5 rounded-4 shadow-lg glass-card">
+            <h1 class="display-4 fw-bold mb-3">Analiza tu progreso</h1>
+            <p class="lead text-secondary mb-4">Pega los datos de tu aldea (JSON) para calcular el tiempo restante hacia el máximo nivel.</p>
+            <button id="pasteDataBtn" class="btn btn-warning btn-lg fw-bold rounded-pill shadow px-5 py-3 paste-btn">
+                <i class="bi bi-clipboard2-data-fill me-2"></i> Pegar datos de la aldea
+            </button>
+            <div id="loader" class="mt-3 d-none">
+                <div class="spinner-border text-warning" role="status">
+                    <span class="visually-hidden">Procesando...</span>
+                </div>
+                <p class="text-secondary mt-2">Analizando base de datos...</p>
+            </div>
+            <div id="pasteError" class="mt-3 text-danger d-none fw-bold"></div>
+        </div>
+
+        <!-- Dashboard Content (Hidden initially) -->
+        <div id="dashboardContent" class="d-none animate-fade-in">
+            <!-- Totals Section -->
+            <div class="row mb-5">
+                <div class="col-12 d-flex justify-content-between align-items-center mb-4 border-bottom border-secondary pb-2">
+                     <h2 class="h4 mb-0">Resumen de Progreso</h2>
+                     <div class="bob-hut-status bg-dark border border-secondary rounded px-3 py-1 d-flex align-items-center gap-2">
+                         <span class="fw-bold text-secondary text-uppercase small" style="font-size:0.75rem;">Choza de B.O.B</span>
+                         <i id="bobHutIcon" class="bi bi-x-circle-fill text-danger fs-5"></i>
+                     </div>
+                </div>
+                <div class="col-12 mb-4">
+                    <div class="row g-3">
+                        <div class="col-md-4">
+                            <div class="card bg-dark glass-card w-100 border-0 shadow-lg text-center p-3 py-4" style="background: linear-gradient(135deg, rgba(23,25,35,0.9), rgba(35,40,50,0.9)) !important;">
+                                <h6 class="text-uppercase text-warning fw-bold mb-2 small"><i class="bi bi-hammer me-2"></i>Constructores</h6>
+                                <h2 class="fw-bold text-white mb-0" id="totalBuildersTime">0d 0h</h2>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="card bg-dark glass-card w-100 border-0 shadow-lg text-center p-3 py-4" style="background: linear-gradient(135deg, rgba(23,25,35,0.9), rgba(35,40,50,0.9)) !important;">
+                                <h6 class="text-uppercase text-info fw-bold mb-2 small"><i class="bi bi-lightning-charge-fill me-2"></i>Laboratorio</h6>
+                                <h2 class="fw-bold text-white mb-0" id="totalUnitsTime">0d 0h</h2>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="card bg-dark glass-card w-100 border-0 shadow-lg text-center p-3 py-4" style="background: linear-gradient(135deg, rgba(23,25,35,0.9), rgba(35,40,50,0.9)) !important;">
+                                <h6 class="text-uppercase text-success fw-bold mb-2 small"><i class="bi bi-bug-fill me-2"></i>Mascotas</h6>
+                                <h2 class="fw-bold text-white mb-0" id="totalPetsTime">0d 0h</h2>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- 5 Columns Container -->
+                <div class="col-12">
+                     <div class="row g-2 justify-content-center">
+                        <div class="col-12 col-sm-4 col-md">
+                            <div class="card bg-dark glass-card h-100 border-0 shadow-sm category-card">
+                                 <div class="card-body text-center p-2">
+                                    <i class="bi bi-shield-fill fs-4 text-primary mb-1 d-block"></i>
+                                    <h6 class="text-uppercase text-secondary fw-bold" style="font-size:0.7rem;">Defensas</h6>
+                                    <h5 class="fw-bold mb-0" id="totalDefensesTime">0d 0h</h5>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-12 col-sm-4 col-md">
+                            <div class="card bg-dark glass-card h-100 border-0 shadow-sm category-card">
+                                 <div class="card-body text-center p-2">
+                                    <i class="bi bi-crosshair fs-4 text-danger mb-1 d-block"></i>
+                                    <h6 class="text-uppercase text-secondary fw-bold" style="font-size:0.7rem;">Ejército</h6>
+                                    <h5 class="fw-bold mb-0" id="totalArmyTime">0d 0h</h5>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-12 col-sm-4 col-md">
+                            <div class="card bg-dark glass-card h-100 border-0 shadow-sm category-card">
+                                 <div class="card-body text-center p-2">
+                                    <i class="bi bi-box-seam fs-4 text-warning mb-1 d-block"></i>
+                                    <h6 class="text-uppercase text-secondary fw-bold" style="font-size:0.7rem;">Recursos</h6>
+                                    <h5 class="fw-bold mb-0" id="totalResourcesTime">0d 0h</h5>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-6 col-md">
+                            <div class="card bg-dark glass-card h-100 border-0 shadow-sm category-card">
+                                 <div class="card-body text-center p-2">
+                                    <i class="bi bi-bullseye fs-4 text-secondary mb-1 d-block"></i>
+                                    <h6 class="text-uppercase text-secondary fw-bold" style="font-size:0.7rem;">Trampas</h6>
+                                    <h5 class="fw-bold mb-0" id="totalTrapsTime">0d 0h</h5>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-12 col-md">
+                            <div class="card bg-dark glass-card h-100 border-0 shadow-sm category-card">
+                                 <div class="card-body text-center p-2">
+                                    <i class="bi bi-person-fill-up fs-4 text-success mb-1 d-block"></i>
+                                    <h6 class="text-uppercase text-secondary fw-bold" style="font-size:0.7rem;">Héroes</h6>
+                                    <h5 class="fw-bold mb-0" id="totalHeroesTime">0d 0h</h5>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Tabs -->
+            <ul class="nav nav-pills nav-fill mb-4 custom-tabs gap-2 flex-wrap" id="trackerTabs" role="tablist">
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link active rounded-pill fw-bold" id="defenses-tab" data-bs-toggle="pill" data-bs-target="#defenses-content" type="button" role="tab" aria-selected="true">Defensas</button>
+                </li>
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link rounded-pill fw-bold" id="army-tab" data-bs-toggle="pill" data-bs-target="#army-content" type="button" role="tab" aria-selected="false">Ejército</button>
+                </li>
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link rounded-pill fw-bold" id="resources-tab" data-bs-toggle="pill" data-bs-target="#resources-content" type="button" role="tab" aria-selected="false">Recursos</button>
+                </li>
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link rounded-pill fw-bold" id="traps-tab" data-bs-toggle="pill" data-bs-target="#traps-content" type="button" role="tab" aria-selected="false">Trampas</button>
+                </li>
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link rounded-pill fw-bold" id="helpers-tab" data-bs-toggle="pill" data-bs-target="#helpers-content" type="button" role="tab" aria-selected="false">Ayudantes</button>
+                </li>
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link rounded-pill fw-bold" id="laboratory-tab" data-bs-toggle="pill" data-bs-target="#laboratory-content" type="button" role="tab" aria-selected="false">Laboratorio</button>
+                </li>
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link rounded-pill fw-bold" id="heroes-tab" data-bs-toggle="pill" data-bs-target="#heroes-content" type="button" role="tab" aria-selected="false">Héroes</button>
+                </li>
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link rounded-pill fw-bold" id="pets-tab" data-bs-toggle="pill" data-bs-target="#pets-content" type="button" role="tab" aria-selected="false">Mascotas</button>
+                </li>
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link rounded-pill fw-bold" id="equipment-tab" data-bs-toggle="pill" data-bs-target="#equipment-content" type="button" role="tab" aria-selected="false">Equipos</button>
+                </li>
+            </ul>
+            
+            <!-- Tab Contents -->
+            <div class="tab-content" id="trackerTabsContent">
+                <!-- Defenses -->
+                <div class="tab-pane fade show active" id="defenses-content" role="tabpanel" aria-labelledby="defenses-tab">
+                    <div class="row g-3" id="defensesContainer"></div>
+                </div>
+                <!-- Army -->
+                <div class="tab-pane fade" id="army-content" role="tabpanel" aria-labelledby="army-tab">
+                    <div class="row g-3" id="armyContainer"></div>
+                </div>
+                <!-- Resources -->
+                <div class="tab-pane fade" id="resources-content" role="tabpanel" aria-labelledby="resources-tab">
+                    <div class="row g-3" id="resourcesContainer"></div>
+                </div>
+                <!-- Traps -->
+                <div class="tab-pane fade" id="traps-content" role="tabpanel" aria-labelledby="traps-tab">
+                    <div class="row g-3" id="trapsContainer"></div>
+                </div>
+                <!-- Helpers -->
+                <div class="tab-pane fade" id="helpers-content" role="tabpanel" aria-labelledby="helpers-tab">
+                    <div class="row g-3" id="helpersContainer"></div>
+                </div>
+                
+                <!-- Laboratory (Nested Tabs) -->
+                <div class="tab-pane fade" id="laboratory-content" role="tabpanel" aria-labelledby="laboratory-tab">
+                    <ul class="nav nav-tabs nav-fill mb-4 border-secondary" id="labTabs" role="tablist">
+                        <li class="nav-item" role="presentation">
+                            <button class="nav-link active text-light fw-bold" id="units-tab" data-bs-toggle="tab" data-bs-target="#units-content" type="button" role="tab" aria-selected="true">Tropas</button>
+                        </li>
+                        <li class="nav-item" role="presentation">
+                            <button class="nav-link text-light fw-bold" id="spells-tab" data-bs-toggle="tab" data-bs-target="#spells-content" type="button" role="tab" aria-selected="false">Hechizos</button>
+                        </li>
+                        <li class="nav-item" role="presentation">
+                            <button class="nav-link text-light fw-bold" id="siege-tab" data-bs-toggle="tab" data-bs-target="#siege-content" type="button" role="tab" aria-selected="false">Asedio</button>
+                        </li>
+                    </ul>
+                    <div class="tab-content">
+                        <!-- Units -->
+                        <div class="tab-pane fade show active" id="units-content" role="tabpanel" aria-labelledby="units-tab">
+                            <div class="row g-3" id="unitsContainer"></div>
+                        </div>
+                        <!-- Spells -->
+                        <div class="tab-pane fade" id="spells-content" role="tabpanel" aria-labelledby="spells-tab">
+                            <div class="row g-3" id="spellsContainer"></div>
+                        </div>
+                        <!-- Siege -->
+                        <div class="tab-pane fade" id="siege-content" role="tabpanel" aria-labelledby="siege-tab">
+                            <div class="row g-3" id="siegeContainer"></div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Heroes -->
+                <div class="tab-pane fade" id="heroes-content" role="tabpanel" aria-labelledby="heroes-tab">
+                    <div class="row g-3" id="heroesContainer"></div>
+                </div>
+                <!-- Pets -->
+                <div class="tab-pane fade" id="pets-content" role="tabpanel" aria-labelledby="pets-tab">
+                    <div class="row g-3" id="petsContainer"></div>
+                </div>
+                <!-- Equipment -->
+                <div class="tab-pane fade" id="equipment-content" role="tabpanel" aria-labelledby="equipment-tab">
+                    <div class="row g-3" id="equipmentContainer"></div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+    
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="/static/script.js"></script>
+</body>
+</html>

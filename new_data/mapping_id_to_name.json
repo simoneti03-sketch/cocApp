@@ -1,0 +1,294 @@
+{
+    "army/ArmyCamp.json": [
+        "1000000",
+        "Army Camp"
+    ],
+    "army/Barracks.json": [
+        "1000006",
+        "Barracks"
+    ],
+    "army/Laboratory.json": [
+        "1000007",
+        "Laboratory"
+    ],
+    "army/DarkBarracks.json": [
+        "1000026",
+        "Dark Barracks"
+    ],
+    "army/SpellFactory.json": [
+        "1000020",
+        "Spell Factory"
+    ],
+    "army/DarkSpellFactory.json": [
+        "1000029",
+        "Dark Spell Factory"
+    ],
+    "army/Workshop.json": [
+        "1000059",
+        "Workshop"
+    ],
+    "army/PetHouse.json": [
+        "1000068",
+        "Pet House"
+    ],
+    "army/Blacksmith.json": [
+        "1000070",
+        "Blacksmith"
+    ],
+    "army/HeroHall.json": [
+        "1000071",
+        "Hero Hall"
+    ],
+    "resources/GoldMine.json": [
+        "1000004",
+        "Gold Mine"
+    ],
+    "resources/GoldStorage.json": [
+        "1000005",
+        "Gold Storage"
+    ],
+    "resources/ElixirCollector.json": [
+        "1000002",
+        "Elixir Collector"
+    ],
+    "resources/ElixirStorage.json": [
+        "1000003",
+        "Elixir Storage"
+    ],
+    "resources/DarkElixirDrill.json": [
+        "1000023",
+        "Dark Elixir Drill"
+    ],
+    "resources/DarkElixirStorage.json": [
+        "1000024",
+        "Dark Elixir Storage"
+    ],
+    "resources/ClanCastle.json": [
+        "1000014",
+        "Clan Castle"
+    ],
+    "defenses/Cannon.json": [
+        "1000008",
+        "Cannon"
+    ],
+    "defenses/ArcherTower.json": [
+        "1000009",
+        "Archer Tower"
+    ],
+    "defenses/WizardTower.json": [
+        "1000011",
+        "Wizard Tower"
+    ],
+    "defenses/AirDefense.json": [
+        "1000012",
+        "Air Defense"
+    ],
+    "defenses/Mortar.json": [
+        "1000013",
+        "Mortar"
+    ],
+    "defenses/HiddenTesla.json": [
+        "1000019",
+        "Hidden Tesla"
+    ],
+    "defenses/XBow.json": [
+        "1000021",
+        "X-Bow"
+    ],
+    "defenses/InfernoTower.json": [
+        "1000027",
+        "Inferno Tower"
+    ],
+    "defenses/AirSweeper.json": [
+        "1000028",
+        "Air Sweeper"
+    ],
+    "defenses/EagleArtillery.json": [
+        "1000031",
+        "Eagle Artillery"
+    ],
+    "defenses/BombTower.json": [
+        "1000032",
+        "Bomb Tower"
+    ],
+    "defenses/Scattershot.json": [
+        "1000067",
+        "Scattershot"
+    ],
+    "defenses/SpellTower.json": [
+        "1000072",
+        "Spell Tower"
+    ],
+    "defenses/Monolith.json": [
+        "1000077",
+        "Monolith"
+    ],
+    "defenses/BuildersHut.json": [
+        "1000015",
+        "Builders Hut"
+    ],
+    "extra/HelperHut.json": [
+        "1000064",
+        "Helper Hut"
+    ],
+    "extra/BobHut.json": [
+        "1000093",
+        "B.O.B Hut"
+    ],
+    "defenses/TownHall.json": [
+        "1000001",
+        "Town Hall"
+    ],
+    "defenses/Wall.json": [
+        "1000010",
+        "Wall"
+    ],
+    "defenses/BuilderCannon.json": [
+        "1100004",
+        "Builder Cannon"
+    ],
+    "defenses/BuilderArcherTower.json": [
+        "1100005",
+        "Builder Archer Tower"
+    ],
+    "defenses/DoubleCannon.json": [
+        "1100006",
+        "Double Cannon"
+    ],
+    "defenses/BuilderHiddenTesla.json": [
+        "1100007",
+        "Builder Hidden Tesla"
+    ],
+    "defenses/Firecrackers.json": [
+        "1100008",
+        "Firecrackers"
+    ],
+    "defenses/Crusher.json": [
+        "1100009",
+        "Crusher"
+    ],
+    "defenses/GuardPost.json": [
+        "1100010",
+        "Guard Post"
+    ],
+    "defenses/BuilderAirBomb.json": [
+        "1100011",
+        "Builder Air Bomb"
+    ],
+    "defenses/MultiMortar.json": [
+        "1100012",
+        "Multi Mortar"
+    ],
+    "defenses/Roaster.json": [
+        "1100015",
+        "Roaster"
+    ],
+    "defenses/GiantCannon.json": [
+        "1100016",
+        "Giant Cannon"
+    ],
+    "defenses/MegaTesla.json": [
+        "1100017",
+        "Mega Tesla"
+    ],
+    "defenses/LavaLauncher.json": [
+        "1100018",
+        "Lava Launcher"
+    ],
+    "defenses/BuilderXBow.json": [
+        "1100019",
+        "Builder XBow"
+    ],
+    "defenses/OTTOOutpost.json": [
+        "1100014",
+        "OTTO Outpost"
+    ],
+    "defenses/StarLaboratory.json": [
+        "1100001",
+        "Star Laboratory"
+    ],
+    "defenses/ReinforcementCamp.json": [
+        "1100020",
+        "Reinforcement Camp"
+    ],
+    "defenses/GoldMine2.json": [
+        "1100002",
+        "Builder Gold Mine"
+    ],
+    "defenses/ElixirCollector2.json": [
+        "1100003",
+        "Builder Elixir Collector"
+    ],
+    "defenses/GoldStorage2.json": [
+        "1100021",
+        "Builder Gold Storage"
+    ],
+    "defenses/ElixirStorage2.json": [
+        "1100022",
+        "Builder Elixir Storage"
+    ],
+    "defenses/GemMine.json": [
+        "1100023",
+        "Gem Mine"
+    ],
+    "defenses/BuilderBarracks.json": [
+        "1100000",
+        "Builder Barracks"
+    ],
+    "defenses/BuilderArmyCamp.json": [
+        "1100024",
+        "Builder Army Camp"
+    ],
+    "traps/Bomb.json": [
+        "12000000",
+        "Bomb"
+    ],
+    "traps/SpringTrap.json": [
+        "12000001",
+        "Spring Trap"
+    ],
+    "traps/GiantBomb.json": [
+        "12000002",
+        "Giant Bomb"
+    ],
+    "traps/AirBomb.json": [
+        "12000005",
+        "Air Bomb"
+    ],
+    "traps/SeekingAirMine.json": [
+        "12000006",
+        "Seeking Air Mine"
+    ],
+    "traps/SkeletonTrap.json": [
+        "12000008",
+        "Skeleton Trap"
+    ],
+    "traps/TornadoTrap.json": [
+        "12000016",
+        "Tornado Trap"
+    ],
+    "traps/GigaBomb.json": [
+        "12000020",
+        "Giga Bomb"
+    ],
+    "heroes/BarbarianKing.json": [
+        "28000000",
+        "Barbarian King"
+    ],
+    "heroes/ArcherQueen.json": [
+        "28000001",
+        "Archer Queen"
+    ],
+    "heroes/GrandWarden.json": [
+        "28000002",
+        "Grand Warden"
+    ],
+    "heroes/RoyalChampion.json": [
+        "28000004",
+        "Royal Champion"
+    ],
+    "heroes/MinionPrince.json": [
+        "28000006",
+        "Minion Prince"
+    ]
+}

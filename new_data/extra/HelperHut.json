@@ -1,0 +1,58 @@
+[
+	{
+		"level": 1,
+		"cost": 0,
+		"currency": "gold",
+		"duration": 0,
+		"TH": 11
+	},
+	{
+		"level": 1,
+		"cost": 0,
+		"currency": "gold",
+		"duration": 0,
+		"TH": 12
+	},
+    {
+        "level": 1,
+        "cost": 0,
+        "currency": "gold",
+        "duration": 0,
+        "TH": 13
+    },
+    {
+        "level": 1,
+        "cost": 0,
+        "currency": "gold",
+        "duration": 0,
+        "TH": 14
+    },
+    {
+        "level": 1,
+        "cost": 0,
+        "currency": "gold",
+        "duration": 0,
+        "TH": 15
+    },
+    {
+        "level": 1,
+        "cost": 0,
+        "currency": "gold",
+        "duration": 0,
+        "TH": 16
+    },
+    {
+        "level": 1,
+        "cost": 0,
+        "currency": "gold",
+        "duration": 0,
+        "TH": 17
+    },
+    {
+        "level": 1,
+        "cost": 0,
+        "currency": "gold",
+        "duration": 0,
+        "TH": 18
+    }
+]
