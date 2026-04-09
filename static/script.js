@@ -15,16 +15,16 @@ document.addEventListener('DOMContentLoaded', () => {
         activeId: null,
         villages: {}
     };
-    
+
     let isRemainingOnly = false;
     let isAllExpanded = false;
 
     function formatTime(seconds) {
         if (seconds <= 0) return 'Maxed!';
-        const d = Math.floor(seconds / (3600*24));
-        const h = Math.floor(seconds % (3600*24) / 3600);
+        const d = Math.floor(seconds / (3600 * 24));
+        const h = Math.floor(seconds % (3600 * 24) / 3600);
         const m = Math.floor(seconds % 3600 / 60);
-        
+
         let parts = [];
         if (d > 0) parts.push(`${d}d`);
         if (h > 0) parts.push(`${h}h`);
@@ -35,38 +35,59 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const BUILDING_IMAGE_MAP = {
         // [Defences]
-        '1000001': { cat: 'Defences', folder: 'TownHall',      prefix: 'Town_Hall' },
-        '1000008': { cat: 'Defences', folder: 'Cannon',        prefix: 'Cannon',         isComplexExt: true },
-        '1000009': { cat: 'Defences', folder: 'ArcherTower',   prefix: 'Archer_Tower' },
-        '1000010': { cat: 'Defences', folder: 'Wall',          prefix: 'Wall' },
-        '1000011': { cat: 'Defences', folder: 'WizardTower',   prefix: 'Wizard_Tower' },
-        '1000012': { cat: 'Defences', folder: 'AirDefense',    prefix: 'Air_Defense' },
-        '1000013': { cat: 'Defences', folder: 'Mortar',        prefix: 'Mortar',         isComplexExt: true },
-        '1000015': { cat: 'Defences', folder: 'BuilderHut',    prefix: 'Builders_Hut',   noLevelOne: true },
-        '1000019': { cat: 'Defences', folder: 'HiddenTesla',   prefix: 'Hidden_Tesla' },
-        '1000021': { cat: 'Defences', folder: 'X-Bow',         prefix: 'X-Bow',          suffix: '_Ground' },
-        '1000027': { cat: 'Defences', folder: 'InfernoTower',   prefix: 'Inferno_Tower',  suffix: '_Single' },
-        '1000028': { cat: 'Defences', folder: 'AirSweeper',    prefix: 'Air_Sweeper' },
+        '1000001': { cat: 'Defences', folder: 'TownHall', prefix: 'Town_Hall' },
+        '1000008': { cat: 'Defences', folder: 'Cannon', prefix: 'Cannon', isComplexExt: true },
+        '1000009': { cat: 'Defences', folder: 'ArcherTower', prefix: 'Archer_Tower' },
+        '1000010': { cat: 'Defences', folder: 'Wall', prefix: 'Wall' },
+        '1000011': { cat: 'Defences', folder: 'WizardTower', prefix: 'Wizard_Tower' },
+        '1000012': { cat: 'Defences', folder: 'AirDefense', prefix: 'Air_Defense' },
+        '1000013': { cat: 'Defences', folder: 'Mortar', prefix: 'Mortar', isComplexExt: true },
+        '1000015': { cat: 'Defences', folder: 'BuilderHut', prefix: 'Builders_Hut', noLevelOne: true },
+        '1000019': { cat: 'Defences', folder: 'HiddenTesla', prefix: 'Hidden_Tesla' },
+        '1000021': { cat: 'Defences', folder: 'X-Bow', prefix: 'X-Bow', suffix: '_Ground' },
+        '1000027': { cat: 'Defences', folder: 'InfernoTower', prefix: 'Inferno_Tower', suffix: '_Single' },
+        '1000028': { cat: 'Defences', folder: 'AirSweeper', prefix: 'Air_Sweeper' },
         '1000031': { cat: 'Defences', folder: 'EagleArtillery', prefix: 'Eagle_Artillery' },
-        '1000032': { cat: 'Defences', folder: 'BombTower',     prefix: 'Bomb_Tower' },
-        '1000067': { cat: 'Defences', folder: 'Scattershot',    prefix: 'Scattershot' },
-        '1000072': { cat: 'Defences', folder: 'SpellTower',    prefix: 'Spell_Tower',    dynamicSuffix: (lvl) => {
-            const spells = { 1: '_Rage', 2: '_Poison', 3: '_Invisibility', 4: '_Earthquake' };
-            return spells[lvl] || '';
-        }},
-        '1000077': { cat: 'Defences', folder: 'Monolith',      prefix: 'Monolith' },
+        '1000032': { cat: 'Defences', folder: 'BombTower', prefix: 'Bomb_Tower' },
+        '1000067': { cat: 'Defences', folder: 'Scattershot', prefix: 'Scattershot' },
+        '1000072': {
+            cat: 'Defences', folder: 'SpellTower', prefix: 'Spell_Tower', dynamicSuffix: (lvl) => {
+                const spells = { 1: '_Rage', 2: '_Poison', 3: '_Invisibility', 4: '_Earthquake' };
+                return spells[lvl] || '';
+            }
+        },
+        '1000077': { cat: 'Defences', folder: 'Monolith', prefix: 'Monolith' },
 
         // [Army]
-        '1000000': { cat: 'Army', folder: 'ArmyCamp',      prefix: 'Army_Camp' },
-        '1000006': { cat: 'Army', folder: 'Barracks',      prefix: 'Barracks' },
-        '1000007': { cat: 'Army', folder: 'Laboratory',    prefix: 'Laboratory' },
-        '1000020': { cat: 'Army', folder: 'SpellFactory',  prefix: 'Spell_Factory' },
-        '1000026': { cat: 'Army', folder: 'DarkBarracks',  prefix: 'Dark_Barracks' },
+        '1000000': { cat: 'Army', folder: 'ArmyCamp', prefix: 'Army_Camp' },
+        '1000006': { cat: 'Army', folder: 'Barracks', prefix: 'Barracks' },
+        '1000007': { cat: 'Army', folder: 'Laboratory', prefix: 'Laboratory' },
+        '1000020': { cat: 'Army', folder: 'SpellFactory', prefix: 'Spell_Factory' },
+        '1000026': { cat: 'Army', folder: 'DarkBarracks', prefix: 'Dark_Barracks' },
         '1000029': { cat: 'Army', folder: 'DarkSpellFactory', prefix: 'Dark_Spell_Factory' },
-        '1000059': { cat: 'Army', folder: 'Workshop',      prefix: 'Workshop' },
-        '1000068': { cat: 'Army', folder: 'PetsHut',       prefix: 'Pet_House' },
-        '1000070': { cat: 'Army', folder: 'Blacksmith',    prefix: 'Blacksmith' },
-        '1000071': { cat: 'Army', folder: 'HeroHall',      prefix: 'Hero_Hall' }
+        '1000059': { cat: 'Army', folder: 'Workshop', prefix: 'Workshop' },
+        '1000068': { cat: 'Army', folder: 'PetsHut', prefix: 'Pet_House' },
+        '1000070': { cat: 'Army', folder: 'Blacksmith', prefix: 'Blacksmith' },
+        '1000071': { cat: 'Army', folder: 'HeroHall', prefix: 'Hero_Hall' },
+
+        // [Resources]
+        '1000002': { cat: 'Resources', folder: 'GoldMine', prefix: 'Gold_Mine' },
+        '1000003': { cat: 'Resources', folder: 'GoldStorage', prefix: 'Gold_Storage' },
+        '1000004': { cat: 'Resources', folder: 'ElixirColector', prefix: 'Elixir_Collector' },
+        '1000005': { cat: 'Resources', folder: 'ElixirStorage', prefix: 'Elixir_Storage' },
+        '1000014': { cat: 'Resources', folder: 'ClanCastle', prefix: 'Clan_Castle' },
+        '1000016': { cat: 'Resources', folder: 'DarkElixirDrill', prefix: 'Dark_Elixir_Drill' },
+        '1000017': { cat: 'Resources', folder: 'DarkElixirStorage', prefix: 'Dark_Elixir_Storage' },
+
+        // [Traps]
+        '12000000': { cat: 'Traps', folder: 'Bomb',           prefix: 'Bomb' },
+        '12000001': { cat: 'Traps', folder: 'SpringTrap',     prefix: 'Spring_Trap' },
+        '12000002': { cat: 'Traps', folder: 'GiantBomb',      prefix: 'Giant_Bomb' },
+        '12000005': { cat: 'Traps', folder: 'AirBomb',        prefix: 'Air_Bomb' },
+        '12000006': { cat: 'Traps', folder: 'SeekingAirMine', prefix: 'Seeking_Air_Mine' },
+        '12000008': { cat: 'Traps', folder: 'SkeletonTrap',   prefix: 'SkeletonTrap',     suffix: '_Ground' },
+        '12000016': { cat: 'Traps', folder: 'TornadoTrap',    prefix: 'Tornado_Trap' },
+        '12000020': { cat: 'Traps', folder: 'GigaBomb',       prefix: 'Giga_Bomb' }
     };
 
     function getItemImage(group, level) {
@@ -81,7 +102,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         // Casos donde el nivel 1 no tiene número (ej: Builders_Hut.webp)
         const displayLevel = (config.noLevelOne && level === 1) ? '' : level;
-        
+
         const suffix = config.dynamicSuffix ? config.dynamicSuffix(level) : (config.suffix || '');
         return `/static/images/${config.cat}/${config.folder}/${config.prefix}${displayLevel}${suffix}${ext}`;
     }
@@ -92,7 +113,7 @@ document.addEventListener('DOMContentLoaded', () => {
         let bClass = isMax ? 'border-info' : 'border-0';
         let statusText = isMax ? `Máximos para Ayuntamiento` : `Queda: ${formatTime(group.total_time_to_max)}`;
         let accId = 'acc-' + group.id;
-        
+
         let headerWidth = group.progress_percentage;
         let hasDropdown = group.total_cnt > 1;
 
@@ -103,7 +124,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 let instMax = inst.is_maxed && !inst.is_upgrading;
                 let instText = instMax ? 'Al Máximo' : (inst.is_upgrading ? `Mejorando a Lvl ${inst.current_lvl + 1}` : `Quedan ${formatTime(inst.time_to_max)}`);
                 let instColor = instMax ? 'text-info fw-bold' : (inst.is_upgrading ? 'text-warning' : 'text-secondary');
-                
+
                 let itemImg = getItemImage(group, inst.current_lvl);
                 let imgHtml = itemImg ? `<img src="${itemImg}" class="me-2 rounded shadow-sm" style="width:50px; height:50px; object-fit:contain; background: rgba(0,0,0,0.1);">` : '';
 
@@ -126,11 +147,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
         let extraTagsTop = '';
         if (!hasDropdown) {
-             if (group.instances[0].weapon > 0) extraTagsTop += ` <span class="badge bg-danger ms-1">Arma ${group.instances[0].weapon}</span>`;
-             if (group.instances[0].gear_up > 0) extraTagsTop += ` <span class="badge bg-primary ms-1" title="Defensa perfeccionada"><i class="bi bi-gear-wide-connected"></i> Perf.</span>`;
+            if (group.instances[0].weapon > 0) extraTagsTop += ` <span class="badge bg-danger ms-1">Arma ${group.instances[0].weapon}</span>`;
+            if (group.instances[0].gear_up > 0) extraTagsTop += ` <span class="badge bg-primary ms-1" title="Defensa perfeccionada"><i class="bi bi-gear-wide-connected"></i> Perf.</span>`;
         }
 
-        let topBadgeHtml = hasDropdown 
+        let topBadgeHtml = hasDropdown
             ? `<span class="badge bg-secondary">Total: ${group.total_cnt}</span>`
             : `<span class="level-badge small">Lvl ${group.instances[0].current_lvl} / ${group.max_lvl}${extraTagsTop}</span>`;
 
@@ -155,7 +176,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 </div>
             `;
         }
-        
+
         let dropdownHtml = hasDropdown ? `
             <div id="${accId}" class="accordion-collapse collapse" aria-labelledby="heading-${accId}" data-bs-parent="#${accId}-parent">
                 <div class="accordion-body pt-0 px-3 pb-3">
@@ -199,19 +220,19 @@ document.addEventListener('DOMContentLoaded', () => {
     function renderSection(containerId, items, iconClass) {
         const container = document.getElementById(containerId);
         container.innerHTML = '';
-        
+
         let displayItems = items;
         if (isRemainingOnly) {
             displayItems = items.filter(group => !group.is_fully_maxed);
         }
 
-        if(displayItems.length === 0) {
+        if (displayItems.length === 0) {
             container.innerHTML = '<div class="col-12 text-center text-secondary py-4"><i class="bi bi-inbox fs-1 d-block mb-2"></i>No hay mejoras pendientes en esta categoría.</div>';
             return;
         }
-        
+
         displayItems.sort((a, b) => b.total_time_to_max - a.total_time_to_max);
-        
+
         let html = '';
         displayItems.forEach(group => {
             html += createAccordion(group, iconClass);
@@ -224,16 +245,16 @@ document.addEventListener('DOMContentLoaded', () => {
         renderSection('defensesContainer', data.defenses, 'bi bi-shield');
         renderSection('armyContainer', data.army, 'bi bi-crosshair');
         renderSection('resourcesContainer', data.resources, 'bi bi-box-seam');
-        
+
         renderSection('trapsContainer', data.traps, 'bi bi-x-octagon');
         renderSection('helpersContainer', data.helpers, 'bi bi-hammer');
-        
+
         renderSection('unitsElixirContainer', data.units_elixir, 'bi bi-lightning-charge');
         renderSection('unitsDarkContainer', data.units_dark, 'bi bi-lightning-charge');
         renderSection('spellsElixirContainer', data.spells_elixir, 'bi bi-magic');
         renderSection('spellsDarkContainer', data.spells_dark, 'bi bi-magic');
         renderSection('siegeContainer', data.siege_machines, 'bi bi-truck');
-        
+
         renderSection('heroesContainer', data.heroes, 'bi bi-person-bounding-box');
         renderSection('petsContainer', data.pets, 'bi bi-bug');
         renderSection('equipmentContainer', data.equipment, 'bi bi-shield-shaded');
@@ -283,25 +304,25 @@ document.addEventListener('DOMContentLoaded', () => {
 
         state.activeId = id;
         const data = v.processed;
-        
+
         const bobIcon = document.getElementById('bobHutIcon');
-        if(v.hasBob) {
+        if (v.hasBob) {
             bobIcon.className = 'bi bi-check-circle-fill text-success fs-5';
         } else {
             bobIcon.className = 'bi bi-x-circle-fill text-danger fs-5';
         }
-        
+
         // Update totals
         document.getElementById('totalBuildersTime').textContent = formatTime(data.totals.builders_time);
         document.getElementById('totalUnitsTime').textContent = formatTime(data.totals.laboratory_time);
         document.getElementById('totalPetsTime').textContent = formatTime(data.totals.pets_time);
-        
+
         document.getElementById('totalDefensesTime').textContent = formatTime(data.totals.defenses_time);
         document.getElementById('totalArmyTime').textContent = formatTime(data.totals.army_time);
         document.getElementById('totalResourcesTime').textContent = formatTime(data.totals.resources_time);
         document.getElementById('totalTrapsTime').textContent = formatTime(data.totals.traps_time);
         document.getElementById('totalHeroesTime').textContent = formatTime(data.totals.heroes_time);
-        
+
         renderAllSections(data);
 
         // UI state
@@ -327,11 +348,11 @@ document.addEventListener('DOMContentLoaded', () => {
             });
 
             const result = await response.json();
-            
+
             if (response.ok && result.status === 'success') {
                 const id = isUpdate && state.activeId ? state.activeId : 'v-' + Date.now();
                 const name = isUpdate && state.activeId ? state.villages[state.activeId].name : prompt("Nombre de la aldea:", "Mi Aldea") || "Aldea";
-                
+
                 state.villages[id] = {
                     id: id,
                     name: name,
@@ -341,11 +362,11 @@ document.addEventListener('DOMContentLoaded', () => {
                     timestamp: Date.now()
                 };
                 state.activeId = id;
-                
+
                 saveState();
                 renderVillageSelector();
                 displayVillage(id);
-                
+
                 dashboardContent.scrollIntoView({ behavior: 'smooth', block: 'start' });
             } else {
                 throw new Error(result.error || 'Error procesando los datos.');
@@ -363,7 +384,7 @@ document.addEventListener('DOMContentLoaded', () => {
     if (toggleRemaining) {
         toggleRemaining.addEventListener('click', () => {
             isRemainingOnly = !isRemainingOnly;
-            
+
             if (isRemainingOnly) {
                 toggleRemaining.classList.replace('btn-dark', 'btn-warning');
                 toggleRemaining.classList.replace('text-secondary', 'text-dark');
@@ -382,7 +403,7 @@ document.addEventListener('DOMContentLoaded', () => {
         expandAllBtn.addEventListener('click', () => {
             isAllExpanded = !isAllExpanded;
             const collapses = document.querySelectorAll('.accordion-collapse');
-            
+
             collapses.forEach(el => {
                 const bsCollapse = bootstrap.Collapse.getOrCreateInstance(el, { toggle: false });
                 if (isAllExpanded) {
@@ -405,7 +426,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-     villageSelector.addEventListener('change', (e) => {
+    villageSelector.addEventListener('change', (e) => {
         // Reset expand state on village switch
         isAllExpanded = false;
         if (expandAllBtn) {
@@ -438,7 +459,7 @@ document.addEventListener('DOMContentLoaded', () => {
             delete state.villages[state.activeId];
             const remainingIds = Object.keys(state.villages);
             state.activeId = remainingIds.length > 0 ? remainingIds[0] : null;
-            
+
             saveState();
             if (state.activeId) {
                 renderVillageSelector();
