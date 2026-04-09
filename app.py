@@ -36,6 +36,18 @@ def _compute_max_level_per_hh(levels, max_hh=12):
                     result[i] = lvl
     return result
 
+def _compute_max_level_per_ph(levels, max_ph=12):
+    """Genera array [max_lvl_en_PH1, ..., max_lvl_en_PHn] para mascotas."""
+    result = [0] * max_ph
+    for entry in levels:
+        ph = entry.get("PH", 1)
+        lvl = entry.get("level", 0)
+        if ph <= max_ph:
+            for i in range(ph - 1, max_ph):
+                if lvl > result[i]:
+                    result[i] = lvl
+    return result
+
 def _load_new_data():
     """Lee todos los JSON de new_data/ y construye el diccionario maestro."""
     master_db = {}
@@ -68,6 +80,7 @@ def _load_new_data():
         levels.sort(key=lambda x: x.get("level", 0))
         
         is_hero = rel_path.startswith("heroes/")
+        is_pet = rel_path.startswith("pets/")
         
         translated_name = translations.get(name, name)
         
@@ -81,6 +94,8 @@ def _load_new_data():
         
         if is_hero:
             entry["max_level_per_hh"] = _compute_max_level_per_hh(levels)
+        elif is_pet:
+            entry["max_level_per_ph"] = _compute_max_level_per_ph(levels)
         else:
             entry["max_level_per_th"] = _compute_max_level_per_th(levels)
         
@@ -96,7 +111,7 @@ print(f"✅ Cargados {len(game_data)} ítems desde new_data/")
 def index():
     return render_template('index.html')
 
-def process_category(items, db_category, th_level=1, hh_level=0):
+def process_category(items, db_category, th_level=1, hh_level=0, ph_level=0):
     processed_groups = {}
     total_time = 0
     
@@ -141,9 +156,13 @@ def process_category(items, db_category, th_level=1, hh_level=0):
             
             # Si el ítem tiene max_level_per_hh (héroes), usar hh_level
             hh_max_list = ref.get('max_level_per_hh')
+            ph_max_list = ref.get('max_level_per_ph')
             th_max_list = ref.get('max_level_per_th')
+            
             if hh_max_list and hh_level > 0 and len(hh_max_list) >= hh_level:
                 max_lvl = hh_max_list[hh_level - 1]
+            elif ph_max_list and ph_level > 0 and len(ph_max_list) >= ph_level:
+                max_lvl = ph_max_list[ph_level - 1]
             elif th_max_list and len(th_max_list) >= th_level:
                 max_lvl = th_max_list[th_level - 1]
             else:
@@ -233,6 +252,7 @@ def process_village():
     # Filtrar edificios y detectar TH, HH, Bob's Hut y Helper Hut
     th_level = 1
     hh_level = 0
+    ph_level = 0
     has_bob = False
     
     army_buildings = []
@@ -248,6 +268,9 @@ def process_village():
         elif id_str == '1000071':
             hh_level = int(b.get('lvl', 0))
             army_buildings.append(b) # HeroHall usually army
+        elif id_str == '1000068': # Pet House
+            ph_level = int(b.get('lvl', 0))
+            army_buildings.append(b)
         elif id_str == '1000093': # HelperHut
             my_helpers.append(b)
         elif id_str == '1000064' or id_str == '1000080': # Bob's Hut
@@ -280,7 +303,7 @@ def process_village():
     siege_res, sm_time = process_category(data.get('siege_machines', []), master_db, th_level)
     
     heroes_res, h_time = process_category(data.get('heroes', []), master_db, th_level, hh_level=hh_level)
-    pets_res, p_time = process_category(data.get('pets', []), master_db, th_level)
+    pets_res, p_time = process_category(data.get('pets', []), master_db, th_level, ph_level=ph_level)
     equip_res, e_time = process_category(data.get('equipment', []), master_db, th_level)
     
     # Sumas de las categorías padre

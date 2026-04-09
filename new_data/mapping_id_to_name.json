@@ -518,5 +518,53 @@
     "siege/TroopLauncher.json": [
         "4000135",
         "Troop Launcher"
+    ],
+    "pets/Lassi.json": [
+        "73000000",
+        "L.A.S.S.I"
+    ],
+    "pets/ElectroOwl.json": [
+        "73000001",
+        "Electro Owl"
+    ],
+    "pets/MightyYak.json": [
+        "73000002",
+        "Mighty Yak"
+    ],
+    "pets/Unicorn.json": [
+        "73000003",
+        "Unicorn"
+    ],
+    "pets/Phoenix.json": [
+        "73000004",
+        "Phoenix"
+    ],
+    "pets/PoisonLizard.json": [
+        "73000007",
+        "Poison Lizard"
+    ],
+    "pets/Diggy.json": [
+        "73000008",
+        "Diggy"
+    ],
+    "pets/Frosty.json": [
+        "73000009",
+        "Frosty"
+    ],
+    "pets/SpiritFox.json": [
+        "73000010",
+        "Spirit Fox"
+    ],
+    "pets/AngryJelly.json": [
+        "73000011",
+        "Angry Jelly"
+    ],
+    "pets/Sneezy.json": [
+        "73000016",
+        "Sneezy"
+    ],
+    "pets/GreedyRaven.json": [
+        "73000017",
+        "Greedy Raven"
     ]
 }

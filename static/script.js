@@ -3,6 +3,19 @@ document.addEventListener('DOMContentLoaded', () => {
     const loader = document.getElementById('loader');
     const pasteError = document.getElementById('pasteError');
     const dashboardContent = document.getElementById('dashboardContent');
+    const toggleRemaining = document.getElementById('toggleRemainingOnly');
+    const villageSelector = document.getElementById('villageSelector');
+    const villageSelectorContainer = document.getElementById('villageSelectorContainer');
+    const addNewVillageBtn = document.getElementById('addNewVillageBtn');
+    const updateVillageBtn = document.getElementById('updateVillageBtn');
+    const deleteVillageBtn = document.getElementById('deleteVillageBtn');
+
+    let state = {
+        activeId: null,
+        villages: {}
+    };
+    
+    let isRemainingOnly = false;
 
     function formatTime(seconds) {
         if (seconds <= 0) return 'Maxed!';
@@ -123,36 +136,127 @@ document.addEventListener('DOMContentLoaded', () => {
     function renderSection(containerId, items, iconClass) {
         const container = document.getElementById(containerId);
         container.innerHTML = '';
-        if(items.length === 0) {
-            container.innerHTML = '<div class="col-12 text-center text-secondary py-4"><i class="bi bi-inbox fs-1 d-block mb-2"></i>No se encontraron datos en esta categoría.</div>';
+        
+        let displayItems = items;
+        if (isRemainingOnly) {
+            displayItems = items.filter(group => !group.is_fully_maxed);
+        }
+
+        if(displayItems.length === 0) {
+            container.innerHTML = '<div class="col-12 text-center text-secondary py-4"><i class="bi bi-inbox fs-1 d-block mb-2"></i>No hay mejoras pendientes en esta categoría.</div>';
             return;
         }
         
-        items.sort((a, b) => b.time_to_max - a.time_to_max);
+        displayItems.sort((a, b) => b.total_time_to_max - a.total_time_to_max);
         
         let html = '';
-        items.forEach(group => {
+        displayItems.forEach(group => {
             html += createAccordion(group, iconClass);
         });
         container.innerHTML = html;
     }
 
-    pasteBtn.addEventListener('click', async () => {
-        pasteError.classList.add('d-none');
-        try {
-            const text = await navigator.clipboard.readText();
-            let jsonData;
+    function renderAllSections(data) {
+        // Render cards
+        renderSection('defensesContainer', data.defenses, 'bi bi-shield');
+        renderSection('armyContainer', data.army, 'bi bi-crosshair');
+        renderSection('resourcesContainer', data.resources, 'bi bi-box-seam');
+        
+        renderSection('trapsContainer', data.traps, 'bi bi-x-octagon');
+        renderSection('helpersContainer', data.helpers, 'bi bi-hammer');
+        
+        renderSection('unitsElixirContainer', data.units_elixir, 'bi bi-lightning-charge');
+        renderSection('unitsDarkContainer', data.units_dark, 'bi bi-lightning-charge');
+        renderSection('spellsElixirContainer', data.spells_elixir, 'bi bi-magic');
+        renderSection('spellsDarkContainer', data.spells_dark, 'bi bi-magic');
+        renderSection('siegeContainer', data.siege_machines, 'bi bi-truck');
+        
+        renderSection('heroesContainer', data.heroes, 'bi bi-person-bounding-box');
+        renderSection('petsContainer', data.pets, 'bi bi-bug');
+        renderSection('equipmentContainer', data.equipment, 'bi bi-shield-shaded');
+    }
+
+    function saveState() {
+        localStorage.setItem('cocTrackerState', JSON.stringify(state));
+    }
+
+    function loadState() {
+        const saved = localStorage.getItem('cocTrackerState');
+        if (saved) {
             try {
-                jsonData = JSON.parse(text);
+                state = JSON.parse(saved);
+                renderVillageSelector();
+                if (state.activeId && state.villages[state.activeId]) {
+                    displayVillage(state.activeId);
+                }
             } catch (e) {
-                pasteError.textContent = "El contenido del portapapeles no es JSON válido.";
-                pasteError.classList.remove('d-none');
-                return;
+                console.error("Error loading state:", e);
             }
+        }
+    }
 
-            loader.classList.remove('d-none');
-            pasteBtn.disabled = true;
+    function renderVillageSelector() {
+        const ids = Object.keys(state.villages);
+        if (ids.length === 0) {
+            villageSelectorContainer.classList.add('d-none');
+            return;
+        }
 
+        villageSelectorContainer.classList.remove('d-none');
+        villageSelector.innerHTML = '';
+        ids.forEach(id => {
+            const v = state.villages[id];
+            const option = document.createElement('option');
+            option.value = id;
+            option.textContent = v.name;
+            option.selected = (id === state.activeId);
+            villageSelector.appendChild(option);
+        });
+    }
+
+    function displayVillage(id) {
+        const v = state.villages[id];
+        if (!v) return;
+
+        state.activeId = id;
+        const data = v.processed;
+        
+        const bobIcon = document.getElementById('bobHutIcon');
+        if(v.hasBob) {
+            bobIcon.className = 'bi bi-check-circle-fill text-success fs-5';
+        } else {
+            bobIcon.className = 'bi bi-x-circle-fill text-danger fs-5';
+        }
+        
+        // Update totals
+        document.getElementById('totalBuildersTime').textContent = formatTime(data.totals.builders_time);
+        document.getElementById('totalUnitsTime').textContent = formatTime(data.totals.laboratory_time);
+        document.getElementById('totalPetsTime').textContent = formatTime(data.totals.pets_time);
+        
+        document.getElementById('totalDefensesTime').textContent = formatTime(data.totals.defenses_time);
+        document.getElementById('totalArmyTime').textContent = formatTime(data.totals.army_time);
+        document.getElementById('totalResourcesTime').textContent = formatTime(data.totals.resources_time);
+        document.getElementById('totalTrapsTime').textContent = formatTime(data.totals.traps_time);
+        document.getElementById('totalHeroesTime').textContent = formatTime(data.totals.heroes_time);
+        
+        renderAllSections(data);
+
+        // UI state
+        dashboardContent.classList.remove('d-none');
+        document.querySelector('.hero-section').classList.add('py-3');
+        document.querySelector('.hero-section').classList.replace('mb-5', 'mb-3');
+        document.querySelector('.hero-section h1').classList.replace('display-4', 'h3');
+        document.querySelector('.hero-section p').classList.add('d-none');
+        pasteBtn.classList.replace('btn-lg', 'btn-sm');
+        pasteBtn.innerHTML = '<i class="bi bi-plus-lg"></i> Añadir otra aldea';
+    }
+
+    async function processAndSave(jsonData, isUpdate = false) {
+        loader.classList.remove('d-none');
+        pasteBtn.disabled = true;
+        pasteError.classList.add('d-none');
+
+        try {
             const response = await fetch('/api/process', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
@@ -162,63 +266,103 @@ document.addEventListener('DOMContentLoaded', () => {
             const result = await response.json();
             
             if (response.ok && result.status === 'success') {
-                const data = result.data;
-                const hasBob = result.has_bob_hut;
+                const id = isUpdate && state.activeId ? state.activeId : 'v-' + Date.now();
+                const name = isUpdate && state.activeId ? state.villages[state.activeId].name : prompt("Nombre de la aldea:", "Mi Aldea") || "Aldea";
                 
-                const bobIcon = document.getElementById('bobHutIcon');
-                if(hasBob) {
-                    bobIcon.className = 'bi bi-check-circle-fill text-success fs-5';
-                } else {
-                    bobIcon.className = 'bi bi-x-circle-fill text-danger fs-5';
-                }
+                state.villages[id] = {
+                    id: id,
+                    name: name,
+                    raw: jsonData,
+                    processed: result.data,
+                    hasBob: result.has_bob_hut,
+                    timestamp: Date.now()
+                };
+                state.activeId = id;
                 
-                // Update totals
-                document.getElementById('totalBuildersTime').textContent = formatTime(data.totals.builders_time);
-                document.getElementById('totalUnitsTime').textContent = formatTime(data.totals.laboratory_time);
-                document.getElementById('totalPetsTime').textContent = formatTime(data.totals.pets_time);
+                saveState();
+                renderVillageSelector();
+                displayVillage(id);
                 
-                document.getElementById('totalDefensesTime').textContent = formatTime(data.totals.defenses_time);
-                document.getElementById('totalArmyTime').textContent = formatTime(data.totals.army_time);
-                document.getElementById('totalResourcesTime').textContent = formatTime(data.totals.resources_time);
-                document.getElementById('totalTrapsTime').textContent = formatTime(data.totals.traps_time);
-                document.getElementById('totalHeroesTime').textContent = formatTime(data.totals.heroes_time);
-                
-                // Render cards
-                renderSection('defensesContainer', data.defenses, 'bi bi-shield');
-                renderSection('armyContainer', data.army, 'bi bi-crosshair');
-                renderSection('resourcesContainer', data.resources, 'bi bi-box-seam');
-                
-                renderSection('trapsContainer', data.traps, 'bi bi-x-octagon');
-                renderSection('helpersContainer', data.helpers, 'bi bi-hammer');
-                
-                renderSection('unitsElixirContainer', data.units_elixir, 'bi bi-lightning-charge');
-                renderSection('unitsDarkContainer', data.units_dark, 'bi bi-lightning-charge');
-                renderSection('spellsElixirContainer', data.spells_elixir, 'bi bi-magic');
-                renderSection('spellsDarkContainer', data.spells_dark, 'bi bi-magic');
-                renderSection('siegeContainer', data.siege_machines, 'bi bi-truck');
-                
-                renderSection('heroesContainer', data.heroes, 'bi bi-person-bounding-box');
-                renderSection('petsContainer', data.pets, 'bi bi-bug');
-                renderSection('equipmentContainer', data.equipment, 'bi bi-shield-shaded');
-
-                // Show dashboard
-                dashboardContent.classList.remove('d-none');
-                
-                // Scroll to dashboard
                 dashboardContent.scrollIntoView({ behavior: 'smooth', block: 'start' });
-
             } else {
-                throw new Error(result.error || 'Error procesando los datos en el servidor.');
+                throw new Error(result.error || 'Error procesando los datos.');
             }
-
         } catch (err) {
-            console.error("Error reading clipboard or processing:", err);
-            pasteError.textContent = "Error: " + err.message + ". (Es posible que debas conceder permiso para leer el portapapeles).";
+            console.error(err);
+            pasteError.textContent = "Error: " + err.message;
             pasteError.classList.remove('d-none');
         } finally {
             loader.classList.add('d-none');
             pasteBtn.disabled = false;
         }
+    }
+
+    if (toggleRemaining) {
+        toggleRemaining.addEventListener('click', () => {
+            isRemainingOnly = !isRemainingOnly;
+            
+            if (isRemainingOnly) {
+                toggleRemaining.classList.replace('btn-dark', 'btn-warning');
+                toggleRemaining.classList.replace('text-secondary', 'text-dark');
+            } else {
+                toggleRemaining.classList.replace('btn-warning', 'btn-dark');
+                toggleRemaining.classList.replace('text-dark', 'text-secondary');
+            }
+
+            if (state.activeId && state.villages[state.activeId]) {
+                renderAllSections(state.villages[state.activeId].processed);
+            }
+        });
+    }
+
+    villageSelector.addEventListener('change', (e) => {
+        displayVillage(e.target.value);
+        saveState();
     });
+
+    addNewVillageBtn.addEventListener('click', () => {
+        pasteBtn.click();
+    });
+
+    updateVillageBtn.addEventListener('click', async () => {
+        try {
+            const text = await navigator.clipboard.readText();
+            const jsonData = JSON.parse(text);
+            await processAndSave(jsonData, true);
+        } catch (e) {
+            alert("Error al actualizar: Asegúrate de tener el JSON en el portapapeles.");
+        }
+    });
+
+    deleteVillageBtn.addEventListener('click', () => {
+        if (!state.activeId) return;
+        if (confirm(`¿Estás seguro de que quieres eliminar la aldea "${state.villages[state.activeId].name}"?`)) {
+            delete state.villages[state.activeId];
+            const remainingIds = Object.keys(state.villages);
+            state.activeId = remainingIds.length > 0 ? remainingIds[0] : null;
+            
+            saveState();
+            if (state.activeId) {
+                renderVillageSelector();
+                displayVillage(state.activeId);
+            } else {
+                location.reload(); // Reset to initial state
+            }
+        }
+    });
+
+    pasteBtn.addEventListener('click', async () => {
+        try {
+            const text = await navigator.clipboard.readText();
+            const jsonData = JSON.parse(text);
+            await processAndSave(jsonData);
+        } catch (err) {
+            pasteError.textContent = "Error: Portapapeles no contiene JSON válido.";
+            pasteError.classList.remove('d-none');
+        }
+    });
+
+    // Cargar estado inicial
+    loadState();
 
 });
