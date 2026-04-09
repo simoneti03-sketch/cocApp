@@ -9,6 +9,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const addNewVillageBtn = document.getElementById('addNewVillageBtn');
     const updateVillageBtn = document.getElementById('updateVillageBtn');
     const deleteVillageBtn = document.getElementById('deleteVillageBtn');
+    const expandAllBtn = document.getElementById('expandAllBtn');
 
     let state = {
         activeId: null,
@@ -16,6 +17,7 @@ document.addEventListener('DOMContentLoaded', () => {
     };
     
     let isRemainingOnly = false;
+    let isAllExpanded = false;
 
     function formatTime(seconds) {
         if (seconds <= 0) return 'Maxed!';
@@ -29,6 +31,46 @@ document.addEventListener('DOMContentLoaded', () => {
         if (m > 0) parts.push(`${m}m`);
         if (parts.length === 0) return '< 1m';
         return parts.join(' ');
+    }
+
+    const DEFENSE_IMAGE_MAP = {
+        '1000001': { folder: 'TownHall',      prefix: 'Town_Hall' },
+        '1000008': { folder: 'Cannon',        prefix: 'Cannon',         isComplexExt: true },
+        '1000009': { folder: 'ArcherTower',   prefix: 'Archer_Tower' },
+        '1000010': { folder: 'Wall',          prefix: 'Wall' },
+        '1000011': { folder: 'WizardTower',   prefix: 'Wizard_Tower' },
+        '1000012': { folder: 'AirDefense',    prefix: 'Air_Defense' },
+        '1000013': { folder: 'Mortar',        prefix: 'Mortar',         isComplexExt: true },
+        '1000015': { folder: 'BuilderHut',    prefix: 'Builders_Hut',   noLevelOne: true },
+        '1000019': { folder: 'HiddenTesla',   prefix: 'Hidden_Tesla' },
+        '1000021': { folder: 'X-Bow',         prefix: 'X-Bow',          suffix: '_Ground' },
+        '1000027': { folder: 'InfernoTower',   prefix: 'Inferno_Tower',  suffix: '_Single' },
+        '1000028': { folder: 'AirSweeper',    prefix: 'Air_Sweeper' },
+        '1000031': { folder: 'EagleArtillery', prefix: 'Eagle_Artillery' },
+        '1000032': { folder: 'BombTower',     prefix: 'Bomb_Tower' },
+        '1000067': { folder: 'Scattershot',    prefix: 'Scattershot' },
+        '1000072': { folder: 'SpellTower',    prefix: 'Spell_Tower',    dynamicSuffix: (lvl) => {
+            const spells = { 1: '_Rage', 2: '_Poison', 3: '_Invisibility', 4: '_Earthquake' };
+            return spells[lvl] || '';
+        }},
+        '1000077': { folder: 'Monolith',      prefix: 'Monolith' }
+    };
+
+    function getItemImage(group, level) {
+        const config = DEFENSE_IMAGE_MAP[group.id];
+        if (!config) return null;
+
+        let ext = '.webp';
+        // Especial para Cañones y Morteros (Nivel 8+ usan .wep.webp)
+        if (config.isComplexExt && level >= 8) {
+            ext = '.wep.webp';
+        }
+
+        // Casos donde el nivel 1 no tiene número (ej: Builders_Hut.webp)
+        const displayLevel = (config.noLevelOne && level === 1) ? '' : level;
+        
+        const suffix = config.dynamicSuffix ? config.dynamicSuffix(level) : (config.suffix || '');
+        return `/static/images/Defences/${config.folder}/${config.prefix}${displayLevel}${suffix}${ext}`;
     }
 
     function createAccordion(group, iconClass) {
@@ -49,6 +91,9 @@ document.addEventListener('DOMContentLoaded', () => {
                 let instText = instMax ? 'Al Máximo' : (inst.is_upgrading ? `Mejorando a Lvl ${inst.current_lvl + 1}` : `Quedan ${formatTime(inst.time_to_max)}`);
                 let instColor = instMax ? 'text-info fw-bold' : (inst.is_upgrading ? 'text-warning' : 'text-secondary');
                 
+                let itemImg = getItemImage(group, inst.current_lvl);
+                let imgHtml = itemImg ? `<img src="${itemImg}" class="me-2 rounded shadow-sm" style="width:50px; height:50px; object-fit:contain; background: rgba(0,0,0,0.1);">` : '';
+
                 let extraTags = '';
                 if (inst.weapon > 0) extraTags += ` <span class="badge bg-danger ms-1" style="font-size: 0.70rem;">Arma ${inst.weapon}</span>`;
                 if (inst.gear_up > 0) extraTags += ` <span class="badge bg-primary ms-1" style="font-size: 0.70rem;"><i class="bi bi-gear-wide-connected me-1"></i>Perfeccionada</span>`;
@@ -56,6 +101,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 instancesHtml += `
                     <div class="d-flex justify-content-between align-items-center py-2 border-bottom border-secondary mb-1 flex-wrap">
                         <div class="d-flex align-items-center mb-1 mb-sm-0">
+                            ${imgHtml}
                             <span class="badge bg-secondary me-2">x${inst.cnt}</span>
                             <span>Nivel ${inst.current_lvl}</span>${extraTags}
                         </div>
@@ -105,12 +151,16 @@ document.addEventListener('DOMContentLoaded', () => {
             </div>
         ` : '';
 
+        let mainImg = !hasDropdown ? getItemImage(group, group.instances[0].current_lvl) : null;
+        let mainImgHtml = mainImg ? `<div class="text-center mb-2"><img src="${mainImg}" class="rounded shadow-sm" style="width:50px; height:50px; object-fit:contain; background: rgba(0,0,0,0.1);"></div>` : '';
+
         return `
             <div class="col-md-6 col-lg-4">
                 <div class="card bg-dark glass-card item-card h-100 ${bClass} shadow-sm overflow-hidden ${hasDropdown ? 'accordion' : ''}" id="${accId}-parent">
                     <div class="card-body p-0">
                         <div class="accordion-item bg-transparent border-0">
                             <h2 class="accordion-header p-3 pb-0" id="heading-${accId}">
+                                ${mainImgHtml}
                                 <div class="d-flex justify-content-between align-items-center mb-2">
                                     <div class="d-flex align-items-center gap-2">
                                         <i class="${iconClass} fs-4 text-warning"></i>
@@ -315,7 +365,42 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    villageSelector.addEventListener('change', (e) => {
+    if (expandAllBtn) {
+        expandAllBtn.addEventListener('click', () => {
+            isAllExpanded = !isAllExpanded;
+            const collapses = document.querySelectorAll('.accordion-collapse');
+            
+            collapses.forEach(el => {
+                const bsCollapse = bootstrap.Collapse.getOrCreateInstance(el, { toggle: false });
+                if (isAllExpanded) {
+                    bsCollapse.show();
+                } else {
+                    bsCollapse.hide();
+                }
+            });
+
+            // Visual feedback
+            if (isAllExpanded) {
+                expandAllBtn.classList.replace('btn-dark', 'btn-warning');
+                expandAllBtn.classList.replace('text-secondary', 'text-dark');
+                expandAllBtn.innerHTML = '<i class="bi bi-arrows-collapse"></i> Replegar todo';
+            } else {
+                expandAllBtn.classList.replace('btn-warning', 'btn-dark');
+                expandAllBtn.classList.replace('text-dark', 'text-secondary');
+                expandAllBtn.innerHTML = '<i class="bi bi-arrows-expand"></i> Desplegar todo';
+            }
+        });
+    }
+
+     villageSelector.addEventListener('change', (e) => {
+        // Reset expand state on village switch
+        isAllExpanded = false;
+        if (expandAllBtn) {
+            expandAllBtn.classList.replace('btn-warning', 'btn-dark');
+            expandAllBtn.classList.replace('text-dark', 'text-secondary');
+            expandAllBtn.innerHTML = '<i class="bi bi-arrows-expand"></i> Desplegar todo';
+        }
+
         displayVillage(e.target.value);
         saveState();
     });
