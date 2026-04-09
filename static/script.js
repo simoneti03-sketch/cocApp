@@ -33,31 +33,44 @@ document.addEventListener('DOMContentLoaded', () => {
         return parts.join(' ');
     }
 
-    const DEFENSE_IMAGE_MAP = {
-        '1000001': { folder: 'TownHall',      prefix: 'Town_Hall' },
-        '1000008': { folder: 'Cannon',        prefix: 'Cannon',         isComplexExt: true },
-        '1000009': { folder: 'ArcherTower',   prefix: 'Archer_Tower' },
-        '1000010': { folder: 'Wall',          prefix: 'Wall' },
-        '1000011': { folder: 'WizardTower',   prefix: 'Wizard_Tower' },
-        '1000012': { folder: 'AirDefense',    prefix: 'Air_Defense' },
-        '1000013': { folder: 'Mortar',        prefix: 'Mortar',         isComplexExt: true },
-        '1000015': { folder: 'BuilderHut',    prefix: 'Builders_Hut',   noLevelOne: true },
-        '1000019': { folder: 'HiddenTesla',   prefix: 'Hidden_Tesla' },
-        '1000021': { folder: 'X-Bow',         prefix: 'X-Bow',          suffix: '_Ground' },
-        '1000027': { folder: 'InfernoTower',   prefix: 'Inferno_Tower',  suffix: '_Single' },
-        '1000028': { folder: 'AirSweeper',    prefix: 'Air_Sweeper' },
-        '1000031': { folder: 'EagleArtillery', prefix: 'Eagle_Artillery' },
-        '1000032': { folder: 'BombTower',     prefix: 'Bomb_Tower' },
-        '1000067': { folder: 'Scattershot',    prefix: 'Scattershot' },
-        '1000072': { folder: 'SpellTower',    prefix: 'Spell_Tower',    dynamicSuffix: (lvl) => {
+    const BUILDING_IMAGE_MAP = {
+        // [Defences]
+        '1000001': { cat: 'Defences', folder: 'TownHall',      prefix: 'Town_Hall' },
+        '1000008': { cat: 'Defences', folder: 'Cannon',        prefix: 'Cannon',         isComplexExt: true },
+        '1000009': { cat: 'Defences', folder: 'ArcherTower',   prefix: 'Archer_Tower' },
+        '1000010': { cat: 'Defences', folder: 'Wall',          prefix: 'Wall' },
+        '1000011': { cat: 'Defences', folder: 'WizardTower',   prefix: 'Wizard_Tower' },
+        '1000012': { cat: 'Defences', folder: 'AirDefense',    prefix: 'Air_Defense' },
+        '1000013': { cat: 'Defences', folder: 'Mortar',        prefix: 'Mortar',         isComplexExt: true },
+        '1000015': { cat: 'Defences', folder: 'BuilderHut',    prefix: 'Builders_Hut',   noLevelOne: true },
+        '1000019': { cat: 'Defences', folder: 'HiddenTesla',   prefix: 'Hidden_Tesla' },
+        '1000021': { cat: 'Defences', folder: 'X-Bow',         prefix: 'X-Bow',          suffix: '_Ground' },
+        '1000027': { cat: 'Defences', folder: 'InfernoTower',   prefix: 'Inferno_Tower',  suffix: '_Single' },
+        '1000028': { cat: 'Defences', folder: 'AirSweeper',    prefix: 'Air_Sweeper' },
+        '1000031': { cat: 'Defences', folder: 'EagleArtillery', prefix: 'Eagle_Artillery' },
+        '1000032': { cat: 'Defences', folder: 'BombTower',     prefix: 'Bomb_Tower' },
+        '1000067': { cat: 'Defences', folder: 'Scattershot',    prefix: 'Scattershot' },
+        '1000072': { cat: 'Defences', folder: 'SpellTower',    prefix: 'Spell_Tower',    dynamicSuffix: (lvl) => {
             const spells = { 1: '_Rage', 2: '_Poison', 3: '_Invisibility', 4: '_Earthquake' };
             return spells[lvl] || '';
         }},
-        '1000077': { folder: 'Monolith',      prefix: 'Monolith' }
+        '1000077': { cat: 'Defences', folder: 'Monolith',      prefix: 'Monolith' },
+
+        // [Army]
+        '1000000': { cat: 'Army', folder: 'ArmyCamp',      prefix: 'Army_Camp' },
+        '1000006': { cat: 'Army', folder: 'Barracks',      prefix: 'Barracks' },
+        '1000007': { cat: 'Army', folder: 'Laboratory',    prefix: 'Laboratory' },
+        '1000020': { cat: 'Army', folder: 'SpellFactory',  prefix: 'Spell_Factory' },
+        '1000026': { cat: 'Army', folder: 'DarkBarracks',  prefix: 'Dark_Barracks' },
+        '1000029': { cat: 'Army', folder: 'DarkSpellFactory', prefix: 'Dark_Spell_Factory' },
+        '1000059': { cat: 'Army', folder: 'Workshop',      prefix: 'Workshop' },
+        '1000068': { cat: 'Army', folder: 'PetsHut',       prefix: 'Pet_House' },
+        '1000070': { cat: 'Army', folder: 'Blacksmith',    prefix: 'Blacksmith' },
+        '1000071': { cat: 'Army', folder: 'HeroHall',      prefix: 'Hero_Hall' }
     };
 
     function getItemImage(group, level) {
-        const config = DEFENSE_IMAGE_MAP[group.id];
+        const config = BUILDING_IMAGE_MAP[group.id];
         if (!config) return null;
 
         let ext = '.webp';
@@ -70,7 +83,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const displayLevel = (config.noLevelOne && level === 1) ? '' : level;
         
         const suffix = config.dynamicSuffix ? config.dynamicSuffix(level) : (config.suffix || '');
-        return `/static/images/Defences/${config.folder}/${config.prefix}${displayLevel}${suffix}${ext}`;
+        return `/static/images/${config.cat}/${config.folder}/${config.prefix}${displayLevel}${suffix}${ext}`;
     }
 
     function createAccordion(group, iconClass) {
