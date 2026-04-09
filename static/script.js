@@ -193,7 +193,8 @@ document.addEventListener('DOMContentLoaded', () => {
                 
                 renderSection('unitsElixirContainer', data.units_elixir, 'bi bi-lightning-charge');
                 renderSection('unitsDarkContainer', data.units_dark, 'bi bi-lightning-charge');
-                renderSection('spellsContainer', data.spells, 'bi bi-magic');
+                renderSection('spellsElixirContainer', data.spells_elixir, 'bi bi-magic');
+                renderSection('spellsDarkContainer', data.spells_dark, 'bi bi-magic');
                 renderSection('siegeContainer', data.siege_machines, 'bi bi-truck');
                 
                 renderSection('heroesContainer', data.heroes, 'bi bi-person-bounding-box');

@@ -1,0 +1,30 @@
+[
+    {
+        "level": 1,
+        "cost": 0,
+        "currency": "dark_elixir",
+        "duration": 0,
+        "TH": 1
+    },
+    {
+        "level": 2,
+        "cost": 62500,
+        "currency": "dark_elixir",
+        "duration": 475200,
+        "TH": 12
+    },
+    {
+        "level": 3,
+        "cost": 125000,
+        "currency": "dark_elixir",
+        "duration": 734400,
+        "TH": 14
+    },
+    {
+        "level": 4,
+        "cost": 175000,
+        "currency": "dark_elixir",
+        "duration": 864000,
+        "TH": 16
+    }
+]

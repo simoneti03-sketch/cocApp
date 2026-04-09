@@ -102,5 +102,22 @@
     "Lava Hound": "Sabueso de Lava",
     "Minion": "Esbirro",
     "Valkyrie": "Valquiria",
-    "Witch": "Bruja"
+    "Witch": "Bruja",
+    "Lightning Spell": "Hechizo de Rayo",
+    "Healing Spell": "Hechizo Curativo",
+    "Rage Spell": "Hechizo de Rabia",
+    "Jump Spell": "Hechizo de Salto",
+    "Freeze Spell": "Hechizo de Hielo",
+    "Clone Spell": "Hechizo de Clonación",
+    "Invisibility Spell": "Hechizo de Invisibilidad",
+    "Recall Spell": "Hechizo de Retorno",
+    "Revive Spell": "Hechizo de Revivir",
+    "Totem Spell": "Hechizo de Tótem",
+    "Poison Spell": "Hechizo de Veneno",
+    "Earthquake Spell": "Hechizo de Terremoto",
+    "Haste Spell": "Hechizo de Aceleración",
+    "Skeleton Spell": "Hechizo de Esqueletos",
+    "Bat Spell": "Hechizo de Murciélagos",
+    "Overgrowth Spell": "Hechizo de Crecimiento excesivo",
+    "Ice Block Spell": "Hechizo de Bloque de Hielo"
 }
