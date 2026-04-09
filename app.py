@@ -258,7 +258,6 @@ def process_village():
     army_buildings = []
     resources_buildings = []
     defenses_buildings = []
-    my_helpers = []
     
     for b in data.get('buildings', []):
         id_str = str(b.get('data'))
@@ -272,8 +271,8 @@ def process_village():
             ph_level = int(b.get('lvl', 0))
             army_buildings.append(b)
         elif id_str == '1000093': # HelperHut
-            my_helpers.append(b)
-        elif id_str == '1000064' or id_str == '1000080': # Bob's Hut
+            defenses_buildings.append(b)
+        elif id_str == '1000064': # Bob's Hut
             has_bob = True
         else:
             ref = master_db.get(id_str)
@@ -287,7 +286,7 @@ def process_village():
 
     for b in data.get('buildings2', []):
         d_val = str(b.get('data'))
-        if d_val == '1000064' or d_val == '1000080':
+        if d_val == '1000064':
             has_bob = True
 
     # Procesar todo individualmente pasando el th_level
@@ -296,7 +295,6 @@ def process_village():
     resources_res, r_time = process_category(resources_buildings, master_db, th_level)
     
     traps_res, t_time = process_category(data.get('traps', []), master_db, th_level)
-    helpers_res, hl_time = process_category(my_helpers, master_db, th_level)
     
     units_res, u_time = process_category(data.get('units', []), master_db, th_level)
     spells_res, s_time = process_category(data.get('spells', []), master_db, th_level)
@@ -316,8 +314,8 @@ def process_village():
     total_pets = p_time
     
     # Calculo especial de tiempo de constructores
-    # Incluye: Defensas, Ejército, Recursos, Trampas, Héroes y el Helper (Ayudantes)
-    total_builders_work = total_defenses + total_army + total_resources + total_traps + total_heroes + hl_time
+    # Incluye: Defensas, Ejército, Recursos, Trampas, Héroes
+    total_builders_work = total_defenses + total_army + total_resources + total_traps + total_heroes
     num_builders = 6 if has_bob else 5
     builders_time = total_builders_work / num_builders
     
@@ -329,7 +327,6 @@ def process_village():
             'army': army_res,
             'resources': resources_res,
             'traps': traps_res,
-            'helpers': helpers_res,
             'units_elixir': [u for u in units_res if u.get('currency') == 'elixir'],
             'units_dark': [u for u in units_res if u.get('currency') == 'dark_elixir'],
             'spells_elixir': [s for s in spells_res if s.get('currency') == 'elixir'],

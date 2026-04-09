@@ -566,5 +566,17 @@
     "pets/GreedyRaven.json": [
         "73000017",
         "Greedy Raven"
+    ],
+    "helpers/BuilderApprentice.json": [
+        "93000000",
+        "Apprentice builder"
+    ],
+    "helpers/LabAssistant.json": [
+        "93000001",
+        "Laboratory assistant"
+    ],
+    "helpers/Alchemist.json": [
+        "93000002",
+        "Alchemist"
     ]
 }

@@ -76,18 +76,18 @@ document.addEventListener('DOMContentLoaded', () => {
         '1000004': { cat: 'Resources', folder: 'ElixirColector', prefix: 'Elixir_Collector' },
         '1000005': { cat: 'Resources', folder: 'ElixirStorage', prefix: 'Elixir_Storage' },
         '1000014': { cat: 'Resources', folder: 'ClanCastle', prefix: 'Clan_Castle' },
-        '1000016': { cat: 'Resources', folder: 'DarkElixirDrill', prefix: 'Dark_Elixir_Drill' },
-        '1000017': { cat: 'Resources', folder: 'DarkElixirStorage', prefix: 'Dark_Elixir_Storage' },
+        '1000023': { cat: 'Resources', folder: 'DarkElixirDrill', prefix: 'Dark_Elixir_Drill' },
+        '1000024': { cat: 'Resources', folder: 'DarkElixirStorage', prefix: 'Dark_Elixir_Storage' },
 
         // [Traps]
-        '12000000': { cat: 'Traps', folder: 'Bomb',           prefix: 'Bomb' },
-        '12000001': { cat: 'Traps', folder: 'SpringTrap',     prefix: 'Spring_Trap' },
-        '12000002': { cat: 'Traps', folder: 'GiantBomb',      prefix: 'Giant_Bomb' },
-        '12000005': { cat: 'Traps', folder: 'AirBomb',        prefix: 'Air_Bomb' },
+        '12000000': { cat: 'Traps', folder: 'Bomb', prefix: 'Bomb' },
+        '12000001': { cat: 'Traps', folder: 'SpringTrap', prefix: 'Spring_Trap' },
+        '12000002': { cat: 'Traps', folder: 'GiantBomb', prefix: 'Giant_Bomb' },
+        '12000005': { cat: 'Traps', folder: 'AirBomb', prefix: 'Air_Bomb' },
         '12000006': { cat: 'Traps', folder: 'SeekingAirMine', prefix: 'Seeking_Air_Mine' },
-        '12000008': { cat: 'Traps', folder: 'SkeletonTrap',   prefix: 'SkeletonTrap',     suffix: '_Ground' },
-        '12000016': { cat: 'Traps', folder: 'TornadoTrap',    prefix: 'Tornado_Trap' },
-        '12000020': { cat: 'Traps', folder: 'GigaBomb',       prefix: 'Giga_Bomb' }
+        '12000008': { cat: 'Traps', folder: 'SkeletonTrap', prefix: 'SkeletonTrap', suffix: '_Ground' },
+        '12000016': { cat: 'Traps', folder: 'TornadoTrap', prefix: 'Tornado_Trap' },
+        '12000020': { cat: 'Traps', folder: 'GigaBomb', prefix: 'Giga_Bomb' }
     };
 
     const LABORATORY_IMAGE_MAP = {
@@ -128,24 +128,24 @@ document.addEventListener('DOMContentLoaded', () => {
 
         // [Spells - Elixir]
         '26000000': { cat: 'Spells/Elixir', prefix: 'Lightning_Spell', suffix: '_info' },
-        '26000001': { cat: 'Spells/Elixir', prefix: 'Healing_Spell',   suffix: '_info' },
-        '26000002': { cat: 'Spells/Elixir', prefix: 'Rage_Spell',      suffix: '_info' },
-        '26000003': { cat: 'Spells/Elixir', prefix: 'Jump_Spell',      suffix: '_info' },
-        '26000005': { cat: 'Spells/Elixir', prefix: 'Freeze_Spell',    suffix: '_info' },
-        '26000016': { cat: 'Spells/Elixir', prefix: 'Clone_Spell',     suffix: '_info' },
+        '26000001': { cat: 'Spells/Elixir', prefix: 'Healing_Spell', suffix: '_info' },
+        '26000002': { cat: 'Spells/Elixir', prefix: 'Rage_Spell', suffix: '_info' },
+        '26000003': { cat: 'Spells/Elixir', prefix: 'Jump_Spell', suffix: '_info' },
+        '26000005': { cat: 'Spells/Elixir', prefix: 'Freeze_Spell', suffix: '_info' },
+        '26000016': { cat: 'Spells/Elixir', prefix: 'Clone_Spell', suffix: '_info' },
         '26000035': { cat: 'Spells/Elixir', prefix: 'Invisibility_Spell', suffix: '_info' },
-        '26000053': { cat: 'Spells/Elixir', prefix: 'Recall_Spell',    suffix: '_info' },
-        '26000098': { cat: 'Spells/Elixir', prefix: 'Revive_Spell',    suffix: '_info' },
-        '26000114': { cat: 'Spells/Elixir', prefix: 'Totem_Spell',     suffix: '_info' },
+        '26000053': { cat: 'Spells/Elixir', prefix: 'Recall_Spell', suffix: '_info' },
+        '26000098': { cat: 'Spells/Elixir', prefix: 'Revive_Spell', suffix: '_info' },
+        '26000114': { cat: 'Spells/Elixir', prefix: 'Totem_Spell', suffix: '_info' },
 
         // [Spells - Dark]
-        '26000009': { cat: 'Spells/Dark', prefix: 'Poison_Spell',     suffix: '_info' },
+        '26000009': { cat: 'Spells/Dark', prefix: 'Poison_Spell', suffix: '_info' },
         '26000010': { cat: 'Spells/Dark', prefix: 'Earthquake_Spell', suffix: '_info' },
-        '26000011': { cat: 'Spells/Dark', prefix: 'Haste_Spell',      suffix: '_info' },
-        '26000017': { cat: 'Spells/Dark', prefix: 'Skeleton_Spell',   suffix: '_info' },
-        '26000028': { cat: 'Spells/Dark', prefix: 'Bat_Spell',        suffix: '_info' },
+        '26000011': { cat: 'Spells/Dark', prefix: 'Haste_Spell', suffix: '_info' },
+        '26000017': { cat: 'Spells/Dark', prefix: 'Skeleton_Spell', suffix: '_info' },
+        '26000028': { cat: 'Spells/Dark', prefix: 'Bat_Spell', suffix: '_info' },
         '26000070': { cat: 'Spells/Dark', prefix: 'Overgrowth_Spell', suffix: '_info' },
-        '26000109': { cat: 'Spells/Dark', prefix: 'Ice_Block_Spell',  suffix: '_info' },
+        '26000109': { cat: 'Spells/Dark', prefix: 'Ice_Block_Spell', suffix: '_info' },
 
         // [Siege Machines]
         '4000051': { cat: 'SiegeMachines', prefix: 'Avatar_Wall_Wrecker' },
@@ -169,7 +169,21 @@ document.addEventListener('DOMContentLoaded', () => {
         '73000010': { cat: 'Pets', prefix: 'Avatar_Spirit_Fox' },
         '73000011': { cat: 'Pets', prefix: 'Avatar_Angry_Jelly' },
         '73000016': { cat: 'Pets', prefix: 'Avatar_Sneezy' },
-        '73000017': { cat: 'Pets', prefix: 'Avatar_Greedy_Raven' }
+        '73000017': { cat: 'Pets', prefix: 'Avatar_Greedy_Raven' },
+
+        // [Heroes]
+        '28000000': { cat: 'Heroes', prefix: 'Avatar_Hero_Barbarian_King' },
+        '28000001': { cat: 'Heroes', prefix: 'Avatar_Hero_Archer_Queen' },
+        '28000002': { cat: 'Heroes', prefix: 'Avatar_Hero_Grand_Warden' },
+        '28000004': { cat: 'Heroes', prefix: 'Avatar_Hero_Royal_Champion' },
+        '28000006': { cat: 'Heroes', prefix: 'Avatar_Hero_Minion_Prince' },
+        '28000007': { cat: 'Heroes', prefix: 'Avatar_Hero_Dragon_Duke' },
+        '28000008': { cat: 'Heroes', prefix: 'Avatar_Hero_Warden_of_Nature' },
+
+        // [Helpers]
+        '93000000': { cat: 'Helpers', prefix: 'BuilderApprentice' },
+        '93000001': { cat: 'Helpers', prefix: 'LabAssistant' },
+        '93000002': { cat: 'Helpers', prefix: 'Alchemist' }
     };
 
     function getItemImage(group, level) {
@@ -334,7 +348,6 @@ document.addEventListener('DOMContentLoaded', () => {
         renderSection('resourcesContainer', data.resources, 'bi bi-box-seam');
 
         renderSection('trapsContainer', data.traps, 'bi bi-x-octagon');
-        renderSection('helpersContainer', data.helpers, 'bi bi-hammer');
 
         renderSection('unitsElixirContainer', data.units_elixir, 'bi bi-lightning-charge');
         renderSection('unitsDarkContainer', data.units_dark, 'bi bi-lightning-charge');
