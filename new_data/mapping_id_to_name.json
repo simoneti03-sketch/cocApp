@@ -291,6 +291,10 @@
         "28000006",
         "Minion Prince"
     ],
+    "heroes/DragonDuke.json": [
+        "28000007",
+        "Dragon Duke"
+    ],
     "units/Elixir/Archer.json": [
         "4000001",
         "Archer"
