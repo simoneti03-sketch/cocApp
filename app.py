@@ -248,9 +248,9 @@ def process_village():
         elif id_str == '1000071':
             hh_level = int(b.get('lvl', 0))
             army_buildings.append(b) # HeroHall usually army
-        elif id_str == '1000064': # HelperHut
+        elif id_str == '1000093': # HelperHut
             my_helpers.append(b)
-        elif id_str == '1000093' or id_str == '1000080': # Bob's Hut
+        elif id_str == '1000064' or id_str == '1000080': # Bob's Hut
             has_bob = True
         else:
             ref = master_db.get(id_str)
@@ -264,7 +264,7 @@ def process_village():
 
     for b in data.get('buildings2', []):
         d_val = str(b.get('data'))
-        if d_val == '1000093' or d_val == '1000080':
+        if d_val == '1000064' or d_val == '1000080':
             has_bob = True
 
     # Procesar todo individualmente pasando el th_level

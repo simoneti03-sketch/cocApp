@@ -128,11 +128,11 @@
         "Builders Hut"
     ],
     "extra/HelperHut.json": [
-        "1000064",
+        "1000093",
         "Helper Hut"
     ],
     "extra/BobHut.json": [
-        "1000093",
+        "1000064",
         "B.O.B Hut"
     ],
     "defenses/TownHall.json": [
