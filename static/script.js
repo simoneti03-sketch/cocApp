@@ -90,21 +90,108 @@ document.addEventListener('DOMContentLoaded', () => {
         '12000020': { cat: 'Traps', folder: 'GigaBomb',       prefix: 'Giga_Bomb' }
     };
 
-    function getItemImage(group, level) {
-        const config = BUILDING_IMAGE_MAP[group.id];
-        if (!config) return null;
+    const LABORATORY_IMAGE_MAP = {
+        // [Units - Elixir]
+        '4000000': { cat: 'Units/Elixir', prefix: 'Avatar_Barbarian' },
+        '4000001': { cat: 'Units/Elixir', prefix: 'Avatar_Archer' },
+        '4000002': { cat: 'Units/Elixir', prefix: 'Avatar_Goblin' },
+        '4000003': { cat: 'Units/Elixir', prefix: 'Avatar_Giant' },
+        '4000004': { cat: 'Units/Elixir', prefix: 'Avatar_Wall_Breaker' },
+        '4000005': { cat: 'Units/Elixir', prefix: 'Avatar_Balloon' },
+        '4000006': { cat: 'Units/Elixir', prefix: 'Avatar_Wizard' },
+        '4000007': { cat: 'Units/Elixir', prefix: 'Avatar_Healer' },
+        '4000008': { cat: 'Units/Elixir', prefix: 'Avatar_Dragon' },
+        '4000009': { cat: 'Units/Elixir', prefix: 'Avatar_P.E.K.K.A' },
+        '4000023': { cat: 'Units/Elixir', prefix: 'Avatar_Baby_Dragon' },
+        '4000024': { cat: 'Units/Elixir', prefix: 'Avatar_Miner' },
+        '4000053': { cat: 'Units/Elixir', prefix: 'Avatar_Yeti' },
+        '4000059': { cat: 'Units/Elixir', prefix: 'Avatar_Electro_Dragon' },
+        '4000065': { cat: 'Units/Elixir', prefix: 'Avatar_Dragon_Rider' },
+        '4000095': { cat: 'Units/Elixir', prefix: 'Avatar_Electro_Titan' },
+        '4000110': { cat: 'Units/Elixir', prefix: 'Avatar_Root_Rider' },
+        '4000132': { cat: 'Units/Elixir', prefix: 'Avatar_Thrower' },
+        '4000155': { cat: 'Units/Elixir', prefix: 'Avatar_Meteor_Golem' },
 
-        let ext = '.webp';
-        // Especial para Cañones y Morteros (Nivel 8+ usan .wep.webp)
-        if (config.isComplexExt && level >= 8) {
-            ext = '.wep.webp';
+        // [Units - Dark]
+        '4000010': { cat: 'Units/Dark', prefix: 'Avatar_Minion' },
+        '4000011': { cat: 'Units/Dark', prefix: 'Avatar_Hog_Rider' },
+        '4000012': { cat: 'Units/Dark', prefix: 'Avatar_Valkyrie' },
+        '4000013': { cat: 'Units/Dark', prefix: 'Avatar_Golem' },
+        '4000015': { cat: 'Units/Dark', prefix: 'Avatar_Witch' },
+        '4000017': { cat: 'Units/Dark', prefix: 'Avatar_Lava_Hound' },
+        '4000022': { cat: 'Units/Dark', prefix: 'Avatar_Bowler' },
+        '4000058': { cat: 'Units/Dark', prefix: 'Avatar_Ice_Golem' },
+        '4000082': { cat: 'Units/Dark', prefix: 'Avatar_Headhunter' },
+        '4000097': { cat: 'Units/Dark', prefix: 'Avatar_Apprentice_Warden' },
+        '4000123': { cat: 'Units/Dark', prefix: 'Avatar_Druid' },
+        '4000150': { cat: 'Units/Dark', prefix: 'Avatar_Furnace' },
+
+        // [Spells - Elixir]
+        '26000000': { cat: 'Spells/Elixir', prefix: 'Lightning_Spell', suffix: '_info' },
+        '26000001': { cat: 'Spells/Elixir', prefix: 'Healing_Spell',   suffix: '_info' },
+        '26000002': { cat: 'Spells/Elixir', prefix: 'Rage_Spell',      suffix: '_info' },
+        '26000003': { cat: 'Spells/Elixir', prefix: 'Jump_Spell',      suffix: '_info' },
+        '26000005': { cat: 'Spells/Elixir', prefix: 'Freeze_Spell',    suffix: '_info' },
+        '26000016': { cat: 'Spells/Elixir', prefix: 'Clone_Spell',     suffix: '_info' },
+        '26000035': { cat: 'Spells/Elixir', prefix: 'Invisibility_Spell', suffix: '_info' },
+        '26000053': { cat: 'Spells/Elixir', prefix: 'Recall_Spell',    suffix: '_info' },
+        '26000098': { cat: 'Spells/Elixir', prefix: 'Revive_Spell',    suffix: '_info' },
+        '26000114': { cat: 'Spells/Elixir', prefix: 'Totem_Spell',     suffix: '_info' },
+
+        // [Spells - Dark]
+        '26000009': { cat: 'Spells/Dark', prefix: 'Poison_Spell',     suffix: '_info' },
+        '26000010': { cat: 'Spells/Dark', prefix: 'Earthquake_Spell', suffix: '_info' },
+        '26000011': { cat: 'Spells/Dark', prefix: 'Haste_Spell',      suffix: '_info' },
+        '26000017': { cat: 'Spells/Dark', prefix: 'Skeleton_Spell',   suffix: '_info' },
+        '26000028': { cat: 'Spells/Dark', prefix: 'Bat_Spell',        suffix: '_info' },
+        '26000070': { cat: 'Spells/Dark', prefix: 'Overgrowth_Spell', suffix: '_info' },
+        '26000109': { cat: 'Spells/Dark', prefix: 'Ice_Block_Spell',  suffix: '_info' },
+
+        // [Siege Machines]
+        '4000051': { cat: 'SiegeMachines', prefix: 'Avatar_Wall_Wrecker' },
+        '4000052': { cat: 'SiegeMachines', prefix: 'Avatar_Battle_Blimp' },
+        '4000062': { cat: 'SiegeMachines', prefix: 'Avatar_Stone_Slammer' },
+        '4000075': { cat: 'SiegeMachines', prefix: 'Avatar_Siege_Barracks' },
+        '4000087': { cat: 'SiegeMachines', prefix: 'Avatar_Log_Launcher' },
+        '4000091': { cat: 'SiegeMachines', prefix: 'Avatar_Flame_Flinger' },
+        '4000092': { cat: 'SiegeMachines', prefix: 'Avatar_Battle_Drill' },
+        '4000135': { cat: 'SiegeMachines', prefix: 'Avatar_Troop_Launcher' },
+
+        // [Pets]
+        '73000000': { cat: 'Pets', prefix: 'Avatar_L.A.S.S.I' },
+        '73000001': { cat: 'Pets', prefix: 'Avatar_Electro_Owl' },
+        '73000002': { cat: 'Pets', prefix: 'Avatar_Mighty_Yak' },
+        '73000003': { cat: 'Pets', prefix: 'Avatar_Unicorn' },
+        '73000004': { cat: 'Pets', prefix: 'Avatar_Phoenix' },
+        '73000007': { cat: 'Pets', prefix: 'Avatar_Poison_Lizard' },
+        '73000008': { cat: 'Pets', prefix: 'Avatar_Diggy' },
+        '73000009': { cat: 'Pets', prefix: 'Avatar_Frosty' },
+        '73000010': { cat: 'Pets', prefix: 'Avatar_Spirit_Fox' },
+        '73000011': { cat: 'Pets', prefix: 'Avatar_Angry_Jelly' },
+        '73000016': { cat: 'Pets', prefix: 'Avatar_Sneezy' },
+        '73000017': { cat: 'Pets', prefix: 'Avatar_Greedy_Raven' }
+    };
+
+    function getItemImage(group, level) {
+        // 1. Buscar en Edificios (tienen niveles individuales)
+        let config = BUILDING_IMAGE_MAP[group.id];
+        if (config) {
+            let ext = '.webp';
+            if (config.isComplexExt && level >= 8) ext = '.wep.webp';
+            const displayLevel = (config.noLevelOne && level === 1) ? '' : level;
+            const sfx = config.dynamicSuffix ? config.dynamicSuffix(level) : (config.suffix || '');
+            return `/static/images/${config.cat}/${config.folder}/${config.prefix}${displayLevel}${sfx}${ext}`;
         }
 
-        // Casos donde el nivel 1 no tiene número (ej: Builders_Hut.webp)
-        const displayLevel = (config.noLevelOne && level === 1) ? '' : level;
+        // 2. Buscar en Laboratorio/Mascotas (son imágenes estáticas)
+        config = LABORATORY_IMAGE_MAP[group.id];
+        if (config) {
+            const sfx = config.suffix || '';
+            const ext = '.webp';
+            return `/static/images/${config.cat}/${config.prefix}${sfx}${ext}`;
+        }
 
-        const suffix = config.dynamicSuffix ? config.dynamicSuffix(level) : (config.suffix || '');
-        return `/static/images/${config.cat}/${config.folder}/${config.prefix}${displayLevel}${suffix}${ext}`;
+        return null;
     }
 
     function createAccordion(group, iconClass) {
