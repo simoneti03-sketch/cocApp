@@ -482,5 +482,37 @@
     "spells/Dark/Skeleton.json": [
         "26000017",
         "Skeleton Spell"
+    ],
+    "siege/WallWrecker.json": [
+        "4000051",
+        "Wall Wrecker"
+    ],
+    "siege/BattleBlimp.json": [
+        "4000052",
+        "Battle Blimp"
+    ],
+    "siege/StoneSlammer.json": [
+        "4000062",
+        "Stone Slammer"
+    ],
+    "siege/SiegeBarracks.json": [
+        "4000075",
+        "Siege Barracks"
+    ],
+    "siege/LogLauncher.json": [
+        "4000087",
+        "Log Launcher"
+    ],
+    "siege/FlameFlinger.json": [
+        "4000091",
+        "Flame Flinger"
+    ],
+    "siege/BattleDrill.json": [
+        "4000092",
+        "Battle Drill"
+    ],
+    "siege/TroopLauncher.json": [
+        "4000135",
+        "Troop Launcher"
     ]
 }
