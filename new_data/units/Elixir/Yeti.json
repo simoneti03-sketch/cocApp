@@ -1,0 +1,51 @@
+[
+    {
+        "level": 1,
+        "cost": 0,
+        "currency": "elixir",
+        "duration": 0,
+        "TH": 1
+    },
+    {
+        "level": 2,
+        "cost": 5000000,
+        "currency": "elixir",
+        "duration": 259200,
+        "TH": 12
+    },
+    {
+        "level": 3,
+        "cost": 6500000,
+        "currency": "elixir",
+        "duration": 388800,
+        "TH": 13
+    },
+    {
+        "level": 4,
+        "cost": 10000000,
+        "currency": "elixir",
+        "duration": 604800,
+        "TH": 14
+    },
+    {
+        "level": 5,
+        "cost": 12000000,
+        "currency": "elixir",
+        "duration": 648000,
+        "TH": 15
+    },
+    {
+        "level": 6,
+        "cost": 14500000,
+        "currency": "elixir",
+        "duration": 712800,
+        "TH": 16
+    },
+    {
+        "level": 7,
+        "cost": 17000000,
+        "currency": "elixir",
+        "duration": 864000,
+        "TH": 17
+    }
+]

@@ -1,0 +1,65 @@
+[
+    {
+        "level": 1,
+        "cost": 0,
+        "currency": "dark_elixir",
+        "duration": 0,
+        "TH": 1
+    },
+    {
+        "level": 2,
+        "cost": 27500,
+        "currency": "dark_elixir",
+        "duration": 172800,
+        "TH": 11
+    },
+    {
+        "level": 3,
+        "cost": 42500,
+        "currency": "dark_elixir",
+        "duration": 216000,
+        "TH": 11
+    },
+    {
+        "level": 4,
+        "cost": 50000,
+        "currency": "dark_elixir",
+        "duration": 280800,
+        "TH": 12
+    },
+    {
+        "level": 5,
+        "cost": 62500,
+        "currency": "dark_elixir",
+        "duration": 345600,
+        "TH": 12
+    },
+    {
+        "level": 6,
+        "cost": 110000,
+        "currency": "dark_elixir",
+        "duration": 561600,
+        "TH": 14
+    },
+    {
+        "level": 7,
+        "cost": 140000,
+        "currency": "dark_elixir",
+        "duration": 648000,
+        "TH": 15
+    },
+    {
+        "level": 8,
+        "cost": 180000,
+        "currency": "dark_elixir",
+        "duration": 691200,
+        "TH": 16
+    },
+    {
+        "level": 9,
+        "cost": 280000,
+        "currency": "dark_elixir",
+        "duration": 914400,
+        "TH": 17
+    }
+]
