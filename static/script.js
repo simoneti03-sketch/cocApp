@@ -287,7 +287,7 @@ document.addEventListener('DOMContentLoaded', () => {
         ` : '';
 
         let mainImg = !hasDropdown ? getItemImage(group, group.instances[0].current_lvl) : null;
-        let mainImgHtml = mainImg ? `<div class="text-center mb-2"><img src="${mainImg}" class="rounded shadow-sm" style="width:50px; height:50px; object-fit:contain; background: rgba(0,0,0,0.1);"></div>` : '';
+        let mainImgHtml = mainImg ? `<div class="text-center mb-2"><img src="${mainImg}" class="rounded shadow-sm" style="width:70px; height:70px; object-fit:contain; background: rgba(0,0,0,0.1);"></div>` : '';
 
         return `
             <div class="col-md-6 col-lg-4">
@@ -295,7 +295,6 @@ document.addEventListener('DOMContentLoaded', () => {
                     <div class="card-body p-0">
                         <div class="accordion-item bg-transparent border-0">
                             <h2 class="accordion-header p-3 pb-0" id="heading-${accId}">
-                                ${mainImgHtml}
                                 <div class="d-flex justify-content-between align-items-center mb-2">
                                     <div class="d-flex align-items-center gap-2">
                                         <i class="${iconClass} fs-4 text-warning"></i>
@@ -303,6 +302,8 @@ document.addEventListener('DOMContentLoaded', () => {
                                     </div>
                                     ${topBadgeHtml}
                                 </div>
+
+                                ${mainImgHtml}
                                 
                                 <div class="progress-dark mb-2 mx-1" style="height: 6px;">
                                     <div class="progress-bar progress-bar-custom ${pColor}" role="progressbar" style="width: ${headerWidth}%" aria-valuenow="${headerWidth}" aria-valuemin="0" aria-valuemax="100"></div>
@@ -318,7 +319,7 @@ document.addEventListener('DOMContentLoaded', () => {
         `;
     }
 
-    function renderSection(containerId, items, iconClass) {
+    function renderSection(containerId, items, iconClass, sortBy = 'time') {
         const container = document.getElementById(containerId);
         container.innerHTML = '';
 
@@ -332,7 +333,11 @@ document.addEventListener('DOMContentLoaded', () => {
             return;
         }
 
-        displayItems.sort((a, b) => b.total_time_to_max - a.total_time_to_max);
+        if (sortBy === 'id') {
+            displayItems.sort((a, b) => parseInt(a.id) - parseInt(b.id));
+        } else {
+            displayItems.sort((a, b) => b.total_time_to_max - a.total_time_to_max);
+        }
 
         let html = '';
         displayItems.forEach(group => {
@@ -349,14 +354,14 @@ document.addEventListener('DOMContentLoaded', () => {
 
         renderSection('trapsContainer', data.traps, 'bi bi-x-octagon');
 
-        renderSection('unitsElixirContainer', data.units_elixir, 'bi bi-lightning-charge');
-        renderSection('unitsDarkContainer', data.units_dark, 'bi bi-lightning-charge');
-        renderSection('spellsElixirContainer', data.spells_elixir, 'bi bi-magic');
-        renderSection('spellsDarkContainer', data.spells_dark, 'bi bi-magic');
-        renderSection('siegeContainer', data.siege_machines, 'bi bi-truck');
+        renderSection('unitsElixirContainer', data.units_elixir, 'bi bi-lightning-charge', 'id');
+        renderSection('unitsDarkContainer', data.units_dark, 'bi bi-lightning-charge', 'id');
+        renderSection('spellsElixirContainer', data.spells_elixir, 'bi bi-magic', 'id');
+        renderSection('spellsDarkContainer', data.spells_dark, 'bi bi-magic', 'id');
+        renderSection('siegeContainer', data.siege_machines, 'bi bi-truck', 'id');
 
         renderSection('heroesContainer', data.heroes, 'bi bi-person-bounding-box');
-        renderSection('petsContainer', data.pets, 'bi bi-bug');
+        renderSection('petsContainer', data.pets, 'bi bi-bug', 'id');
         renderSection('equipmentContainer', data.equipment, 'bi bi-shield-shaded');
     }
 

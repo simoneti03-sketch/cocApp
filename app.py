@@ -238,6 +238,9 @@ def process_category(items, db_category, th_level=1, hh_level=0, ph_level=0):
             g['progress_percentage'] = 100
         processed_list.append(g)
         
+    # Ordenar por ID para consistencia (será sobrescrito por tiempo en algunas secciones del frontend)
+    processed_list.sort(key=lambda x: int(x['id']) if x['id'].isdigit() else x['id'])
+    
     return processed_list, total_time
 
 @app.route('/api/process', methods=['POST'])
