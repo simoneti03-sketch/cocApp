@@ -168,8 +168,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
         // [Pets]
         '73000000': { cat: 'Pets', prefix: 'Avatar_L.A.S.S.I' },
-        '73000001': { cat: 'Pets', prefix: 'Avatar_Electro_Owl' },
-        '73000002': { cat: 'Pets', prefix: 'Avatar_Mighty_Yak' },
+        '73000001': { cat: 'Pets', prefix: 'Avatar_Mighty_Yak' },
+        '73000002': { cat: 'Pets', prefix: 'Avatar_Electro_Owl' },
         '73000003': { cat: 'Pets', prefix: 'Avatar_Unicorn' },
         '73000004': { cat: 'Pets', prefix: 'Avatar_Phoenix' },
         '73000007': { cat: 'Pets', prefix: 'Avatar_Poison_Lizard' },
@@ -222,7 +222,7 @@ document.addEventListener('DOMContentLoaded', () => {
         let pColor = isMax ? 'bg-info' : '';
         let bClass = isMax ? 'border-info' : 'border-0';
         let statusText = isMax ? `Máximos para Ayuntamiento` : `Queda: ${formatTime(group.total_time_to_max)}`;
-        
+
         let costHtml = '';
         if (!isMax && group.total_cost_to_max > 0) {
             const currencyMap = {
@@ -239,7 +239,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 </div>
             `;
         }
-        
+
         let accId = 'acc-' + group.id;
 
         let headerWidth = group.progress_percentage;
@@ -319,8 +319,11 @@ document.addEventListener('DOMContentLoaded', () => {
             </div>
         ` : '';
 
-        let mainImg = !hasDropdown ? getItemImage(group, group.instances[0].current_lvl) : null;
-        let mainImgHtml = mainImg ? `<div class="text-center mb-2"><img src="${mainImg}" class="rounded shadow-sm" style="width:70px; height:70px; object-fit:contain; background: rgba(0,0,0,0.1);"></div>` : '';
+        const maxCurrentLvl = Math.max(...group.instances.map(i => i.current_lvl));
+        const headerImg = getItemImage(group, maxCurrentLvl);
+        const headerImgHtml = headerImg
+            ? `<img src="${headerImg}" class="rounded shadow-sm" style="width:50px; height:50px; object-fit:contain; background: rgba(0,0,0,0.2); border: 1px solid rgba(255,255,255,0.1);">`
+            : `<i class="${iconClass} fs-4 text-warning"></i>`;
 
         return `
             <div class="col-md-6 col-lg-4">
@@ -330,13 +333,11 @@ document.addEventListener('DOMContentLoaded', () => {
                             <h2 class="accordion-header p-3 pb-0" id="heading-${accId}">
                                 <div class="d-flex justify-content-between align-items-center mb-2">
                                     <div class="d-flex align-items-center gap-2">
-                                        <i class="${iconClass} fs-4 text-warning"></i>
+                                        ${headerImgHtml}
                                         <span class="item-title">${group.name}</span>
                                     </div>
                                     ${topBadgeHtml}
                                 </div>
-
-                                ${mainImgHtml}
                                 
                                 <div class="progress-dark mb-2 mx-1" style="height: 6px;">
                                     <div class="progress-bar progress-bar-custom ${pColor}" role="progressbar" style="width: ${headerWidth}%" aria-valuenow="${headerWidth}" aria-valuemin="0" aria-valuemax="100"></div>
@@ -384,7 +385,6 @@ document.addEventListener('DOMContentLoaded', () => {
         renderSection('defensesContainer', data.defenses, 'bi bi-shield');
         renderSection('armyContainer', data.army, 'bi bi-crosshair');
         renderSection('resourcesContainer', data.resources, 'bi bi-box-seam');
-
         renderSection('trapsContainer', data.traps, 'bi bi-x-octagon');
 
         renderSection('unitsElixirContainer', data.units_elixir, 'bi bi-lightning-charge', 'id');
@@ -395,7 +395,24 @@ document.addEventListener('DOMContentLoaded', () => {
 
         renderSection('heroesContainer', data.heroes, 'bi bi-person-bounding-box');
         renderSection('petsContainer', data.pets, 'bi bi-bug', 'id');
-        renderSection('equipmentContainer', data.equipment, 'bi bi-shield-shaded');
+
+        // Combined "Todo" section (Everything)
+        const allItems = [
+            // 1. Edificios (Defensas, Ejército, Recursos)
+            ...(data.defenses || []), ...(data.army || []), ...(data.resources || []),
+            // 2. Trampas
+            ...(data.traps || []),
+            // 3. Heroes (Héroes y Equipos)
+            ...(data.heroes || []), ...(data.equipment || []),
+            // 4. Laboratorio (Tropas, Hechizos, Máquinas)
+            ...(data.units_elixir || []), ...(data.units_dark || []),
+            ...(data.spells_elixir || []), ...(data.spells_dark || []),
+            ...(data.siege_machines || []),
+            // 5. Mascotas
+            ...(data.pets || [])
+        ];
+
+        renderSection('allContainer', allItems, 'bi bi-grid-fill');
     }
 
     function saveState() {
@@ -473,7 +490,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     goldEl.classList.add('d-none');
                 }
             }
-            
+
             const elixirEl = document.getElementById(rowId + '-elixir');
             const elixirTextEl = document.getElementById(elixirId);
             if (elixirEl) {

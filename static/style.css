@@ -83,6 +83,19 @@ body {
     border-color: rgba(255,255,255,0.2) !important;
 }
 
+.custom-tabs .nav-link.tab-todo {
+    background: rgba(103, 58, 183, 0.15) !important;
+    color: #d1c4e9 !important;
+    border-color: rgba(103, 58, 183, 0.3) !important;
+}
+
+.custom-tabs .nav-link.tab-todo.active {
+    background: linear-gradient(135deg, #673ab7, #3f51b5) !important;
+    color: #fff !important;
+    border-color: rgba(255,255,255,0.4) !important;
+    box-shadow: 0 0 15px rgba(103, 58, 183, 0.4);
+}
+
 .item-title {
     font-size: 1.1rem;
     font-weight: 600;
