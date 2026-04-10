@@ -103,6 +103,12 @@
                                 <h6 class="text-uppercase text-warning fw-bold mb-2 small"><i
                                         class="bi bi-hammer me-2"></i>Constructores</h6>
                                 <h2 class="fw-bold text-white mb-2" id="totalBuildersTime">0d 0h</h2>
+                                
+                                <div class="progress bg-secondary-subtle mb-2" style="height: 6px; background-color: rgba(255,255,255,0.1) !important;">
+                                    <div id="progBarBuilders" class="progress-bar bg-warning" role="progressbar" style="width: 0%"></div>
+                                </div>
+                                <div class="small text-secondary mb-2" id="progTextBuilders">0 / 0 mejoras</div>
+
                                 <div class="d-flex justify-content-center gap-3 small text-secondary fw-bold mt-2 border-top border-secondary pt-2">
                                     <div id="cost-builders-gold" class="d-none"><img src="/static/images/resources/Gold.png" width="14" class="me-1"> <span id="builderGoldCost">0</span></div>
                                     <div id="cost-builders-elixir" class="d-none"><img src="/static/images/resources/Elixir.png" width="14" class="me-1"> <span id="builderElixirCost">0</span></div>
@@ -116,6 +122,12 @@
                                 <h6 class="text-uppercase text-info fw-bold mb-2 small"><i
                                         class="bi bi-lightning-charge-fill me-2"></i>Laboratorio</h6>
                                 <h2 class="fw-bold text-white mb-2" id="totalUnitsTime">0d 0h</h2>
+
+                                <div class="progress bg-secondary-subtle mb-2" style="height: 6px; background-color: rgba(255,255,255,0.1) !important;">
+                                    <div id="progBarLab" class="progress-bar bg-info" role="progressbar" style="width: 0%"></div>
+                                </div>
+                                <div class="small text-secondary mb-2" id="progTextLab">0 / 0 mejoras</div>
+
                                 <div class="d-flex justify-content-center gap-3 small text-secondary fw-bold mt-2 border-top border-secondary pt-2">
                                     <div id="cost-lab-gold" class="d-none"><img src="/static/images/resources/Gold.png" width="14" class="me-1"> <span id="labGoldCost">0</span></div>
                                     <div id="cost-lab-elixir" class="d-none"><img src="/static/images/resources/Elixir.png" width="14" class="me-1"> <span id="labElixirCost">0</span></div>
@@ -129,68 +141,92 @@
                                 <h6 class="text-uppercase text-success fw-bold mb-2 small"><i
                                         class="bi bi-bug-fill me-2"></i>Mascotas</h6>
                                 <h2 class="fw-bold text-white mb-2" id="totalPetsTime">0d 0h</h2>
+
+                                <div class="progress bg-secondary-subtle mb-2" style="height: 6px; background-color: rgba(255,255,255,0.1) !important;">
+                                    <div id="progBarPets" class="progress-bar bg-success" role="progressbar" style="width: 0%"></div>
+                                </div>
+                                <div class="small text-secondary mb-2" id="progTextPets">0 / 0 mejoras</div>
+
                                 <div class="d-flex justify-content-center gap-3 small text-secondary fw-bold mt-2 border-top border-secondary pt-2">
                                     <div id="cost-pets-dark" class="d-none"><img src="/static/images/resources/Dark_Elixir.png" width="14" class="me-1"> <span id="petDarkCost">0</span></div>
                                 </div>
                             </div>
                         </div>
+
                     </div>
                 </div>
                 <!-- 5 Columns Container -->
-                <div class="col-12">
+                <!-- 5 Columns Container -->
+                <div class="col-12 mt-3">
                     <div class="row g-2 justify-content-center">
                         <div class="col-12 col-sm-4 col-md">
-                            <div class="card bg-dark glass-card h-100 border-0 shadow-sm category-card">
-                                <div class="card-body text-center p-2">
-                                    <i class="bi bi-shield-fill fs-4 text-primary mb-1 d-block"></i>
-                                    <h6 class="text-uppercase text-secondary fw-bold" style="font-size:0.7rem;">Defensas
-                                    </h6>
-                                    <h5 class="fw-bold mb-0" id="totalDefensesTime">0d 0h</h5>
+                            <div class="card bg-dark glass-card h-100 border-0 shadow-sm category-card p-2">
+                                <div class="card-body text-center p-1">
+                                    <i class="bi bi-shield-fill fs-5 text-primary mb-1 d-block"></i>
+                                    <h6 class="text-uppercase text-secondary fw-bold" style="font-size:0.65rem; letter-spacing: 0.5px;">Defensas</h6>
+                                    <h5 class="fw-bold mb-1" id="totalDefensesTime" style="font-size: 1rem;">0d 0h</h5>
+                                    <div class="progress bg-secondary-subtle mx-auto" style="height: 4px; width: 80%; background-color: rgba(255,255,255,0.05) !important;">
+                                        <div id="progBarDefenses" class="progress-bar bg-primary" role="progressbar" style="width: 0%"></div>
+                                    </div>
+                                    <div class="small text-secondary mt-1" id="progTextDefenses" style="font-size: 0.6rem;">0%</div>
                                 </div>
                             </div>
                         </div>
                         <div class="col-12 col-sm-4 col-md">
-                            <div class="card bg-dark glass-card h-100 border-0 shadow-sm category-card">
-                                <div class="card-body text-center p-2">
-                                    <i class="bi bi-crosshair fs-4 text-danger mb-1 d-block"></i>
-                                    <h6 class="text-uppercase text-secondary fw-bold" style="font-size:0.7rem;">Ejército
-                                    </h6>
-                                    <h5 class="fw-bold mb-0" id="totalArmyTime">0d 0h</h5>
+                            <div class="card bg-dark glass-card h-100 border-0 shadow-sm category-card p-2">
+                                <div class="card-body text-center p-1">
+                                    <i class="bi bi-crosshair fs-5 text-danger mb-1 d-block"></i>
+                                    <h6 class="text-uppercase text-secondary fw-bold" style="font-size:0.65rem; letter-spacing: 0.5px;">Ejército</h6>
+                                    <h5 class="fw-bold mb-1" id="totalArmyTime" style="font-size: 1rem;">0d 0h</h5>
+                                    <div class="progress bg-secondary-subtle mx-auto" style="height: 4px; width: 80%; background-color: rgba(255,255,255,0.05) !important;">
+                                        <div id="progBarArmy" class="progress-bar bg-danger" role="progressbar" style="width: 0%"></div>
+                                    </div>
+                                    <div class="small text-secondary mt-1" id="progTextArmy" style="font-size: 0.6rem;">0%</div>
                                 </div>
                             </div>
                         </div>
                         <div class="col-12 col-sm-4 col-md">
-                            <div class="card bg-dark glass-card h-100 border-0 shadow-sm category-card">
-                                <div class="card-body text-center p-2">
-                                    <i class="bi bi-box-seam fs-4 text-warning mb-1 d-block"></i>
-                                    <h6 class="text-uppercase text-secondary fw-bold" style="font-size:0.7rem;">Recursos
-                                    </h6>
-                                    <h5 class="fw-bold mb-0" id="totalResourcesTime">0d 0h</h5>
+                            <div class="card bg-dark glass-card h-100 border-0 shadow-sm category-card p-2">
+                                <div class="card-body text-center p-1">
+                                    <i class="bi bi-box-seam fs-5 text-warning mb-1 d-block"></i>
+                                    <h6 class="text-uppercase text-secondary fw-bold" style="font-size:0.65rem; letter-spacing: 0.5px;">Recursos</h6>
+                                    <h5 class="fw-bold mb-1" id="totalResourcesTime" style="font-size: 1rem;">0d 0h</h5>
+                                    <div class="progress bg-secondary-subtle mx-auto" style="height: 4px; width: 80%; background-color: rgba(255,255,255,0.05) !important;">
+                                        <div id="progBarResources" class="progress-bar bg-warning" role="progressbar" style="width: 0%"></div>
+                                    </div>
+                                    <div class="small text-secondary mt-1" id="progTextResources" style="font-size: 0.6rem;">0%</div>
                                 </div>
                             </div>
                         </div>
                         <div class="col-6 col-md">
-                            <div class="card bg-dark glass-card h-100 border-0 shadow-sm category-card">
-                                <div class="card-body text-center p-2">
-                                    <i class="bi bi-bullseye fs-4 text-secondary mb-1 d-block"></i>
-                                    <h6 class="text-uppercase text-secondary fw-bold" style="font-size:0.7rem;">Trampas
-                                    </h6>
-                                    <h5 class="fw-bold mb-0" id="totalTrapsTime">0d 0h</h5>
+                            <div class="card bg-dark glass-card h-100 border-0 shadow-sm category-card p-2">
+                                <div class="card-body text-center p-1">
+                                    <i class="bi bi-bullseye fs-5 text-secondary mb-1 d-block"></i>
+                                    <h6 class="text-uppercase text-secondary fw-bold" style="font-size:0.65rem; letter-spacing: 0.5px;">Trampas</h6>
+                                    <h5 class="fw-bold mb-1" id="totalTrapsTime" style="font-size: 1rem;">0d 0h</h5>
+                                    <div class="progress bg-secondary-subtle mx-auto" style="height: 4px; width: 80%; background-color: rgba(255,255,255,0.05) !important;">
+                                        <div id="progBarTraps" class="progress-bar bg-secondary" role="progressbar" style="width: 0%"></div>
+                                    </div>
+                                    <div class="small text-secondary mt-1" id="progTextTraps" style="font-size: 0.6rem;">0%</div>
                                 </div>
                             </div>
                         </div>
                         <div class="col-12 col-md">
-                            <div class="card bg-dark glass-card h-100 border-0 shadow-sm category-card">
-                                <div class="card-body text-center p-2">
-                                    <i class="bi bi-person-fill-up fs-4 text-success mb-1 d-block"></i>
-                                    <h6 class="text-uppercase text-secondary fw-bold" style="font-size:0.7rem;">Héroes
-                                    </h6>
-                                    <h5 class="fw-bold mb-0" id="totalHeroesTime">0d 0h</h5>
+                            <div class="card bg-dark glass-card h-100 border-0 shadow-sm category-card p-2">
+                                <div class="card-body text-center p-1">
+                                    <i class="bi bi-person-fill-up fs-5 text-success mb-1 d-block"></i>
+                                    <h6 class="text-uppercase text-secondary fw-bold" style="font-size:0.65rem; letter-spacing: 0.5px;">Héroes</h6>
+                                    <h5 class="fw-bold mb-1" id="totalHeroesTime" style="font-size: 1rem;">0d 0h</h5>
+                                    <div class="progress bg-secondary-subtle mx-auto" style="height: 4px; width: 80%; background-color: rgba(255,255,255,0.05) !important;">
+                                        <div id="progBarHeroes" class="progress-bar bg-success" role="progressbar" style="width: 0%"></div>
+                                    </div>
+                                    <div class="small text-secondary mt-1" id="progTextHeroes" style="font-size: 0.6rem;">0%</div>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
+
             </div>
 
             <!-- Tabs -->

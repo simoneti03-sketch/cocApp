@@ -514,11 +514,50 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         };
 
+        const updateCategoryProgress = (progId, textId, upgrades) => {
+            const bar = document.getElementById(progId);
+            const text = document.getElementById(textId);
+            if (!bar || !text || !upgrades) return;
+
+            const total = upgrades.total || 0;
+            const done = upgrades.done || 0;
+            const perc = total > 0 ? (done / total) * 100 : 100;
+
+            bar.style.width = perc.toFixed(1) + '%';
+            text.textContent = `${done} / ${total} mejoras (${perc.toFixed(1)}%)`;
+        };
+
+
+        const updateSubCategoryProgress = (progId, textId, upgrades) => {
+            const bar = document.getElementById(progId);
+            const text = document.getElementById(textId);
+            if (!bar || !text || !upgrades) return;
+
+            const total = upgrades.total || 0;
+            const done = upgrades.done || 0;
+            const perc = total > 0 ? (done / total) * 100 : 100;
+
+            bar.style.width = perc.toFixed(1) + '%';
+            text.textContent = `${perc.toFixed(1)}%`;
+        };
+
         updateCostRow('cost-builders', 'builderGoldCost', 'builderElixirCost', 'builderDarkCost', data.totals.builder_costs);
         updateCostRow('cost-lab', 'labGoldCost', 'labElixirCost', 'labDarkCost', data.totals.lab_costs);
         updateCostRow('cost-pets', '', '', 'petDarkCost', data.totals.pet_costs);
 
+        updateCategoryProgress('progBarBuilders', 'progTextBuilders', data.totals.upgrades.builders);
+        updateCategoryProgress('progBarLab', 'progTextLab', data.totals.upgrades.lab);
+        updateCategoryProgress('progBarPets', 'progTextPets', data.totals.upgrades.pets);
+
+        updateSubCategoryProgress('progBarDefenses', 'progTextDefenses', data.totals.upgrades.defenses);
+        updateSubCategoryProgress('progBarArmy', 'progTextArmy', data.totals.upgrades.army);
+        updateSubCategoryProgress('progBarResources', 'progTextResources', data.totals.upgrades.resources);
+        updateSubCategoryProgress('progBarTraps', 'progTextTraps', data.totals.upgrades.traps);
+        updateSubCategoryProgress('progBarHeroes', 'progTextHeroes', data.totals.upgrades.heroes);
+
         renderAllSections(data);
+
+
 
         // UI state
         dashboardContent.classList.remove('d-none');
