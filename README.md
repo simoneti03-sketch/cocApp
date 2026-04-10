@@ -4,8 +4,8 @@ Una herramienta para gestionar el progreso de tus aldeas en Clash of Clans. Calc
 
 ## ✨ Características Principales
 
-- 🚀 **Cálculo Preciso de Tiempos**: Calcula automáticamente cuánto tiempo te queda por cada categoría (Defensas, Héroes, Laboratorio, etc.).
-- 🛡️ **Soporte TH17**: Actualizado con los últimos niveles de Ayuntamiento y estructuras.
+- 🚀 **Cálculo Preciso de Tiempos**: Calcula automáticamente cuánto tiempo y recursos te quedan por cada categoría (Defensas, Héroes, Laboratorio, etc.).
+- 🛡️ **Soporte TH17**: Actualizado con los últimos niveles de Ayuntamiento y estructuras.(Proximamente TH18)
 - 🧪 **Laboratorio y Mascotas**: Seguimiento detallado de tropas, hechizos y mascotas.
 - 👷 **Optimización de Constructores**: Detecta automáticamente si tienes el 6º constructor (B.O.B Hut).
 - 💾 **Multi-Aldea**: Guarda y gestiona varias cuentas localmente en tu navegador.
@@ -22,7 +22,7 @@ Para ejecutar esta aplicación localmente, necesitarás:
 
 ### 1. Clonar el repositorio
 ```bash
-git clone https://github.com/tu-usuario/cocApp.git
+git clone https://github.com/simoneti03-sketch/cocApp.git
 cd cocApp
 ```
 

@@ -84,10 +84,22 @@ def _load_new_data():
         
         translated_name = translations.get(name, name)
         
+        raw_curr = levels[0].get("currency", "gold") if levels else "gold"
+        # Normalización
+        curr = raw_curr.replace("-", "").replace("_", "").lower()
+        if "darkelixir" in curr:
+            final_curr = "dark_elixir"
+        elif "gold" in curr:
+            final_curr = "gold"
+        elif "elixir" in curr:
+            final_curr = "elixir"
+        else:
+            final_curr = raw_curr # fallback (shiny, glowy, etc)
+            
         entry = {
             "name": translated_name,
             "category": rel_path.split('/')[0],
-            "currency": levels[0].get("currency", "gold") if levels else "gold",
+            "currency": final_curr,
             "upgrade_times": [e.get("duration", 0) for e in levels],
             "price_per_lvl": [e.get("cost", 0) for e in levels],
         }
@@ -153,6 +165,7 @@ def process_category(items, db_category, th_level=1, hh_level=0, ph_level=0):
         if ref:
             name = ref.get('name', default_name) or default_name
             times = ref.get('upgrade_times', [])
+            costs = ref.get('price_per_lvl', [])
             
             # Si el ítem tiene max_level_per_hh (héroes), usar hh_level
             hh_max_list = ref.get('max_level_per_hh')
@@ -174,22 +187,29 @@ def process_category(items, db_category, th_level=1, hh_level=0, ph_level=0):
             is_maxed = (current_lvl >= max_lvl and max_lvl > 0)
             
         instance_time_to_max = 0
+        instance_cost_to_max = 0
         is_upgrading = (time_left > 0)
         
         if not is_maxed:
             if is_upgrading:
+                # El costo de la mejora actual ya se pagó, solo sumamos tiempos si aplica (pero aquí time_left ya es el remanente)
                 instance_time_to_max += time_left
+                # Sumamos desde el siguiente nivel
                 for l in range(current_lvl + 2, max_lvl + 1):
                     idx = l - 1
                     if idx >= 0 and idx < len(times):
                         instance_time_to_max += times[idx]
+                    if idx >= 0 and idx < len(costs):
+                        instance_cost_to_max += costs[idx]
             else:
                 for l in range(current_lvl + 1, max_lvl + 1):
                     idx = l - 1
                     if idx >= 0 and idx < len(times):
                         instance_time_to_max += times[idx]
-        
+                    if idx >= 0 and idx < len(costs):
+                        instance_cost_to_max += costs[idx]
         total_instance_time = instance_time_to_max * cnt
+        total_instance_cost = instance_cost_to_max * cnt
         
         if item_id not in processed_groups:
             processed_groups[item_id] = {
@@ -200,6 +220,7 @@ def process_category(items, db_category, th_level=1, hh_level=0, ph_level=0):
                 'total_cnt': 0,
                 'is_fully_maxed': True,
                 'total_time_to_max': 0,
+                'total_cost_to_max': 0,
                 'progress_sum': 0,
                 'instances': []
             }
@@ -207,6 +228,7 @@ def process_category(items, db_category, th_level=1, hh_level=0, ph_level=0):
         group = processed_groups[item_id]
         group['total_cnt'] += cnt
         group['total_time_to_max'] += total_instance_time
+        group['total_cost_to_max'] += total_instance_cost
         
         prog = (current_lvl / max_lvl) * 100 if max_lvl > 0 else 100
         group['progress_sum'] += (prog * cnt)
@@ -221,6 +243,7 @@ def process_category(items, db_category, th_level=1, hh_level=0, ph_level=0):
             'is_upgrading': is_upgrading,
             'time_left': time_left,
             'time_to_max': instance_time_to_max,
+            'cost_to_max': instance_cost_to_max,
             'weapon': int(item.get('weapon', 0)),
             'gear_up': int(item.get('gear_up', 0)),
             'raw_data': None
@@ -229,6 +252,7 @@ def process_category(items, db_category, th_level=1, hh_level=0, ph_level=0):
         total_time += total_instance_time
 
     processed_list = []
+    total_cost = 0 # Esta variable no se usa mucho afuera porque se separa por categorías
     for g in processed_groups.values():
         if g['total_cnt'] > 0:
             g['progress_percentage'] = g['progress_sum'] / g['total_cnt']
@@ -252,7 +276,7 @@ def process_village():
     # game_data ya es un diccionario plano id → datos
     master_db = game_data
             
-    # Filtrar edificios y detectar TH, HH, Bob's Hut y Helper Hut
+    # Filtrar edificios y detectar TH, HH, Bob's Hut
     th_level = 1
     hh_level = 0
     ph_level = 0
@@ -263,7 +287,17 @@ def process_village():
     defenses_buildings = []
     
     for b in data.get('buildings', []):
-        id_str = str(b.get('data'))
+        d_val = b.get('data')
+        if d_val is None: continue
+        
+        try:
+            if int(float(d_val)) == 1000093:
+                print(f"DEBUG: Skipping Helper Hut {d_val}")
+                continue
+        except (ValueError, TypeError):
+            pass
+
+        id_str = str(d_val)
         if id_str == '1000001':
             th_level = int(b.get('lvl', 1))
             defenses_buildings.append(b) # TownHall goes to defenses
@@ -273,14 +307,15 @@ def process_village():
         elif id_str == '1000068': # Pet House
             ph_level = int(b.get('lvl', 0))
             army_buildings.append(b)
-        elif id_str == '1000093': # HelperHut
-            defenses_buildings.append(b)
         elif id_str == '1000064': # Bob's Hut
             has_bob = True
         else:
             ref = master_db.get(id_str)
             cat = ref.get('category', 'defenses') if ref else 'defenses'
-            if cat == 'army':
+            if cat == 'helpers':
+                print(f"DEBUG: Skipping category helper {id_str}")
+                continue # Descartar ayudantes si aparecen en buildings
+            elif cat == 'army':
                 army_buildings.append(b)
             elif cat == 'resources':
                 resources_buildings.append(b)
@@ -288,8 +323,10 @@ def process_village():
                 defenses_buildings.append(b)
 
     for b in data.get('buildings2', []):
-        d_val = str(b.get('data'))
-        if d_val == '1000064':
+        id_str = str(b.get('data'))
+        if id_str == '1000093': # HelperHut
+            continue
+        if id_str == '1000064':
             has_bob = True
 
     # Procesar todo individualmente pasando el th_level
@@ -315,6 +352,22 @@ def process_village():
     total_laboratory = u_time + s_time + sm_time
     total_heroes = h_time + e_time
     total_pets = p_time
+    
+    # Cálculos de COSTOS (Oro, Elixir, Oscuro)
+    def _sum_costs(res_list):
+        costs = {}
+        for item in res_list:
+            curr = item.get('currency', 'gold')
+            costs[curr] = costs.get(curr, 0) + item.get('total_cost_to_max', 0)
+        return costs
+
+    builder_items = defenses_res + army_res + resources_res + traps_res + heroes_res
+    builder_costs = _sum_costs(builder_items)
+    
+    lab_items = units_res + spells_res + siege_res
+    lab_costs = _sum_costs(lab_items)
+    
+    pet_costs = _sum_costs(pets_res)
     
     # Calculo especial de tiempo de constructores
     # Incluye: Defensas, Ejército, Recursos, Trampas, Héroes
@@ -346,7 +399,10 @@ def process_village():
                 'army_time': total_army,
                 'resources_time': total_resources,
                 'traps_time': total_traps,
-                'heroes_time': total_heroes
+                'heroes_time': total_heroes,
+                'builder_costs': builder_costs,
+                'lab_costs': lab_costs,
+                'pet_costs': pet_costs
             }
         }
     })

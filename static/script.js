@@ -33,6 +33,15 @@ document.addEventListener('DOMContentLoaded', () => {
         return parts.join(' ');
     }
 
+    function formatCost(amount) {
+        if (amount >= 1000000) {
+            return (amount / 1000000).toFixed(1).replace(/\.0$/, '') + 'M';
+        } else if (amount >= 1000) {
+            return (amount / 1000).toFixed(1).replace(/\.0$/, '') + 'K';
+        }
+        return amount.toString();
+    }
+
     const BUILDING_IMAGE_MAP = {
         // [Defences]
         '1000001': { cat: 'Defences', folder: 'TownHall', prefix: 'Town_Hall' },
@@ -213,6 +222,24 @@ document.addEventListener('DOMContentLoaded', () => {
         let pColor = isMax ? 'bg-info' : '';
         let bClass = isMax ? 'border-info' : 'border-0';
         let statusText = isMax ? `Máximos para Ayuntamiento` : `Queda: ${formatTime(group.total_time_to_max)}`;
+        
+        let costHtml = '';
+        if (!isMax && group.total_cost_to_max > 0) {
+            const currencyMap = {
+                'gold': { img: 'Gold.png', color: 'text-warning' },
+                'elixir': { img: 'Elixir.png', color: 'text-info' },
+                'dark_elixir': { img: 'Dark_Elixir.png', color: 'text-secondary' },
+                'dark-elixir': { img: 'Dark_Elixir.png', color: 'text-secondary' }
+            };
+            const curr = currencyMap[group.currency] || { img: 'Gold.png', color: 'text-warning' };
+            costHtml = `
+                <div class="d-flex align-items-center gap-1 ${curr.color}" style="font-size: 0.75rem;">
+                    <img src="/static/images/resources/${curr.img}" width="14" style="filter: drop-shadow(0 0 2px rgba(0,0,0,0.5));">
+                    ${formatCost(group.total_cost_to_max)}
+                </div>
+            `;
+        }
+        
         let accId = 'acc-' + group.id;
 
         let headerWidth = group.progress_percentage;
@@ -260,7 +287,10 @@ document.addEventListener('DOMContentLoaded', () => {
         if (hasDropdown) {
             statusRowHtml = `
                 <div class="d-flex justify-content-between align-items-center time-text mt-1 mx-1 mb-2">
-                    <span class="${isMax ? 'text-info fw-bold' : ''}">${statusText}</span>
+                    <div class="d-flex flex-column">
+                        <span class="${isMax ? 'text-info fw-bold' : ''}">${statusText}</span>
+                        ${costHtml}
+                    </div>
                     <button class="btn btn-sm btn-outline-secondary text-light p-1 px-2 collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#${accId}" aria-expanded="false" aria-controls="${accId}" style="font-size: 0.75rem;">
                         Desplegar <i class="bi bi-chevron-down ms-1"></i>
                     </button>
@@ -272,8 +302,11 @@ document.addEventListener('DOMContentLoaded', () => {
             let instColor = inst.is_maxed && !inst.is_upgrading ? 'text-info fw-bold' : (inst.is_upgrading ? 'text-warning' : '');
             statusRowHtml = `
                 <div class="d-flex justify-content-between align-items-center time-text mt-1 mx-1 mb-2">
-                    <span>Estado:</span>
-                    <span class="${instColor}">${instText}</span>
+                    <div class="d-flex flex-column">
+                        <span>Estado:</span>
+                        <span class="${instColor}">${instText}</span>
+                        ${costHtml}
+                    </div>
                 </div>
             `;
         }
@@ -323,9 +356,9 @@ document.addEventListener('DOMContentLoaded', () => {
         const container = document.getElementById(containerId);
         container.innerHTML = '';
 
-        let displayItems = items;
+        let displayItems = items.filter(group => group.id !== '1000093');
         if (isRemainingOnly) {
-            displayItems = items.filter(group => !group.is_fully_maxed);
+            displayItems = displayItems.filter(group => !group.is_fully_maxed);
         }
 
         if (displayItems.length === 0) {
@@ -427,6 +460,46 @@ document.addEventListener('DOMContentLoaded', () => {
         document.getElementById('totalResourcesTime').textContent = formatTime(data.totals.resources_time);
         document.getElementById('totalTrapsTime').textContent = formatTime(data.totals.traps_time);
         document.getElementById('totalHeroesTime').textContent = formatTime(data.totals.heroes_time);
+
+        // Update costs
+        const updateCostRow = (rowId, goldId, elixirId, darkId, costs) => {
+            const goldEl = document.getElementById(rowId + '-gold');
+            const goldTextEl = document.getElementById(goldId);
+            if (goldEl) {
+                if (costs.gold > 0) {
+                    goldEl.classList.remove('d-none');
+                    if (goldTextEl) goldTextEl.textContent = formatCost(costs.gold);
+                } else {
+                    goldEl.classList.add('d-none');
+                }
+            }
+            
+            const elixirEl = document.getElementById(rowId + '-elixir');
+            const elixirTextEl = document.getElementById(elixirId);
+            if (elixirEl) {
+                if (costs.elixir > 0) {
+                    elixirEl.classList.remove('d-none');
+                    if (elixirTextEl) elixirTextEl.textContent = formatCost(costs.elixir);
+                } else {
+                    elixirEl.classList.add('d-none');
+                }
+            }
+
+            const darkEl = document.getElementById(rowId + '-dark');
+            const darkTextEl = document.getElementById(darkId);
+            if (darkEl) {
+                if (costs.dark_elixir > 0) {
+                    darkEl.classList.remove('d-none');
+                    if (darkTextEl) darkTextEl.textContent = formatCost(costs.dark_elixir);
+                } else {
+                    darkEl.classList.add('d-none');
+                }
+            }
+        };
+
+        updateCostRow('cost-builders', 'builderGoldCost', 'builderElixirCost', 'builderDarkCost', data.totals.builder_costs);
+        updateCostRow('cost-lab', 'labGoldCost', 'labElixirCost', 'labDarkCost', data.totals.lab_costs);
+        updateCostRow('cost-pets', '', '', 'petDarkCost', data.totals.pet_costs);
 
         renderAllSections(data);
 
