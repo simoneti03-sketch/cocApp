@@ -22,9 +22,9 @@
 	},
 	{
 		"level": 4,
-		"cost": 1000000,
+		"cost": 18000000,
 		"currency": "gold",
 		"duration": 43200,
-		"TH": 10
+		"TH": 17
 	}
 ]

@@ -8,7 +8,7 @@ app = Flask(__name__)
 # Cargar datos verificados directamente desde new_data/
 # ============================================================
 NEW_DATA_DIR = os.path.join(os.path.dirname(__file__), 'new_data')
-MAX_TH = 17
+MAX_TH = 18
 
 # Mapeo: se cargará dinámicamente desde new_data/mapping_id_to_name.json
 
