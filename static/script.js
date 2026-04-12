@@ -66,6 +66,10 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         },
         '1000077': { cat: 'Defences', folder: 'Monolith', prefix: 'Monolith' },
+        '1000079': { cat: 'Defences', folder: 'MultiGearTower', prefix: 'Multi-Gear_Tower', suffix: '_LongRange' },
+        '1000084': { cat: 'Defences', folder: 'MultiArcherTower', prefix: 'Multi-Archer_Tower' },
+        '1000085': { cat: 'Defences', folder: 'RicochetCannon', prefix: 'Ricochet_Cannon' },
+        '1000089': { cat: 'Defences', folder: 'FireSpitter', prefix: 'Firespitter' },
 
         // [Army]
         '1000000': { cat: 'Army', folder: 'ArmyCamp', prefix: 'Army_Camp' },

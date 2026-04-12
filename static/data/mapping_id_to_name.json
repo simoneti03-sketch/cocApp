@@ -143,6 +143,22 @@
         "1000010",
         "Wall"
     ],
+    "defenses/MultiGearTower.json": [
+        "1000079",
+        "Multi Gear Tower"
+    ],
+    "defenses/MultiArcherTower.json": [
+        "1000084",
+        "Multi-Archer Tower"
+    ],
+    "defenses/RicochetCannon.json": [
+        "1000085",
+        "Ricochet Cannon"
+    ],
+    "defenses/Firespitter.json": [
+        "1000089",
+        "Firespitter"
+    ],
     "defenses/BuilderCannon.json": [
         "1100004",
         "Builder Cannon"
