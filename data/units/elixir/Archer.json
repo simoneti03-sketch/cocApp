@@ -1,0 +1,100 @@
+[
+    {
+        "level": 1,
+        "cost": 0,
+        "currency": "elixir",
+        "duration": 0,
+        "LL": 1
+    },
+    {
+        "level": 2,
+        "cost": 20000,
+        "currency": "elixir",
+        "duration": 3600,
+        "LL": 1
+    },
+    {
+        "level": 3,
+        "cost": 80000,
+        "currency": "elixir",
+        "duration": 7200,
+        "LL": 3
+    },
+    {
+        "level": 4,
+        "cost": 200000,
+        "currency": "elixir",
+        "duration": 10800,
+        "LL": 5
+    },
+    {
+        "level": 5,
+        "cost": 500000,
+        "currency": "elixir",
+        "duration": 28800,
+        "LL": 6
+    },
+    {
+        "level": 6,
+        "cost": 1000000,
+        "currency": "elixir",
+        "duration": 43200,
+        "LL": 7
+    },
+    {
+        "level": 7,
+        "cost": 1500000,
+        "currency": "elixir",
+        "duration": 86400,
+        "LL": 8
+    },
+    {
+        "level": 8,
+        "cost": 2300000,
+        "currency": "elixir",
+        "duration": 129600,
+        "LL": 9
+    },
+    {
+        "level": 9,
+        "cost": 3000000,
+        "currency": "elixir",
+        "duration": 172800,
+        "LL": 10
+    },
+    {
+        "level": 10,
+        "cost": 4500000,
+        "currency": "elixir",
+        "duration": 302400,
+        "LL": 12
+    },
+    {
+        "level": 11,
+        "cost": 6500000,
+        "currency": "elixir",
+        "duration": 345600,
+        "LL": 13
+    },
+    {
+        "level": 12,
+        "cost": 9000000,
+        "currency": "elixir",
+        "duration": 432000,
+        "LL": 14
+    },
+    {
+        "level": 13,
+        "cost": 14000000,
+        "currency": "elixir",
+        "duration": 777600,
+        "LL": 15
+    },
+    {
+        "level": 14,
+        "cost": 25000000,
+        "currency": "elixir",
+        "duration": 1166400,
+        "LL": 16
+    }
+]

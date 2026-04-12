@@ -5,12 +5,15 @@ from flask import Flask, request, jsonify, render_template
 app = Flask(__name__)
 
 # ============================================================
-# Cargar datos verificados directamente desde new_data/
+# Cargar datos directamente desde data/
 # ============================================================
-NEW_DATA_DIR = os.path.join(os.path.dirname(__file__), 'new_data')
+DATA_DIR = os.path.join(os.path.dirname(__file__), 'data')
+STATIC_DATA_DIR = os.path.join(os.path.dirname(__file__), 'static', 'data')
+MAPPING_PATH = os.path.join(STATIC_DATA_DIR, "mapping_id_to_name.json")
+TRANSLATIONS_PATH = os.path.join(STATIC_DATA_DIR, "translations.json")
 MAX_TH = 18
 
-# Mapeo: se cargará dinámicamente desde new_data/mapping_id_to_name.json
+# Mapeo: se cargará dinámicamente desde data/mapping_id_to_name.json
 
 def _compute_max_level_per_th(levels, max_th=MAX_TH):
     """Genera array [max_lvl_en_TH1, ..., max_lvl_en_THn] desde los datos por nivel."""
@@ -62,59 +65,60 @@ def _compute_max_level_per_th_indirect(levels, th_to_limit_map, limit_field):
         result[i] = max_v
     return result
 
-def _load_new_data():
-    """Lee todos los JSON de new_data/ y construye el diccionario maestro."""
+def _load_game_data():
+    """Lee todos los JSON de data/ y construye el diccionario maestro."""
     master_db = {}
     
     # Cargar el mapeo de IDs a nombres desde el archivo JSON
-    mapping_path = os.path.join(NEW_DATA_DIR, "mapping_id_to_name.json")
     file_to_id = {}
-    if os.path.exists(mapping_path):
-        with open(mapping_path, "r", encoding="utf-8") as fm:
+    if os.path.exists(MAPPING_PATH):
+        with open(MAPPING_PATH, "r", encoding="utf-8") as fm:
             file_to_id = json.load(fm)
             
     # Leer archivo de traducciones
     translations = {}
-    trans_path = os.path.join(NEW_DATA_DIR, 'translations.json')
-    if os.path.exists(trans_path):
-        with open(trans_path, 'r', encoding='utf-8') as f:
+    if os.path.exists(TRANSLATIONS_PATH):
+        with open(TRANSLATIONS_PATH, 'r', encoding='utf-8') as f:
             translations = json.load(f)
 
-    # Pre-cargar mapeos de TH a HH y PH
+    # Pre-cargar mapeos de TH a niveles máximos de LL, HH y PH
+    th_to_ll = [0] * MAX_TH
     th_to_hh = [0] * MAX_TH
     th_to_ph = [0] * MAX_TH
     
-    hh_path = os.path.join(NEW_DATA_DIR, "army/HeroHall.json")
-    if os.path.exists(hh_path):
-        with open(hh_path, "r") as f:
-            th_to_hh = _compute_max_level_per_th(json.load(f))
-            
-    ph_path = os.path.join(NEW_DATA_DIR, "army/PetHouse.json")
-    if os.path.exists(ph_path):
-        with open(ph_path, "r") as f:
-            th_to_ph = _compute_max_level_per_th(json.load(f))
-            
+    def load_limit_building(rel_path):
+        full_p = os.path.join(DATA_DIR, rel_path)
+        if os.path.exists(full_p):
+            with open(full_p, "r", encoding="utf-8") as f:
+                return _compute_max_level_per_th(json.load(f))
+        return [0] * MAX_TH
+
+    th_to_ll = load_limit_building("army/Laboratory.json")
+    th_to_hh = load_limit_building("army/HeroHall.json")
+    th_to_ph = load_limit_building("army/PetHouse.json")
+
     for rel_path, mapping_info in file_to_id.items():
         # Recuperar (id_in_game, nombre_bonito) usando mapping_info que es un Array
         item_id, name = mapping_info
         
-        full_path = os.path.join(NEW_DATA_DIR, rel_path)
+        full_path = os.path.join(DATA_DIR, rel_path)
         if not os.path.exists(full_path):
             continue
         
-        with open(full_path, 'r', encoding='utf-8') as f:
-            levels = json.load(f)
+        try:
+            with open(full_path, 'r', encoding='utf-8') as f:
+                levels = json.load(f)
+        except Exception as e:
+            print(f"Error al cargar {full_path}: {e}")
+            continue
         
         levels.sort(key=lambda x: x.get("level", 0))
-        
-        is_hero = rel_path.startswith("heroes/")
-        is_pet = rel_path.startswith("pets/")
         
         translated_name = translations.get(name, name)
         
         raw_curr = levels[0].get("currency", "gold") if levels else "gold"
         # Normalización
-        curr = raw_curr.replace("-", "").replace("_", "").lower()
+        curr = str(raw_curr).replace("-", "").replace("_", "").lower()
         if "darkelixir" in curr:
             final_curr = "dark_elixir"
         elif "gold" in curr:
@@ -124,28 +128,42 @@ def _load_new_data():
         else:
             final_curr = raw_curr # fallback (shiny, glowy, etc)
             
+        # Determinar nivel máximo por ayuntamiento
+        if rel_path.startswith("units/") or rel_path.startswith("spells/") or rel_path.startswith("siege/"):
+            # Buscar si el archivo usa LL o TH
+            if levels and "LL" in levels[0]:
+                max_lvl_per_th = _compute_max_level_per_th_indirect(levels, th_to_ll, "LL")
+            else:
+                max_lvl_per_th = _compute_max_level_per_th(levels)
+        elif rel_path.startswith("heroes/"):
+            if levels and "HH" in levels[0]:
+                max_lvl_per_th = _compute_max_level_per_th_indirect(levels, th_to_hh, "HH")
+            else:
+                max_lvl_per_th = _compute_max_level_per_th(levels)
+        elif rel_path.startswith("pets/"):
+            if levels and "PH" in levels[0]:
+                max_lvl_per_th = _compute_max_level_per_th_indirect(levels, th_to_ph, "PH")
+            else:
+                max_lvl_per_th = _compute_max_level_per_th(levels)
+        else:
+            max_lvl_per_th = _compute_max_level_per_th(levels)
+
         entry = {
             "name": translated_name,
             "category": rel_path.split('/')[0],
             "currency": final_curr,
             "upgrade_times": [e.get("duration", 0) for e in levels],
             "price_per_lvl": [e.get("cost", 0) for e in levels],
+            "max_level_per_th": max_lvl_per_th
         }
-        
-        if is_hero:
-            entry["max_level_per_th"] = _compute_max_level_per_th_indirect(levels, th_to_hh, "HH")
-        elif is_pet:
-            entry["max_level_per_th"] = _compute_max_level_per_th_indirect(levels, th_to_ph, "PH")
-        else:
-            entry["max_level_per_th"] = _compute_max_level_per_th(levels)
         
         master_db[item_id] = entry
     
     return master_db
 
 # Cargar todo al arrancar
-game_data = _load_new_data()
-print(f"✅ Cargados {len(game_data)} ítems desde new_data/")
+game_data = _load_game_data()
+print(f"✅ Cargados {len(game_data)} ítems desde data/")
 
 @app.route('/')
 def index():

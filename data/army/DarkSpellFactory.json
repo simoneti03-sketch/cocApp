@@ -1,0 +1,51 @@
+[
+    {
+        "level": 1,
+        "cost": 600,
+        "currency": "gold",
+        "duration": 0,
+        "TH": 8
+    },
+    {
+        "level": 2,
+        "cost": 660,
+        "currency": "gold",
+        "duration": 0,
+        "TH": 8
+    },
+    {
+        "level": 3,
+        "cost": 720,
+        "currency": "gold",
+        "duration": 0,
+        "TH": 9
+    },
+    {
+        "level": 4,
+        "cost": 780,
+        "currency": "gold",
+        "duration": 0,
+        "TH": 9
+    },
+    {
+        "level": 5,
+        "cost": 840,
+        "currency": "gold",
+        "duration": 0,
+        "TH": 10
+    },
+    {
+        "level": 6,
+        "cost": 950,
+        "currency": "gold",
+        "duration": 0,
+        "TH": 12
+    },
+    {
+        "level": 7,
+        "cost": 1010,
+        "currency": "gold",
+        "duration": 0,
+        "TH": 14
+    }
+]

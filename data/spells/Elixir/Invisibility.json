@@ -1,0 +1,30 @@
+[
+    {
+        "level": 1,
+        "cost": 0,
+        "currency": "elixir",
+        "duration": 0,
+        "LL": 1
+    },
+    {
+        "level": 2,
+        "cost": 5000000,
+        "currency": "elixir",
+        "duration": 259200,
+        "LL": 9
+    },
+    {
+        "level": 3,
+        "cost": 6000000,
+        "currency": "elixir",
+        "duration": 345600,
+        "LL": 10
+    },
+    {
+        "level": 4,
+        "cost": 7000000,
+        "currency": "elixir",
+        "duration": 432000,
+        "LL": 11
+    }
+]
