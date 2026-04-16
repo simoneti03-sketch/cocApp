@@ -1,0 +1,16 @@
+[
+    {
+        "level": 1,
+        "cost": 29000000,
+        "currency": "gold",
+        "duration": 1123200,
+        "TH": 1
+    },
+    {
+        "level": 2,
+        "cost": 30000000,
+        "currency": "gold",
+        "duration": 1209600,
+        "TH": 1
+    }
+]

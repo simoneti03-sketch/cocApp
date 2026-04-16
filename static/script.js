@@ -19,6 +19,13 @@ document.addEventListener('DOMContentLoaded', () => {
     let isRemainingOnly = false;
     let isAllExpanded = false;
 
+    const currencyMap = {
+        'gold': { img: 'Gold.png', color: 'text-warning' },
+        'elixir': { img: 'Elixir.png', color: 'text-info' },
+        'dark_elixir': { img: 'Dark_Elixir.png', color: 'text-secondary' },
+        'dark-elixir': { img: 'Dark_Elixir.png', color: 'text-secondary' }
+    };
+
     function formatTime(seconds) {
         if (seconds <= 0) return 'Maxed!';
         const d = Math.floor(seconds / (3600 * 24));
@@ -200,13 +207,14 @@ document.addEventListener('DOMContentLoaded', () => {
     };
 
     function getItemImage(group, level) {
-        // 1. Buscar en Edificios (tienen niveles individuales)
+        const targetLvl = level === 0 ? 1 : level;
+        // 1. Buscar en Edificios
         let config = BUILDING_IMAGE_MAP[group.id];
         if (config) {
             let ext = '.webp';
-            if (config.isComplexExt && level >= 8) ext = '.wep.webp';
-            const displayLevel = (config.noLevelOne && level === 1) ? '' : level;
-            const sfx = config.dynamicSuffix ? config.dynamicSuffix(level) : (config.suffix || '');
+            if (config.isComplexExt && targetLvl >= 8) ext = '.wep.webp';
+            const displayLevel = (config.noLevelOne && targetLvl === 1) ? '' : targetLvl;
+            const sfx = config.dynamicSuffix ? config.dynamicSuffix(targetLvl) : (config.suffix || '');
             return `/static/images/${config.cat}/${config.folder}/${config.prefix}${displayLevel}${sfx}${ext}`;
         }
 
@@ -223,19 +231,14 @@ document.addEventListener('DOMContentLoaded', () => {
 
     function createAccordion(group, iconClass) {
         let isMax = group.is_fully_maxed;
-        let pColor = isMax ? 'bg-info' : '';
-        let bClass = isMax ? 'border-info' : 'border-0';
-        let statusText = isMax ? `Máximos para Ayuntamiento` : `Queda: ${formatTime(group.total_time_to_max)}`;
+        let isUnlocked = group.is_unlocked !== false;
+        let pColor = !isUnlocked ? 'bg-danger' : (isMax ? 'bg-info' : '');
+        let bClass = !isUnlocked ? 'border-danger' : (isMax ? 'border-info' : 'border-0');
+        let statusText = !isUnlocked ? '<span class="text-danger fw-bold">Por desbloquear</span>' : (isMax ? `Máximos para Ayuntamiento` : `Queda: ${formatTime(group.total_time_to_max)}`);
 
         let costHtml = '';
         if (!isMax && group.total_cost_to_max > 0) {
-            const currencyMap = {
-                'gold': { img: 'Gold.png', color: 'text-warning' },
-                'elixir': { img: 'Elixir.png', color: 'text-info' },
-                'dark_elixir': { img: 'Dark_Elixir.png', color: 'text-secondary' },
-                'dark-elixir': { img: 'Dark_Elixir.png', color: 'text-secondary' }
-            };
-            const curr = currencyMap[group.currency] || { img: 'Gold.png', color: 'text-warning' };
+            const curr = currencyMap[group.currency] || currencyMap['gold'];
             costHtml = `
                 <div class="d-flex align-items-center gap-1 ${curr.color}" style="font-size: 0.75rem;">
                     <img src="/static/images/resources/${curr.img}" width="14" style="filter: drop-shadow(0 0 2px rgba(0,0,0,0.5));">
@@ -302,13 +305,22 @@ document.addEventListener('DOMContentLoaded', () => {
             `;
         } else {
             let inst = group.instances[0];
-            let instText = inst.is_maxed && !inst.is_upgrading ? `Máx. para Ayuntamiento` : (inst.is_upgrading ? `Mejorando a Lvl ${inst.current_lvl + 1}` : `Queda: ${formatTime(inst.time_to_max)}`);
-            let instColor = inst.is_maxed && !inst.is_upgrading ? 'text-info fw-bold' : (inst.is_upgrading ? 'text-warning' : '');
+            let instText = !isUnlocked ? 'Pendiente Desbloqueo' : (inst.is_maxed && !inst.is_upgrading ? `Máx. para Ayuntamiento` : (inst.is_upgrading ? `Mejorando a Lvl ${inst.current_lvl + 1}` : `Queda: ${formatTime(inst.time_to_max)}`));
+            let instColor = !isUnlocked ? 'text-danger fw-bold' : (inst.is_maxed && !inst.is_upgrading ? 'text-info fw-bold' : (inst.is_upgrading ? 'text-warning' : ''));
+            
+            let missingTag = '';
+            if (inst.missing_count > 0) {
+                missingTag = `<div class="text-danger-emphasis fw-bold" style="font-size: 0.65rem;">
+                                <i class="bi bi-exclamation-triangle-fill me-1"></i>Faltan ${inst.missing_count} por construir
+                              </div>`;
+            }
+
             statusRowHtml = `
                 <div class="d-flex justify-content-between align-items-center time-text mt-1 mx-1 mb-2">
                     <div class="d-flex flex-column">
                         <span>Estado:</span>
                         <span class="${instColor}">${instText}</span>
+                        ${missingTag}
                         ${costHtml}
                     </div>
                 </div>
@@ -331,7 +343,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         return `
             <div class="col-md-6 col-lg-4">
-                <div class="card bg-dark glass-card item-card h-100 ${bClass} shadow-sm overflow-hidden ${hasDropdown ? 'accordion' : ''}" id="${accId}-parent">
+                <div class="card bg-dark glass-card item-card h-100 ${bClass} shadow-sm overflow-hidden ${hasDropdown ? 'accordion' : ''}" id="${accId}-parent" style="${!isUnlocked ? 'background: rgba(220, 53, 69, 0.05) !important;' : ''}">
                     <div class="card-body p-0">
                         <div class="accordion-item bg-transparent border-0">
                             <h2 class="accordion-header p-3 pb-0" id="heading-${accId}">
@@ -402,21 +414,80 @@ document.addEventListener('DOMContentLoaded', () => {
 
         // Combined "Todo" section (Everything)
         const allItems = [
-            // 1. Edificios (Defensas, Ejército, Recursos)
             ...(data.defenses || []), ...(data.army || []), ...(data.resources || []),
-            // 2. Trampas
             ...(data.traps || []),
-            // 3. Heroes (Héroes y Equipos)
             ...(data.heroes || []), ...(data.equipment || []),
-            // 4. Laboratorio (Tropas, Hechizos, Máquinas)
             ...(data.units_elixir || []), ...(data.units_dark || []),
             ...(data.spells_elixir || []), ...(data.spells_dark || []),
             ...(data.siege_machines || []),
-            // 5. Mascotas
             ...(data.pets || [])
         ];
 
         renderSection('allContainer', allItems, 'bi bi-grid-fill');
+
+        // Render min requirements if available
+        if (data.min_requirements_gap) {
+            renderMinRequirements(data.min_requirements_gap, data.totals);
+        }
+    }
+
+    function renderMinRequirements(gap, totals) {
+        const container = document.getElementById('minRequirementsList');
+        const section = document.getElementById('minRequirementsSection');
+        const totalTimeEl = document.getElementById('minReqTotalTime');
+        const totalCostsEl = document.getElementById('minReqTotalCosts');
+
+        if (!gap || gap.length === 0) {
+            section.classList.add('d-none');
+            return;
+        }
+
+        section.classList.remove('d-none');
+        totalTimeEl.textContent = formatTime(totals.min_requirements_total_time || 0);
+        
+        let costsHtml = '';
+        const mc = totals.min_requirements_total_costs || {};
+        if (mc.gold) costsHtml += `<span class="text-warning-emphasis me-2 small fw-bold"><img src="/static/images/resources/gold.png" width="14"> ${formatCost(mc.gold)}</span>`;
+        if (mc.elixir) costsHtml += `<span class="text-info-emphasis me-2 small fw-bold"><img src="/static/images/resources/elixir.png" width="14"> ${formatCost(mc.elixir)}</span>`;
+        if (mc.dark_elixir) costsHtml += `<span class="text-danger-emphasis small fw-bold"><img src="/static/images/resources/dark_elixir.png" width="14"> ${formatCost(mc.dark_elixir)}</span>`;
+        totalCostsEl.innerHTML = costsHtml;
+
+        let listHtml = '';
+        gap.forEach(item => {
+            const imgUrl = getItemImage({ id: item.item_id }, 1);
+            const currConfig = currencyMap[item.currency] || currencyMap['gold'];
+            
+            let missingTag = '';
+            if (item.missing_count > 0) {
+                missingTag = `<div class="text-danger-emphasis fw-bold" style="font-size: 0.65rem;">
+                                <i class="bi bi-exclamation-triangle-fill me-1"></i>Faltan ${item.missing_count} por construir
+                              </div>`;
+            }
+
+            listHtml += `
+                <div class="col-md-6 col-lg-4 mb-3">
+                    <div class="d-flex align-items-center p-2 rounded bg-white bg-opacity-5 border border-white border-opacity-10 h-100">
+                        <img src="${imgUrl}" width="40" height="40" class="me-3 rounded bg-black bg-opacity-25 p-1" style="object-fit: contain;">
+                        <div class="flex-grow-1 min-w-0">
+                            <div class="d-flex justify-content-between align-items-start">
+                                <h6 class="mb-0 text-white small fw-bold text-truncate" style="max-width: 110px;">${item.name}</h6>
+                                <span class="badge bg-warning text-dark px-1" style="font-size: 0.6rem;">${item.requirement}</span>
+                            </div>
+                            ${missingTag}
+                            <div class="d-flex justify-content-between align-items-center mt-1">
+                                <span class="small text-secondary fw-bold" style="font-size: 0.7rem;">
+                                    <i class="bi bi-clock me-1"></i>${formatTime(item.total_time)}
+                                </span>
+                                <span class="small ${currConfig.color} fw-bold" style="font-size: 0.7rem;">
+                                    <img src="/static/images/resources/${currConfig.img}" width="12"> ${formatCost(item.total_cost)}
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            `;
+        });
+        container.innerHTML = listHtml;
     }
 
     function saveState() {
@@ -525,10 +596,13 @@ document.addEventListener('DOMContentLoaded', () => {
 
             const total = upgrades.total || 0;
             const done = upgrades.done || 0;
-            const perc = total > 0 ? (done / total) * 100 : 100;
+            
+            const totalTime = upgrades.total_time || 0;
+            const doneTime = upgrades.done_time || 0;
+            const perc = totalTime > 0 ? (doneTime / totalTime) * 100 : 100;
 
             bar.style.width = perc.toFixed(1) + '%';
-            text.textContent = `${done} / ${total} mejoras (${perc.toFixed(1)}%)`;
+            text.textContent = `${perc.toFixed(1)}%`;
         };
 
 
@@ -537,9 +611,9 @@ document.addEventListener('DOMContentLoaded', () => {
             const text = document.getElementById(textId);
             if (!bar || !text || !upgrades) return;
 
-            const total = upgrades.total || 0;
-            const done = upgrades.done || 0;
-            const perc = total > 0 ? (done / total) * 100 : 100;
+            const totalTime = upgrades.total_time || 0;
+            const doneTime = upgrades.done_time || 0;
+            const perc = totalTime > 0 ? (doneTime / totalTime) * 100 : 100;
 
             bar.style.width = perc.toFixed(1) + '%';
             text.textContent = `${perc.toFixed(1)}%`;

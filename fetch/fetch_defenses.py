@@ -31,7 +31,8 @@ TARGETS = {
     "Firespitter": "https://clashofclans.fandom.com/wiki/Firespitter",
     "TownHall": "https://clashofclans.fandom.com/wiki/Town_Hall",
     "Wall": "https://clashofclans.fandom.com/wiki/Wall",
-    "AirSweeper": "https://clashofclans.fandom.com/wiki/Air_Sweeper"
+    "AirSweeper": "https://clashofclans.fandom.com/wiki/Air_Sweeper",
+    "SuperWizardTower": "https://clashofclans.fandom.com/wiki/Super_Wizard_Tower/Home_Village"
 }
 
 def parse_time_to_seconds(time_str):

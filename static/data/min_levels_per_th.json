@@ -1,0 +1,2126 @@
+{
+    "TH1": {
+        "Cannon": {
+            "count": 1,
+            "level": 1
+        },
+        "Barracks": {
+            "count": 1,
+            "level": 1
+        },
+        "Elixir Collector": {
+            "count": 1,
+            "level": 1
+        },
+        "Elixir Storage": {
+            "count": 1,
+            "level": 1
+        },
+        "Gold Storage": {
+            "count": 1,
+            "level": 1
+        },
+        "Town Hall": {
+            "count": 1,
+            "level": 2
+        }
+    },
+    "TH2": {
+        "Cannon": {
+            "count": 2,
+            "level": 1
+        },
+        "Barracks": {
+            "count": 1,
+            "level": 1
+        },
+        "Elixir Collector": {
+            "count": 2,
+            "level": 1
+        },
+        "Elixir Storage": {
+            "count": 1,
+            "level": 1
+        },
+        "Gold Storage": {
+            "count": 1,
+            "level": 1
+        },
+        "Town Hall": {
+            "count": 1,
+            "level": 3
+        },
+        "Gold Mine": {
+            "count": 1,
+            "level": 1
+        },
+        "Wall": {
+            "count": 25,
+            "level": 1
+        },
+        "Archer Tower": {
+            "count": 1,
+            "level": 1
+        }
+    },
+    "TH3": {
+        "Cannon": {
+            "count": 2,
+            "level": 1
+        },
+        "Barracks": {
+            "count": 1,
+            "level": 1
+        },
+        "Elixir Collector": {
+            "count": 3,
+            "level": 1
+        },
+        "Elixir Storage": {
+            "count": 2,
+            "level": 1
+        },
+        "Gold Storage": {
+            "count": 2,
+            "level": 1
+        },
+        "Town Hall": {
+            "count": 1,
+            "level": 4
+        },
+        "Gold Mine": {
+            "count": 2,
+            "level": 1
+        },
+        "Wall": {
+            "count": 50,
+            "level": 1
+        },
+        "Archer Tower": {
+            "count": 1,
+            "level": 1
+        },
+        "Laboratory": {
+            "count": 1,
+            "level": 1
+        },
+        "Army Camp": {
+            "count": 1,
+            "level": 1
+        },
+        "Mortar": {
+            "count": 1,
+            "level": 1
+        },
+        "Bomb": {
+            "count": 2,
+            "level": 1
+        }
+    },
+    "TH4": {
+        "Cannon": {
+            "count": 2,
+            "level": 1
+        },
+        "Barracks": {
+            "count": 1,
+            "level": 1
+        },
+        "Elixir Collector": {
+            "count": 4,
+            "level": 1
+        },
+        "Elixir Storage": {
+            "count": 2,
+            "level": 1
+        },
+        "Gold Storage": {
+            "count": 2,
+            "level": 1
+        },
+        "Town Hall": {
+            "count": 1,
+            "level": 5
+        },
+        "Gold Mine": {
+            "count": 3,
+            "level": 1
+        },
+        "Wall": {
+            "count": 75,
+            "level": 1
+        },
+        "Archer Tower": {
+            "count": 2,
+            "level": 1
+        },
+        "Laboratory": {
+            "count": 1,
+            "level": 1
+        },
+        "Army Camp": {
+            "count": 1,
+            "level": 1
+        },
+        "Mortar": {
+            "count": 1,
+            "level": 1
+        },
+        "Bomb": {
+            "count": 2,
+            "level": 1
+        },
+        "Air Defense": {
+            "count": 1,
+            "level": 1
+        },
+        "Spring Trap": {
+            "count": 2,
+            "level": 1
+        }
+    },
+    "TH5": {
+        "Cannon": {
+            "count": 3,
+            "level": 1
+        },
+        "Barracks": {
+            "count": 1,
+            "level": 1
+        },
+        "Elixir Collector": {
+            "count": 5,
+            "level": 1
+        },
+        "Elixir Storage": {
+            "count": 2,
+            "level": 1
+        },
+        "Gold Storage": {
+            "count": 2,
+            "level": 1
+        },
+        "Town Hall": {
+            "count": 1,
+            "level": 6
+        },
+        "Gold Mine": {
+            "count": 4,
+            "level": 1
+        },
+        "Wall": {
+            "count": 100,
+            "level": 1
+        },
+        "Archer Tower": {
+            "count": 3,
+            "level": 1
+        },
+        "Laboratory": {
+            "count": 1,
+            "level": 1
+        },
+        "Army Camp": {
+            "count": 2,
+            "level": 1
+        },
+        "Mortar": {
+            "count": 1,
+            "level": 1
+        },
+        "Bomb": {
+            "count": 4,
+            "level": 1
+        },
+        "Air Defense": {
+            "count": 1,
+            "level": 1
+        },
+        "Spring Trap": {
+            "count": 2,
+            "level": 1
+        },
+        "Spell Factory": {
+            "count": 1,
+            "level": 1
+        },
+        "Wizard Tower": {
+            "count": 1,
+            "level": 1
+        },
+        "Air Bomb": {
+            "count": 2,
+            "level": 1
+        }
+    },
+    "TH6": {
+        "Cannon": {
+            "count": 3,
+            "level": 1
+        },
+        "Barracks": {
+            "count": 1,
+            "level": 1
+        },
+        "Elixir Collector": {
+            "count": 6,
+            "level": 1
+        },
+        "Elixir Storage": {
+            "count": 2,
+            "level": 1
+        },
+        "Gold Storage": {
+            "count": 2,
+            "level": 1
+        },
+        "Town Hall": {
+            "count": 1,
+            "level": 7
+        },
+        "Gold Mine": {
+            "count": 5,
+            "level": 1
+        },
+        "Wall": {
+            "count": 125,
+            "level": 1
+        },
+        "Archer Tower": {
+            "count": 3,
+            "level": 1
+        },
+        "Laboratory": {
+            "count": 1,
+            "level": 1
+        },
+        "Army Camp": {
+            "count": 2,
+            "level": 1
+        },
+        "Mortar": {
+            "count": 2,
+            "level": 1
+        },
+        "Bomb": {
+            "count": 4,
+            "level": 1
+        },
+        "Air Defense": {
+            "count": 2,
+            "level": 1
+        },
+        "Spring Trap": {
+            "count": 4,
+            "level": 1
+        },
+        "Spell Factory": {
+            "count": 1,
+            "level": 1
+        },
+        "Wizard Tower": {
+            "count": 2,
+            "level": 1
+        },
+        "Air Bomb": {
+            "count": 2,
+            "level": 1
+        },
+        "Air Sweeper": {
+            "count": 1,
+            "level": 1
+        },
+        "Giant Bomb": {
+            "count": 1,
+            "level": 1
+        }
+    },
+    "TH7": {
+        "Cannon": {
+            "count": 5,
+            "level": 1
+        },
+        "Barracks": {
+            "count": 1,
+            "level": 1
+        },
+        "Elixir Collector": {
+            "count": 6,
+            "level": 1
+        },
+        "Elixir Storage": {
+            "count": 2,
+            "level": 1
+        },
+        "Gold Storage": {
+            "count": 2,
+            "level": 1
+        },
+        "Town Hall": {
+            "count": 1,
+            "level": 8
+        },
+        "Gold Mine": {
+            "count": 5,
+            "level": 1
+        },
+        "Wall": {
+            "count": 175,
+            "level": 1
+        },
+        "Archer Tower": {
+            "count": 4,
+            "level": 1
+        },
+        "Laboratory": {
+            "count": 1,
+            "level": 1
+        },
+        "Army Camp": {
+            "count": 3,
+            "level": 1
+        },
+        "Mortar": {
+            "count": 3,
+            "level": 1
+        },
+        "Bomb": {
+            "count": 6,
+            "level": 1
+        },
+        "Air Defense": {
+            "count": 3,
+            "level": 1
+        },
+        "Spring Trap": {
+            "count": 4,
+            "level": 1
+        },
+        "Spell Factory": {
+            "count": 1,
+            "level": 1
+        },
+        "Wizard Tower": {
+            "count": 2,
+            "level": 1
+        },
+        "Air Bomb": {
+            "count": 2,
+            "level": 1
+        },
+        "Air Sweeper": {
+            "count": 1,
+            "level": 1
+        },
+        "Giant Bomb": {
+            "count": 2,
+            "level": 1
+        },
+        "Hero Hall": {
+            "count": 1,
+            "level": 1
+        },
+        "Dark Barracks": {
+            "count": 1,
+            "level": 1
+        },
+        "Dark Elixir Drill": {
+            "count": 1,
+            "level": 1
+        },
+        "Dark Elixir Storage": {
+            "count": 1,
+            "level": 1
+        },
+        "Hidden Tesla": {
+            "count": 2,
+            "level": 1
+        },
+        "Seeking Air Mine": {
+            "count": 1,
+            "level": 1
+        }
+    },
+    "TH8": {
+        "Cannon": {
+            "count": 5,
+            "level": 1
+        },
+        "Barracks": {
+            "count": 1,
+            "level": 1
+        },
+        "Elixir Collector": {
+            "count": 6,
+            "level": 1
+        },
+        "Elixir Storage": {
+            "count": 3,
+            "level": 1
+        },
+        "Gold Storage": {
+            "count": 3,
+            "level": 1
+        },
+        "Town Hall": {
+            "count": 1,
+            "level": 9
+        },
+        "Gold Mine": {
+            "count": 5,
+            "level": 1
+        },
+        "Wall": {
+            "count": 225,
+            "level": 1
+        },
+        "Archer Tower": {
+            "count": 5,
+            "level": 1
+        },
+        "Laboratory": {
+            "count": 1,
+            "level": 1
+        },
+        "Army Camp": {
+            "count": 3,
+            "level": 1
+        },
+        "Mortar": {
+            "count": 4,
+            "level": 1
+        },
+        "Bomb": {
+            "count": 6,
+            "level": 1
+        },
+        "Air Defense": {
+            "count": 3,
+            "level": 1
+        },
+        "Spring Trap": {
+            "count": 6,
+            "level": 1
+        },
+        "Spell Factory": {
+            "count": 1,
+            "level": 1
+        },
+        "Wizard Tower": {
+            "count": 3,
+            "level": 1
+        },
+        "Air Bomb": {
+            "count": 4,
+            "level": 1
+        },
+        "Air Sweeper": {
+            "count": 1,
+            "level": 1
+        },
+        "Giant Bomb": {
+            "count": 3,
+            "level": 1
+        },
+        "Hero Hall": {
+            "count": 1,
+            "level": 2
+        },
+        "Dark Barracks": {
+            "count": 1,
+            "level": 1
+        },
+        "Dark Elixir Drill": {
+            "count": 2,
+            "level": 1
+        },
+        "Dark Elixir Storage": {
+            "count": 1,
+            "level": 1
+        },
+        "Hidden Tesla": {
+            "count": 3,
+            "level": 1
+        },
+        "Seeking Air Mine": {
+            "count": 2,
+            "level": 1
+        },
+        "Blacksmith": {
+            "count": 1,
+            "level": 1
+        },
+        "Dark Spell Factory": {
+            "count": 1,
+            "level": 1
+        },
+        "Bomb Tower": {
+            "count": 1,
+            "level": 1
+        },
+        "Skeleton Trap": {
+            "count": 2,
+            "level": 1
+        }
+    },
+    "TH9": {
+        "Cannon": {
+            "count": 5,
+            "level": 1
+        },
+        "Barracks": {
+            "count": 1,
+            "level": 1
+        },
+        "Elixir Collector": {
+            "count": 7,
+            "level": 1
+        },
+        "Elixir Storage": {
+            "count": 4,
+            "level": 1
+        },
+        "Gold Storage": {
+            "count": 4,
+            "level": 1
+        },
+        "Town Hall": {
+            "count": 1,
+            "level": 10
+        },
+        "Gold Mine": {
+            "count": 6,
+            "level": 1
+        },
+        "Wall": {
+            "count": 250,
+            "level": 1
+        },
+        "Archer Tower": {
+            "count": 6,
+            "level": 1
+        },
+        "Laboratory": {
+            "count": 1,
+            "level": 1
+        },
+        "Army Camp": {
+            "count": 3,
+            "level": 1
+        },
+        "Mortar": {
+            "count": 4,
+            "level": 1
+        },
+        "Bomb": {
+            "count": 6,
+            "level": 1
+        },
+        "Air Defense": {
+            "count": 4,
+            "level": 1
+        },
+        "Spring Trap": {
+            "count": 6,
+            "level": 1
+        },
+        "Spell Factory": {
+            "count": 1,
+            "level": 1
+        },
+        "Wizard Tower": {
+            "count": 4,
+            "level": 1
+        },
+        "Air Bomb": {
+            "count": 4,
+            "level": 1
+        },
+        "Air Sweeper": {
+            "count": 2,
+            "level": 1
+        },
+        "Giant Bomb": {
+            "count": 4,
+            "level": 1
+        },
+        "Hero Hall": {
+            "count": 1,
+            "level": 3
+        },
+        "Dark Barracks": {
+            "count": 1,
+            "level": 1
+        },
+        "Dark Elixir Drill": {
+            "count": 3,
+            "level": 1
+        },
+        "Dark Elixir Storage": {
+            "count": 1,
+            "level": 1
+        },
+        "Hidden Tesla": {
+            "count": 4,
+            "level": 1
+        },
+        "Seeking Air Mine": {
+            "count": 4,
+            "level": 1
+        },
+        "Blacksmith": {
+            "count": 1,
+            "level": 1
+        },
+        "Dark Spell Factory": {
+            "count": 1,
+            "level": 1
+        },
+        "Bomb Tower": {
+            "count": 1,
+            "level": 1
+        },
+        "Skeleton Trap": {
+            "count": 2,
+            "level": 1
+        },
+        "Helper Hut": {
+            "count": 1,
+            "level": 1
+        },
+        "X-Bow": {
+            "count": 2,
+            "level": 1
+        }
+    },
+    "TH10": {
+        "Cannon": {
+            "count": 6,
+            "level": 1
+        },
+        "Barracks": {
+            "count": 1,
+            "level": 1
+        },
+        "Elixir Collector": {
+            "count": 7,
+            "level": 1
+        },
+        "Elixir Storage": {
+            "count": 4,
+            "level": 1
+        },
+        "Gold Storage": {
+            "count": 4,
+            "level": 1
+        },
+        "Town Hall": {
+            "count": 1,
+            "level": 11
+        },
+        "Gold Mine": {
+            "count": 6,
+            "level": 1
+        },
+        "Wall": {
+            "count": 275,
+            "level": 1
+        },
+        "Archer Tower": {
+            "count": 7,
+            "level": 1
+        },
+        "Laboratory": {
+            "count": 1,
+            "level": 1
+        },
+        "Army Camp": {
+            "count": 3,
+            "level": 1
+        },
+        "Mortar": {
+            "count": 4,
+            "level": 1
+        },
+        "Bomb": {
+            "count": 6,
+            "level": 1
+        },
+        "Air Defense": {
+            "count": 4,
+            "level": 1
+        },
+        "Spring Trap": {
+            "count": 6,
+            "level": 1
+        },
+        "Spell Factory": {
+            "count": 1,
+            "level": 1
+        },
+        "Wizard Tower": {
+            "count": 4,
+            "level": 1
+        },
+        "Air Bomb": {
+            "count": 5,
+            "level": 1
+        },
+        "Air Sweeper": {
+            "count": 2,
+            "level": 1
+        },
+        "Giant Bomb": {
+            "count": 5,
+            "level": 1
+        },
+        "Hero Hall": {
+            "count": 1,
+            "level": 3
+        },
+        "Dark Barracks": {
+            "count": 1,
+            "level": 1
+        },
+        "Dark Elixir Drill": {
+            "count": 3,
+            "level": 1
+        },
+        "Dark Elixir Storage": {
+            "count": 1,
+            "level": 1
+        },
+        "Hidden Tesla": {
+            "count": 4,
+            "level": 1
+        },
+        "Seeking Air Mine": {
+            "count": 5,
+            "level": 1
+        },
+        "Blacksmith": {
+            "count": 1,
+            "level": 1
+        },
+        "Dark Spell Factory": {
+            "count": 1,
+            "level": 1
+        },
+        "Bomb Tower": {
+            "count": 2,
+            "level": 1
+        },
+        "Skeleton Trap": {
+            "count": 3,
+            "level": 1
+        },
+        "Helper Hut": {
+            "count": 1,
+            "level": 1
+        },
+        "X-Bow": {
+            "count": 3,
+            "level": 1
+        },
+        "Inferno Tower": {
+            "count": 2,
+            "level": 1
+        }
+    },
+    "TH11": {
+        "Cannon": {
+            "count": 7,
+            "level": 1
+        },
+        "Barracks": {
+            "count": 1,
+            "level": 1
+        },
+        "Elixir Collector": {
+            "count": 7,
+            "level": 1
+        },
+        "Elixir Storage": {
+            "count": 4,
+            "level": 1
+        },
+        "Gold Storage": {
+            "count": 4,
+            "level": 1
+        },
+        "Town Hall": {
+            "count": 1,
+            "level": 12
+        },
+        "Gold Mine": {
+            "count": 6,
+            "level": 1
+        },
+        "Wall": {
+            "count": 300,
+            "level": 1
+        },
+        "Archer Tower": {
+            "count": 8,
+            "level": 1
+        },
+        "Laboratory": {
+            "count": 1,
+            "level": 1
+        },
+        "Army Camp": {
+            "count": 3,
+            "level": 1
+        },
+        "Mortar": {
+            "count": 4,
+            "level": 1
+        },
+        "Bomb": {
+            "count": 6,
+            "level": 1
+        },
+        "Air Defense": {
+            "count": 4,
+            "level": 1
+        },
+        "Spring Trap": {
+            "count": 6,
+            "level": 1
+        },
+        "Spell Factory": {
+            "count": 1,
+            "level": 1
+        },
+        "Wizard Tower": {
+            "count": 5,
+            "level": 1
+        },
+        "Air Bomb": {
+            "count": 5,
+            "level": 1
+        },
+        "Air Sweeper": {
+            "count": 2,
+            "level": 1
+        },
+        "Giant Bomb": {
+            "count": 5,
+            "level": 1
+        },
+        "Hero Hall": {
+            "count": 1,
+            "level": 5
+        },
+        "Dark Barracks": {
+            "count": 1,
+            "level": 1
+        },
+        "Dark Elixir Drill": {
+            "count": 3,
+            "level": 1
+        },
+        "Dark Elixir Storage": {
+            "count": 1,
+            "level": 1
+        },
+        "Hidden Tesla": {
+            "count": 4,
+            "level": 1
+        },
+        "Seeking Air Mine": {
+            "count": 5,
+            "level": 1
+        },
+        "Blacksmith": {
+            "count": 1,
+            "level": 1
+        },
+        "Dark Spell Factory": {
+            "count": 1,
+            "level": 1
+        },
+        "Bomb Tower": {
+            "count": 2,
+            "level": 1
+        },
+        "Skeleton Trap": {
+            "count": 3,
+            "level": 1
+        },
+        "Helper Hut": {
+            "count": 1,
+            "level": 1
+        },
+        "X-Bow": {
+            "count": 4,
+            "level": 1
+        },
+        "Inferno Tower": {
+            "count": 2,
+            "level": 1
+        },
+        "Eagle Artillery": {
+            "count": 1,
+            "level": 1
+        },
+        "Tornado Trap": {
+            "count": 1,
+            "level": 1
+        }
+    },
+    "TH12": {
+        "Cannon": {
+            "count": 7,
+            "level": 1
+        },
+        "Barracks": {
+            "count": 1,
+            "level": 1
+        },
+        "Elixir Collector": {
+            "count": 7,
+            "level": 1
+        },
+        "Elixir Storage": {
+            "count": 4,
+            "level": 1
+        },
+        "Gold Storage": {
+            "count": 4,
+            "level": 1
+        },
+        "Town Hall": {
+            "count": 1,
+            "level": 13
+        },
+        "Gold Mine": {
+            "count": 6,
+            "level": 1
+        },
+        "Wall": {
+            "count": 300,
+            "level": 1
+        },
+        "Archer Tower": {
+            "count": 8,
+            "level": 1
+        },
+        "Laboratory": {
+            "count": 1,
+            "level": 1
+        },
+        "Army Camp": {
+            "count": 3,
+            "level": 1
+        },
+        "Mortar": {
+            "count": 4,
+            "level": 1
+        },
+        "Bomb": {
+            "count": 6,
+            "level": 1
+        },
+        "Air Defense": {
+            "count": 4,
+            "level": 1
+        },
+        "Spring Trap": {
+            "count": 8,
+            "level": 1
+        },
+        "Spell Factory": {
+            "count": 1,
+            "level": 1
+        },
+        "Wizard Tower": {
+            "count": 5,
+            "level": 1
+        },
+        "Air Bomb": {
+            "count": 6,
+            "level": 1
+        },
+        "Air Sweeper": {
+            "count": 2,
+            "level": 1
+        },
+        "Giant Bomb": {
+            "count": 6,
+            "level": 1
+        },
+        "Hero Hall": {
+            "count": 1,
+            "level": 5
+        },
+        "Dark Barracks": {
+            "count": 1,
+            "level": 1
+        },
+        "Dark Elixir Drill": {
+            "count": 3,
+            "level": 1
+        },
+        "Dark Elixir Storage": {
+            "count": 1,
+            "level": 1
+        },
+        "Hidden Tesla": {
+            "count": 5,
+            "level": 1
+        },
+        "Seeking Air Mine": {
+            "count": 6,
+            "level": 1
+        },
+        "Blacksmith": {
+            "count": 1,
+            "level": 1
+        },
+        "Dark Spell Factory": {
+            "count": 1,
+            "level": 1
+        },
+        "Bomb Tower": {
+            "count": 2,
+            "level": 1
+        },
+        "Skeleton Trap": {
+            "count": 3,
+            "level": 1
+        },
+        "Helper Hut": {
+            "count": 1,
+            "level": 1
+        },
+        "X-Bow": {
+            "count": 4,
+            "level": 1
+        },
+        "Inferno Tower": {
+            "count": 3,
+            "level": 1
+        },
+        "Eagle Artillery": {
+            "count": 1,
+            "level": 1
+        },
+        "Tornado Trap": {
+            "count": 1,
+            "level": 1
+        },
+        "Workshop": {
+            "count": 1,
+            "level": 1
+        }
+    },
+    "TH13": {
+        "Cannon": {
+            "count": 7,
+            "level": 1
+        },
+        "Barracks": {
+            "count": 1,
+            "level": 1
+        },
+        "Elixir Collector": {
+            "count": 7,
+            "level": 1
+        },
+        "Elixir Storage": {
+            "count": 4,
+            "level": 1
+        },
+        "Gold Storage": {
+            "count": 4,
+            "level": 1
+        },
+        "Town Hall": {
+            "count": 1,
+            "level": 14
+        },
+        "Gold Mine": {
+            "count": 6,
+            "level": 1
+        },
+        "Wall": {
+            "count": 300,
+            "level": 1
+        },
+        "Archer Tower": {
+            "count": 8,
+            "level": 1
+        },
+        "Laboratory": {
+            "count": 1,
+            "level": 1
+        },
+        "Army Camp": {
+            "count": 3,
+            "level": 1
+        },
+        "Mortar": {
+            "count": 4,
+            "level": 1
+        },
+        "Bomb": {
+            "count": 7,
+            "level": 1
+        },
+        "Air Defense": {
+            "count": 4,
+            "level": 1
+        },
+        "Spring Trap": {
+            "count": 9,
+            "level": 1
+        },
+        "Spell Factory": {
+            "count": 1,
+            "level": 1
+        },
+        "Wizard Tower": {
+            "count": 5,
+            "level": 1
+        },
+        "Air Bomb": {
+            "count": 6,
+            "level": 1
+        },
+        "Air Sweeper": {
+            "count": 2,
+            "level": 1
+        },
+        "Giant Bomb": {
+            "count": 6,
+            "level": 1
+        },
+        "Hero Hall": {
+            "count": 1,
+            "level": 7
+        },
+        "Dark Barracks": {
+            "count": 1,
+            "level": 1
+        },
+        "Dark Elixir Drill": {
+            "count": 3,
+            "level": 1
+        },
+        "Dark Elixir Storage": {
+            "count": 1,
+            "level": 1
+        },
+        "Hidden Tesla": {
+            "count": 5,
+            "level": 1
+        },
+        "Seeking Air Mine": {
+            "count": 7,
+            "level": 1
+        },
+        "Blacksmith": {
+            "count": 1,
+            "level": 1
+        },
+        "Dark Spell Factory": {
+            "count": 1,
+            "level": 1
+        },
+        "Bomb Tower": {
+            "count": 2,
+            "level": 1
+        },
+        "Skeleton Trap": {
+            "count": 3,
+            "level": 1
+        },
+        "Helper Hut": {
+            "count": 1,
+            "level": 1
+        },
+        "X-Bow": {
+            "count": 4,
+            "level": 1
+        },
+        "Inferno Tower": {
+            "count": 3,
+            "level": 1
+        },
+        "Eagle Artillery": {
+            "count": 1,
+            "level": 1
+        },
+        "Tornado Trap": {
+            "count": 1,
+            "level": 1
+        },
+        "Workshop": {
+            "count": 1,
+            "level": 1
+        },
+        "Scattershot": {
+            "count": 2,
+            "level": 1
+        }
+    },
+    "TH14": {
+        "Cannon": {
+            "count": 7,
+            "level": 1
+        },
+        "Barracks": {
+            "count": 1,
+            "level": 1
+        },
+        "Elixir Collector": {
+            "count": 7,
+            "level": 1
+        },
+        "Elixir Storage": {
+            "count": 4,
+            "level": 1
+        },
+        "Gold Storage": {
+            "count": 4,
+            "level": 1
+        },
+        "Town Hall": {
+            "count": 1,
+            "level": 15
+        },
+        "Gold Mine": {
+            "count": 6,
+            "level": 1
+        },
+        "Wall": {
+            "count": 325,
+            "level": 1
+        },
+        "Archer Tower": {
+            "count": 8,
+            "level": 1
+        },
+        "Laboratory": {
+            "count": 1,
+            "level": 1
+        },
+        "Army Camp": {
+            "count": 3,
+            "level": 1
+        },
+        "Mortar": {
+            "count": 4,
+            "level": 1
+        },
+        "Bomb": {
+            "count": 8,
+            "level": 1
+        },
+        "Air Defense": {
+            "count": 4,
+            "level": 1
+        },
+        "Spring Trap": {
+            "count": 9,
+            "level": 1
+        },
+        "Spell Factory": {
+            "count": 1,
+            "level": 1
+        },
+        "Wizard Tower": {
+            "count": 5,
+            "level": 1
+        },
+        "Air Bomb": {
+            "count": 7,
+            "level": 1
+        },
+        "Air Sweeper": {
+            "count": 2,
+            "level": 1
+        },
+        "Giant Bomb": {
+            "count": 7,
+            "level": 1
+        },
+        "Hero Hall": {
+            "count": 1,
+            "level": 7
+        },
+        "Dark Barracks": {
+            "count": 1,
+            "level": 1
+        },
+        "Dark Elixir Drill": {
+            "count": 3,
+            "level": 1
+        },
+        "Dark Elixir Storage": {
+            "count": 1,
+            "level": 1
+        },
+        "Hidden Tesla": {
+            "count": 5,
+            "level": 1
+        },
+        "Seeking Air Mine": {
+            "count": 8,
+            "level": 1
+        },
+        "Blacksmith": {
+            "count": 1,
+            "level": 1
+        },
+        "Dark Spell Factory": {
+            "count": 1,
+            "level": 1
+        },
+        "Bomb Tower": {
+            "count": 2,
+            "level": 1
+        },
+        "Skeleton Trap": {
+            "count": 4,
+            "level": 1
+        },
+        "Helper Hut": {
+            "count": 1,
+            "level": 1
+        },
+        "X-Bow": {
+            "count": 4,
+            "level": 1
+        },
+        "Inferno Tower": {
+            "count": 3,
+            "level": 1
+        },
+        "Eagle Artillery": {
+            "count": 1,
+            "level": 1
+        },
+        "Tornado Trap": {
+            "count": 1,
+            "level": 1
+        },
+        "Workshop": {
+            "count": 1,
+            "level": 1
+        },
+        "Scattershot": {
+            "count": 2,
+            "level": 1
+        },
+        "Pet House": {
+            "count": 1,
+            "level": 1
+        }
+    },
+    "TH15": {
+        "Cannon": {
+            "count": 7,
+            "level": 1
+        },
+        "Barracks": {
+            "count": 1,
+            "level": 1
+        },
+        "Elixir Collector": {
+            "count": 7,
+            "level": 1
+        },
+        "Elixir Storage": {
+            "count": 4,
+            "level": 1
+        },
+        "Gold Storage": {
+            "count": 4,
+            "level": 1
+        },
+        "Town Hall": {
+            "count": 1,
+            "level": 16
+        },
+        "Gold Mine": {
+            "count": 6,
+            "level": 1
+        },
+        "Wall": {
+            "count": 325,
+            "level": 1
+        },
+        "Archer Tower": {
+            "count": 8,
+            "level": 1
+        },
+        "Laboratory": {
+            "count": 1,
+            "level": 1
+        },
+        "Army Camp": {
+            "count": 3,
+            "level": 1
+        },
+        "Mortar": {
+            "count": 4,
+            "level": 1
+        },
+        "Bomb": {
+            "count": 8,
+            "level": 1
+        },
+        "Air Defense": {
+            "count": 4,
+            "level": 1
+        },
+        "Spring Trap": {
+            "count": 9,
+            "level": 1
+        },
+        "Spell Factory": {
+            "count": 1,
+            "level": 1
+        },
+        "Wizard Tower": {
+            "count": 5,
+            "level": 1
+        },
+        "Air Bomb": {
+            "count": 7,
+            "level": 1
+        },
+        "Air Sweeper": {
+            "count": 2,
+            "level": 1
+        },
+        "Giant Bomb": {
+            "count": 7,
+            "level": 1
+        },
+        "Hero Hall": {
+            "count": 1,
+            "level": 9
+        },
+        "Dark Barracks": {
+            "count": 1,
+            "level": 1
+        },
+        "Dark Elixir Drill": {
+            "count": 3,
+            "level": 1
+        },
+        "Dark Elixir Storage": {
+            "count": 1,
+            "level": 1
+        },
+        "Hidden Tesla": {
+            "count": 5,
+            "level": 1
+        },
+        "Seeking Air Mine": {
+            "count": 8,
+            "level": 1
+        },
+        "Blacksmith": {
+            "count": 1,
+            "level": 1
+        },
+        "Dark Spell Factory": {
+            "count": 1,
+            "level": 1
+        },
+        "Bomb Tower": {
+            "count": 2,
+            "level": 1
+        },
+        "Skeleton Trap": {
+            "count": 4,
+            "level": 1
+        },
+        "Helper Hut": {
+            "count": 1,
+            "level": 1
+        },
+        "X-Bow": {
+            "count": 4,
+            "level": 1
+        },
+        "Inferno Tower": {
+            "count": 3,
+            "level": 1
+        },
+        "Eagle Artillery": {
+            "count": 1,
+            "level": 1
+        },
+        "Tornado Trap": {
+            "count": 1,
+            "level": 1
+        },
+        "Workshop": {
+            "count": 1,
+            "level": 1
+        },
+        "Scattershot": {
+            "count": 2,
+            "level": 1
+        },
+        "Pet House": {
+            "count": 1,
+            "level": 1
+        },
+        "Spell Tower": {
+            "count": 2,
+            "level": 1
+        },
+        "Monolith": {
+            "count": 1,
+            "level": 1
+        }
+    },
+    "TH16": {
+        "Cannon": {
+            "count": 3,
+            "level": 1
+        },
+        "Barracks": {
+            "count": 1,
+            "level": 1
+        },
+        "Elixir Collector": {
+            "count": 7,
+            "level": 1
+        },
+        "Elixir Storage": {
+            "count": 4,
+            "level": 1
+        },
+        "Gold Storage": {
+            "count": 4,
+            "level": 1
+        },
+        "Town Hall": {
+            "count": 1,
+            "level": 17
+        },
+        "Gold Mine": {
+            "count": 6,
+            "level": 1
+        },
+        "Wall": {
+            "count": 325,
+            "level": 1
+        },
+        "Archer Tower": {
+            "count": 4,
+            "level": 1
+        },
+        "Laboratory": {
+            "count": 1,
+            "level": 1
+        },
+        "Army Camp": {
+            "count": 3,
+            "level": 1
+        },
+        "Mortar": {
+            "count": 4,
+            "level": 1
+        },
+        "Bomb": {
+            "count": 8,
+            "level": 1
+        },
+        "Air Defense": {
+            "count": 4,
+            "level": 1
+        },
+        "Spring Trap": {
+            "count": 9,
+            "level": 1
+        },
+        "Spell Factory": {
+            "count": 1,
+            "level": 1
+        },
+        "Wizard Tower": {
+            "count": 5,
+            "level": 1
+        },
+        "Air Bomb": {
+            "count": 7,
+            "level": 1
+        },
+        "Air Sweeper": {
+            "count": 2,
+            "level": 1
+        },
+        "Giant Bomb": {
+            "count": 7,
+            "level": 1
+        },
+        "Hero Hall": {
+            "count": 1,
+            "level": 9
+        },
+        "Dark Barracks": {
+            "count": 1,
+            "level": 1
+        },
+        "Dark Elixir Drill": {
+            "count": 3,
+            "level": 1
+        },
+        "Dark Elixir Storage": {
+            "count": 1,
+            "level": 1
+        },
+        "Hidden Tesla": {
+            "count": 5,
+            "level": 1
+        },
+        "Seeking Air Mine": {
+            "count": 8,
+            "level": 1
+        },
+        "Blacksmith": {
+            "count": 1,
+            "level": 1
+        },
+        "Dark Spell Factory": {
+            "count": 1,
+            "level": 1
+        },
+        "Bomb Tower": {
+            "count": 2,
+            "level": 1
+        },
+        "Skeleton Trap": {
+            "count": 4,
+            "level": 1
+        },
+        "Helper Hut": {
+            "count": 1,
+            "level": 1
+        },
+        "X-Bow": {
+            "count": 4,
+            "level": 1
+        },
+        "Inferno Tower": {
+            "count": 3,
+            "level": 1
+        },
+        "Eagle Artillery": {
+            "count": 1,
+            "level": 7
+        },
+        "Tornado Trap": {
+            "count": 1,
+            "level": 1
+        },
+        "Workshop": {
+            "count": 1,
+            "level": 1
+        },
+        "Scattershot": {
+            "count": 2,
+            "level": 1
+        },
+        "Pet House": {
+            "count": 1,
+            "level": 1
+        },
+        "Spell Tower": {
+            "count": 2,
+            "level": 1
+        },
+        "Monolith": {
+            "count": 1,
+            "level": 1
+        },
+        "Multi-Archer Tower": {
+            "count": 2,
+            "level": 1
+        },
+        "Ricochet Cannon": {
+            "count": 2,
+            "level": 1
+        }
+    },
+    "TH17": {
+        "Cannon": {
+            "count": 0,
+            "level": 1
+        },
+        "Barracks": {
+            "count": 1,
+            "level": 1
+        },
+        "Elixir Collector": {
+            "count": 7,
+            "level": 1
+        },
+        "Elixir Storage": {
+            "count": 4,
+            "level": 1
+        },
+        "Gold Storage": {
+            "count": 4,
+            "level": 1
+        },
+        "Town Hall": {
+            "count": 1,
+            "level": 18
+        },
+        "Gold Mine": {
+            "count": 6,
+            "level": 1
+        },
+        "Wall": {
+            "count": 325,
+            "level": 1
+        },
+        "Archer Tower": {
+            "count": 2,
+            "level": 1
+        },
+        "Laboratory": {
+            "count": 1,
+            "level": 1
+        },
+        "Army Camp": {
+            "count": 3,
+            "level": 1
+        },
+        "Mortar": {
+            "count": 4,
+            "level": 1
+        },
+        "Bomb": {
+            "count": 8,
+            "level": 1
+        },
+        "Air Defense": {
+            "count": 4,
+            "level": 1
+        },
+        "Spring Trap": {
+            "count": 9,
+            "level": 1
+        },
+        "Spell Factory": {
+            "count": 1,
+            "level": 1
+        },
+        "Wizard Tower": {
+            "count": 5,
+            "level": 1
+        },
+        "Air Bomb": {
+            "count": 7,
+            "level": 1
+        },
+        "Air Sweeper": {
+            "count": 2,
+            "level": 1
+        },
+        "Giant Bomb": {
+            "count": 8,
+            "level": 1
+        },
+        "Hero Hall": {
+            "count": 1,
+            "level": 9
+        },
+        "Dark Barracks": {
+            "count": 1,
+            "level": 1
+        },
+        "Dark Elixir Drill": {
+            "count": 3,
+            "level": 1
+        },
+        "Dark Elixir Storage": {
+            "count": 1,
+            "level": 1
+        },
+        "Hidden Tesla": {
+            "count": 5,
+            "level": 1
+        },
+        "Seeking Air Mine": {
+            "count": 9,
+            "level": 1
+        },
+        "Blacksmith": {
+            "count": 1,
+            "level": 1
+        },
+        "Dark Spell Factory": {
+            "count": 1,
+            "level": 1
+        },
+        "Bomb Tower": {
+            "count": 2,
+            "level": 1
+        },
+        "Skeleton Trap": {
+            "count": 4,
+            "level": 1
+        },
+        "Helper Hut": {
+            "count": 1,
+            "level": 1
+        },
+        "X-Bow": {
+            "count": 4,
+            "level": 1
+        },
+        "Inferno Tower": {
+            "count": 3,
+            "level": 1
+        },
+        "Eagle Artillery": {
+            "count": 1,
+            "level": 7
+        },
+        "Tornado Trap": {
+            "count": 1,
+            "level": 1
+        },
+        "Workshop": {
+            "count": 1,
+            "level": 1
+        },
+        "Scattershot": {
+            "count": 2,
+            "level": 1
+        },
+        "Pet House": {
+            "count": 1,
+            "level": 1
+        },
+        "Spell Tower": {
+            "count": 2,
+            "level": 1
+        },
+        "Monolith": {
+            "count": 1,
+            "level": 1
+        },
+        "Multi-Archer Tower": {
+            "count": 3,
+            "level": 1
+        },
+        "Ricochet Cannon": {
+            "count": 3,
+            "level": 1
+        },
+        "Multi-Gear Tower": {
+            "count": 1,
+            "level": 1
+        },
+        "Firespitter": {
+            "count": 2,
+            "level": 1
+        },
+        "Giga Bomb": {
+            "count": 1,
+            "level": 1
+        },
+        "Inferno Artillery": {
+            "count": 1,
+            "level": 5
+        }
+    },
+    "TH18": {
+        "Cannon": {
+            "count": 0,
+            "level": 1
+        },
+        "Barracks": {
+            "count": 1,
+            "level": 1
+        },
+        "Elixir Collector": {
+            "count": 7,
+            "level": 1
+        },
+        "Elixir Storage": {
+            "count": 4,
+            "level": 1
+        },
+        "Gold Storage": {
+            "count": 4,
+            "level": 1
+        },
+        "Town Hall": {
+            "count": 1,
+            "level": 18
+        },
+        "Gold Mine": {
+            "count": 6,
+            "level": 1
+        },
+        "Wall": {
+            "count": 325,
+            "level": 1
+        },
+        "Archer Tower": {
+            "count": 2,
+            "level": 1
+        },
+        "Laboratory": {
+            "count": 1,
+            "level": 1
+        },
+        "Army Camp": {
+            "count": 3,
+            "level": 1
+        },
+        "Mortar": {
+            "count": 4,
+            "level": 1
+        },
+        "Bomb": {
+            "count": 8,
+            "level": 1
+        },
+        "Air Defense": {
+            "count": 4,
+            "level": 1
+        },
+        "Spring Trap": {
+            "count": 9,
+            "level": 1
+        },
+        "Spell Factory": {
+            "count": 1,
+            "level": 1
+        },
+        "Wizard Tower": {
+            "count": 5,
+            "level": 1
+        },
+        "Air Bomb": {
+            "count": 7,
+            "level": 1
+        },
+        "Air Sweeper": {
+            "count": 2,
+            "level": 1
+        },
+        "Giant Bomb": {
+            "count": 8,
+            "level": 1
+        },
+        "Hero Hall": {
+            "count": 1,
+            "level": 9
+        },
+        "Dark Barracks": {
+            "count": 1,
+            "level": 1
+        },
+        "Dark Elixir Drill": {
+            "count": 3,
+            "level": 1
+        },
+        "Dark Elixir Storage": {
+            "count": 1,
+            "level": 1
+        },
+        "Hidden Tesla": {
+            "count": 5,
+            "level": 1
+        },
+        "Seeking Air Mine": {
+            "count": 9,
+            "level": 1
+        },
+        "Blacksmith": {
+            "count": 1,
+            "level": 1
+        },
+        "Dark Spell Factory": {
+            "count": 1,
+            "level": 1
+        },
+        "Bomb Tower": {
+            "count": 2,
+            "level": 1
+        },
+        "Skeleton Trap": {
+            "count": 4,
+            "level": 1
+        },
+        "Helper Hut": {
+            "count": 1,
+            "level": 1
+        },
+        "X-Bow": {
+            "count": 4,
+            "level": 1
+        },
+        "Inferno Tower": {
+            "count": 3,
+            "level": 1
+        },
+        "Eagle Artillery": {
+            "count": 1,
+            "level": 7
+        },
+        "Tornado Trap": {
+            "count": 1,
+            "level": 1
+        },
+        "Workshop": {
+            "count": 1,
+            "level": 1
+        },
+        "Scattershot": {
+            "count": 2,
+            "level": 1
+        },
+        "Pet House": {
+            "count": 1,
+            "level": 1
+        },
+        "Spell Tower": {
+            "count": 2,
+            "level": 1
+        },
+        "Monolith": {
+            "count": 1,
+            "level": 1
+        },
+        "Multi-Archer Tower": {
+            "count": 3,
+            "level": 1
+        },
+        "Ricochet Cannon": {
+            "count": 3,
+            "level": 1
+        },
+        "Multi-Gear Tower": {
+            "count": 1,
+            "level": 1
+        },
+        "Firespitter": {
+            "count": 2,
+            "level": 1
+        },
+        "Giga Bomb": {
+            "count": 1,
+            "level": 1
+        },
+        "Inferno Artillery": {
+            "count": 1,
+            "level": 5
+        }
+    }
+}

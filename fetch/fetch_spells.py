@@ -107,6 +107,10 @@ def fetch_and_parse(name, url, spell_type):
             "duration": duration,
             "LL": last_known_ll
         })
+    # Post-procesamiento: si el nivel 1 tiene LL 1 por defecto, usar el LL del nivel 2
+    if len(data_list) >= 2:
+        if data_list[0]['level'] == 1 and data_list[0].get('LL', 0) <= 1:
+            data_list[0]['LL'] = data_list[1].get('LL', 1)
                 
     return data_list
 
